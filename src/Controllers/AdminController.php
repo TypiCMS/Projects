@@ -29,7 +29,7 @@ class AdminController extends AdminSimpleController
     {
         $model = $this->repository->getModel();
         $tags = Session::getOldInput('tags');
-        $this->layout->content = View::make('core::admin.create')
+        return view('core::admin.create')
             ->withTags($tags)
             ->withModel($model);
     }
@@ -47,7 +47,7 @@ class AdminController extends AdminSimpleController
         ]);
 
         $tags = implode(', ', $model->tags->lists('tag'));
-        $this->layout->content = View::make('core::admin.edit')
+        return view('core::admin.edit')
             ->withTags($tags)
             ->withModel($model);
     }
