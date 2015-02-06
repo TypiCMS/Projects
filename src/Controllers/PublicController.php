@@ -3,10 +3,10 @@ namespace TypiCMS\Modules\Projects\Controllers;
 
 use App;
 use Illuminate\Support\Str;
-use View;
 use TypiCMS;
-use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
 use TypiCMS\Controllers\BasePublicController;
+use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
+use View;
 
 class PublicController extends BasePublicController
 {
@@ -37,9 +37,8 @@ class PublicController extends BasePublicController
             $models = $this->repository->getAll($relatedModels, false);
         }
 
-        return view('projects.public.index')
-            ->with('category', $category)
-            ->with('models', $models);
+        return view('projects::public.index')
+            ->with(compact('models', 'category'));
     }
 
     /**
@@ -58,7 +57,7 @@ class PublicController extends BasePublicController
 
         $this->title['parent'] = $model->title;
 
-        return view('projects.public.show')
-            ->with('model', $model);
+        return view('projects::public.show')
+            ->with(compact('model'));
     }
 }

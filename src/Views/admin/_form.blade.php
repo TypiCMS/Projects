@@ -18,7 +18,7 @@
     <div class="col-sm-4 form-group @if($errors->has('category_id'))has-error @endif">
         {{ Form::label('category_id', trans('validation.attributes.category_id'), array('class' => 'control-label')) }}
         {{ Form::select('category_id', Categories::getAllForSelect(), null, array('class' => 'form-control')) }}
-        {{ $errors->first('category_id', '<p class="help-block">:message</p>') }}
+        {!! $errors->first('category_id', '<p class="help-block">:message</p>') !!}
     </div>
 </div>
 
@@ -47,7 +47,7 @@
                         <button class="btn btn-default btn-slug @if($errors->has($lang.'.slug'))btn-danger @endif" type="button">@lang('validation.attributes.generate')</button>
                     </span>
                 </div>
-                {{ $errors->first($lang.'.slug', '<p class="help-block">:message</p>') }}
+                {!! $errors->first($lang.'.slug', '<p class="help-block">:message</p>') !!}
             </div>
         </div>
 

@@ -30,8 +30,7 @@ class AdminController extends AdminSimpleController
         $model = $this->repository->getModel();
         $tags = Session::getOldInput('tags');
         return view('core::admin.create')
-            ->withTags($tags)
-            ->withModel($model);
+            ->with(compact('model', 'tags'));
     }
 
     /**
@@ -40,7 +39,7 @@ class AdminController extends AdminSimpleController
      * @param  Model    $model
      * @return Response
      */
-    public function edit(Model $model)
+    public function edit($model)
     {
         JavaScript::put([
             'tags' => Tag::lists('tag')
@@ -48,7 +47,6 @@ class AdminController extends AdminSimpleController
 
         $tags = implode(', ', $model->tags->lists('tag'));
         return view('core::admin.edit')
-            ->withTags($tags)
-            ->withModel($model);
+            ->with(compact('model', 'tags'));
     }
 }
