@@ -2,7 +2,7 @@
 namespace TypiCMS\Modules\Projects\Controllers;
 
 use App;
-use Str;
+use Illuminate\Support\Str;
 use View;
 use TypiCMS;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;

@@ -1,30 +1,21 @@
 <?php
 namespace TypiCMS\Modules\Projects\Providers;
 
-use Lang;
-use View;
 use Config;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
-
-// Models
+use Illuminate\Support\ServiceProvider;
+use Lang;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectTranslation;
-
-// Repo
-use TypiCMS\Modules\Projects\Repositories\EloquentProject;
-
-// Cache
 use TypiCMS\Modules\Projects\Repositories\CacheDecorator;
-use TypiCMS\Services\Cache\LaravelCache;
-
-// Form
+use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 use TypiCMS\Modules\Projects\Services\Form\ProjectForm;
 use TypiCMS\Modules\Projects\Services\Form\ProjectFormLaravelValidator;
-
-// Observers
-use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Observers\FileObserver;
+use TypiCMS\Observers\SlugObserver;
+use TypiCMS\Services\Cache\LaravelCache;
+use View;
 
 class ModuleProvider extends ServiceProvider
 {
@@ -35,9 +26,19 @@ class ModuleProvider extends ServiceProvider
         require __DIR__ . '/../routes.php';
 
         // Add dirs
-        View::addLocation(__DIR__ . '/../Views');
-        Lang::addNamespace('projects', __DIR__ . '/../lang');
-        Config::addNamespace('projects', __DIR__ . '/../config');
+        View::addNamespace('projects', __DIR__ . '/../views/');
+        $this->loadTranslationsFrom(__DIR__ . '/../lang', 'projects');
+        $this->publishes([
+            __DIR__ . '/../config/' => config_path('typicms/projects'),
+        ], 'config');
+        $this->publishes([
+            __DIR__ . '/../migrations/' => base_path('/database/migrations'),
+        ], 'migrations');
+
+        AliasLoader::getInstance()->alias(
+            'Projects',
+            'TypiCMS\Modules\Projects\Facades\Facade'
+        );
 
         // Observers
         ProjectTranslation::observe(new SlugObserver);
@@ -72,10 +73,6 @@ class ModuleProvider extends ServiceProvider
                 new ProjectFormLaravelValidator($app['validator']),
                 $app->make('TypiCMS\Modules\Projects\Repositories\ProjectInterface')
             );
-        });
-
-        $app->before(function ($request, $response) {
-            require __DIR__ . '/../breadcrumbs.php';
         });
 
     }
