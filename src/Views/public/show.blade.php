@@ -1,3 +1,4 @@
+@extends('core::public.master')
 
 @section('main')
 

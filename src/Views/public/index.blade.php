@@ -1,6 +1,8 @@
+@extends('core::public.master')
+
 @section('main')
 
-    <h2>{{ Str::title(trans_choice('projects::global.projects', 2)) }}</h2>
+    <h2>{{ Illuminate\Support\Str::title(trans_choice('projects::global.projects', 2)) }}</h2>
 
     @if ($models->count())
 
