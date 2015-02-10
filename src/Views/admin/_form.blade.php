@@ -15,7 +15,7 @@
 @include('core::admin._image-fieldset', ['field' => 'image'])
 
     {!! BootForm::select(trans('validation.attributes.category_id'), 'category_id', Categories::getAllForSelect()) !!}
-    {!! BootForm::text(trans('validation.attributes.tags'), 'tags')->value($tags) !!}
+    {!! BootForm::text(trans('validation.attributes.tags'), 'tags')->value(implode(', ', $model->tags->lists('tag'))) !!}
 
 @include('core::admin._tabs-lang')
 
