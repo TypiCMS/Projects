@@ -1,11 +1,11 @@
 <?php
-namespace TypiCMS\Modules\Projects\Controllers;
+namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
 use JavaScript;
 use Response;
 use Session;
-use TypiCMS\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\AdminSimpleController;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
 use TypiCMS\Modules\Projects\Services\Form\ProjectForm;
 use TypiCMS\Modules\Tags\Models\Tag;

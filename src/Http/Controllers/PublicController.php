@@ -1,10 +1,10 @@
 <?php
-namespace TypiCMS\Modules\Projects\Controllers;
+namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use App;
 use Illuminate\Support\Str;
 use TypiCMS;
-use TypiCMS\Controllers\BasePublicController;
+use TypiCMS\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
 use View;
 
