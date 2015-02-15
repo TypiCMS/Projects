@@ -6,18 +6,17 @@ use JavaScript;
 use Response;
 use Session;
 use TypiCMS\Http\Controllers\AdminSimpleController;
+use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
-use TypiCMS\Modules\Projects\Services\Form\ProjectForm;
 use TypiCMS\Modules\Tags\Models\Tag;
 use View;
 
 class AdminController extends AdminSimpleController
 {
 
-    public function __construct(ProjectInterface $project, ProjectForm $projectform)
+    public function __construct(ProjectInterface $project)
     {
-        parent::__construct($project, $projectform);
-        $this->title['parent'] = trans_choice('projects::global.projects', 2);
+        parent::__construct($project);
     }
 
     /**
@@ -50,5 +49,30 @@ class AdminController extends AdminSimpleController
 
         return view('core::admin.edit')
             ->with(compact('model'));
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  FormRequest $request
+     * @return Redirect
+     */
+    public function store(FormRequest $request)
+    {
+        $model = $this->repository->create($request->all());
+        return $this->redirect($request, $model);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  $model
+     * @param  FormRequest $request
+     * @return Redirect
+     */
+    public function update($model, FormRequest $request)
+    {
+        $this->repository->update($request->all());
+        return $this->redirect($request, $model);
     }
 }

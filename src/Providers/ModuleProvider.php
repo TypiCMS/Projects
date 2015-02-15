@@ -10,8 +10,6 @@ use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectTranslation;
 use TypiCMS\Modules\Projects\Repositories\CacheDecorator;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
-use TypiCMS\Modules\Projects\Services\Form\ProjectForm;
-use TypiCMS\Modules\Projects\Services\Form\ProjectFormLaravelValidator;
 use TypiCMS\Observers\FileObserver;
 use TypiCMS\Observers\SlugObserver;
 use TypiCMS\Services\Cache\LaravelCache;
@@ -68,13 +66,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], ['projects', 'tags'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        $app->bind('TypiCMS\Modules\Projects\Services\Form\ProjectForm', function (Application $app) {
-            return new ProjectForm(
-                new ProjectFormLaravelValidator($app['validator']),
-                $app->make('TypiCMS\Modules\Projects\Repositories\ProjectInterface')
-            );
         });
 
     }
