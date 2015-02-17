@@ -1,7 +1,6 @@
 <?php
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
-use App;
 use Illuminate\Support\Str;
 use TypiCMS;
 use TypiCMS\Http\Controllers\BasePublicController;
@@ -50,7 +49,7 @@ class PublicController extends BasePublicController
     {
         $model = $this->repository->bySlug($slug);
         if ($category->id != $model->category_id) {
-            App::abort(404);
+            abort(404);
         }
 
         TypiCMS::setModel($model);
