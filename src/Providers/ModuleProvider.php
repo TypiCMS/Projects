@@ -12,6 +12,7 @@ use TypiCMS\Modules\Projects\Repositories\CacheDecorator;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 use TypiCMS\Observers\FileObserver;
 use TypiCMS\Observers\SlugObserver;
+use TypiCMS\Observers\TagObserver;
 use TypiCMS\Services\Cache\LaravelCache;
 use View;
 
@@ -38,6 +39,7 @@ class ModuleProvider extends ServiceProvider
         // Observers
         ProjectTranslation::observe(new SlugObserver);
         Project::observe(new FileObserver);
+        Project::observe(new TagObserver);
     }
 
     public function register()
@@ -57,8 +59,7 @@ class ModuleProvider extends ServiceProvider
 
         $app->bind('TypiCMS\Modules\Projects\Repositories\ProjectInterface', function (Application $app) {
             $repository = new EloquentProject(
-                new Project,
-                $app->make('TypiCMS\Modules\Tags\Repositories\TagInterface')
+                new Project
             );
             if (! Config::get('app.cache')) {
                 return $repository;

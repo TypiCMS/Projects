@@ -2,6 +2,8 @@
 namespace TypiCMS\Modules\Projects\Models;
 
 use Dimsav\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use TypiCMS\Models\Base;
 use TypiCMS\Presenters\PresentableTrait;
 use TypiCMS\Traits\Historable;
@@ -15,9 +17,13 @@ class Project extends Base
 
     protected $presenter = 'TypiCMS\Modules\Projects\Presenters\ModulePresenter';
 
+    protected $dates = ['date'];
+
     protected $fillable = array(
         'category_id',
         'image',
+        'date',
+        'website',
         // Translatable columns
         'title',
         'slug',
@@ -51,11 +57,26 @@ class Project extends Base
     protected $appends = ['status', 'title', 'thumb', 'category_name'];
 
     /**
-     * Relation
+     * A project belongs to a category.
+     * 
+     * @return BelongsTo
      */
     public function category()
     {
         return $this->belongsTo('TypiCMS\Modules\Categories\Models\Category');
+    }
+
+    /**
+     * A project has many galleries.
+     *
+     * @return MorphToMany
+     */
+    public function galleries()
+    {
+        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
+            ->withPivot('position')
+            ->orderBy('position')
+            ->withTimestamps();
     }
 
     /**

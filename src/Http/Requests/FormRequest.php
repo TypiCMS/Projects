@@ -9,6 +9,8 @@ class FormRequest extends AbstractFormRequest {
     {
         $rules = [
             'category_id' => 'required',
+            'date'        => 'date',
+            'website'     => 'url',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules[$locale . '.slug'] = [
@@ -20,5 +22,26 @@ class FormRequest extends AbstractFormRequest {
             $rules[$locale . '.title'] = 'max:255';
         }
         return $rules;
+    }
+
+    /**
+     * Sanitize inputs
+     * 
+     * @return array
+     */
+    public function sanitize()
+    {
+        $input = $this->all();
+
+        // Checkboxes
+        foreach (config('translatable.locales') as $locale) {
+            $input[$locale]['status'] = $this->has($locale . '.status');
+        }
+
+        // add relations data (default to empty array)
+        $input['galleries'] = $this->get('galleries', []);
+
+        $this->replace($input);
+        return $this->all();
     }
 }
