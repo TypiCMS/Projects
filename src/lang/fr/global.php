@@ -1,6 +1,6 @@
 <?php
 return array(
-    'name' => 'projets',
+    'name' => 'Projets',
     'projects' => 'projet|projets',
     'New'  => 'Nouveau projet',
     'Edit' => 'Modifier le projet',

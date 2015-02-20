@@ -1,8 +1,11 @@
 @extends('core::public.master')
 
+@section('title', trans('projects::global.name') . ' – ' . $websiteTitle)
+@section('ogTitle', trans('projects::global.name'))
+
 @section('main')
 
-    <h2>{{ Illuminate\Support\Str::title(trans_choice('projects::global.projects', 2)) }}</h2>
+    <h2>@lang('projects::global.name')</h2>
 
     @if ($models->count())
 
