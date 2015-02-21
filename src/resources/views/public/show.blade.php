@@ -4,6 +4,7 @@
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbAbsoluteSrc())
+@section('bodyClass', 'body-project body-project-' . $model->id)
 
 @section('main')
 
