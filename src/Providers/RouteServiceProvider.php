@@ -53,7 +53,9 @@ class RouteServiceProvider extends ServiceProvider {
                         }
                     }
                     $router->get($uri, array('as' => $lang.'.projects', 'uses' => 'PublicController@index'));
-                    $router->get($uri.'/{slug}', array('as' => $lang.'.projects.slug', 'uses' => 'PublicController@show'));
+                    $router->get($uri.'/{categories}', array('as' => $lang.'.projects.categories', 'uses' => 'PublicController@index'));
+                    $router->get($uri.'/{categories}/{slug}', array('as' => $lang.'.projects.categories.slug', 'uses' => 'PublicController@show'));
+
                 }
             });
 
@@ -61,6 +63,7 @@ class RouteServiceProvider extends ServiceProvider {
              * Admin routes
              */
             $router->resource('admin/projects', 'AdminController');
+            $router->post('admin/projects/sort', array('as' => 'admin.projects.sort', 'uses' => 'AdminController@projects'));
 
             /**
              * API routes
