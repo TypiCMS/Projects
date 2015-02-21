@@ -13,7 +13,6 @@ class PublicController extends BasePublicController
     public function __construct(ProjectInterface $project)
     {
         parent::__construct($project);
-        $this->title['parent'] = Str::title(trans_choice('projects::global.projects', 2));
     }
 
     /**
@@ -24,8 +23,6 @@ class PublicController extends BasePublicController
     public function index($category = null)
     {
         TypiCMS::setModel($this->repository->getModel());
-
-        $this->title['child'] = '';
 
         $relatedModels = array('translations', 'category', 'category.translations');
 
@@ -53,8 +50,6 @@ class PublicController extends BasePublicController
         }
 
         TypiCMS::setModel($model);
-
-        $this->title['parent'] = $model->title;
 
         return view('projects::public.show')
             ->with(compact('model'));
