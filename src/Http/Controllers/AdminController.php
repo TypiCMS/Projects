@@ -5,13 +5,13 @@ use Illuminate\Database\Eloquent\Model;
 use JavaScript;
 use Response;
 use Session;
-use TypiCMS\Http\Controllers\AdminSimpleController;
+use TypiCMS\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
 use TypiCMS\Modules\Tags\Models\Tag;
 use View;
 
-class AdminController extends AdminSimpleController
+class AdminController extends BaseAdminController
 {
 
     public function __construct(ProjectInterface $project)
