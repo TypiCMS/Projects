@@ -24,7 +24,7 @@ class AdminController extends BaseAdminController
      *
      * @return Response
      */
-    public function create()
+    public function create($parent = null)
     {
         JavaScript::put([
             'tags' => Tag::lists('tag')
@@ -41,7 +41,7 @@ class AdminController extends BaseAdminController
      * @param  Model    $model
      * @return Response
      */
-    public function edit($model)
+    public function edit($model, $child = null)
     {
         JavaScript::put([
             'tags' => Tag::lists('tag')
