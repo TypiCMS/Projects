@@ -3,15 +3,11 @@ use TypiCMS\Modules\Projects\Models\Project;
 
 class ProjectsControllerTest extends TestCase
 {
-    public function tearDown()
-    {
-        Mockery::close();
-    }
 
     public function testAdminIndex()
     {
-        $this->get('admin/projects');
-        $this->assertTrue($this->client->getResponse()->isOk());
+        $response = $this->call('GET', 'admin/projects');
+        $this->assertEquals(200, $response->getStatusCode());
     }
 
     public function testStoreFails()
