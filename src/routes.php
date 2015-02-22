@@ -8,7 +8,7 @@ Route::bind('projects', function ($value) {
 if (! App::runningInConsole()) {
     Route::group(
         array(
-            'before'    => 'visitor.publicAccess',
+            'before'    => 'visitorHasPublicAccess',
             'namespace' => 'TypiCMS\Modules\Projects\Http\Controllers',
         ),
         function () {

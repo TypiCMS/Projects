@@ -38,26 +38,24 @@ class RouteServiceProvider extends ServiceProvider {
     public function map(Router $router)
     {
         $router->group(['namespace' => $this->namespace], function($router) {
+
             /**
              * Front office routes
              */
-            $router->group(['before' => 'visitor.publicAccess'], function ($router) {
-                $routes = app('TypiCMS.routes');
-                foreach (Config::get('translatable.locales') as $lang) {
-                    if (isset($routes['projects'][$lang])) {
-                        $uri = $routes['projects'][$lang];
-                    } else {
-                        $uri = 'projects';
-                        if (Config::get('app.fallback_locale') != $lang || config('typicms.main_locale_in_url')) {
-                            $uri = $lang . '/' . $uri;
-                        }
+            $routes = app('TypiCMS.routes');
+            foreach (Config::get('translatable.locales') as $lang) {
+                if (isset($routes['projects'][$lang])) {
+                    $uri = $routes['projects'][$lang];
+                } else {
+                    $uri = 'projects';
+                    if (Config::get('app.fallback_locale') != $lang || config('typicms.main_locale_in_url')) {
+                        $uri = $lang . '/' . $uri;
                     }
-                    $router->get($uri, array('as' => $lang.'.projects', 'uses' => 'PublicController@index'));
-                    $router->get($uri.'/{categories}', array('as' => $lang.'.projects.categories', 'uses' => 'PublicController@index'));
-                    $router->get($uri.'/{categories}/{slug}', array('as' => $lang.'.projects.categories.slug', 'uses' => 'PublicController@show'));
-
                 }
-            });
+                $router->get($uri, array('as' => $lang.'.projects', 'uses' => 'PublicController@index'));
+                $router->get($uri.'/{categories}', array('as' => $lang.'.projects.categories', 'uses' => 'PublicController@index'));
+                $router->get($uri.'/{categories}/{slug}', array('as' => $lang.'.projects.categories.slug', 'uses' => 'PublicController@show'));
+            }
 
             /**
              * Admin routes
