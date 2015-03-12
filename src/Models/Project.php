@@ -45,6 +45,8 @@ class Project extends Base
         'body',
     );
 
+    protected $appends = ['status', 'title', 'thumb', 'category_name'];
+
     /**
      * Columns that are file.
      *
@@ -53,8 +55,6 @@ class Project extends Base
     public $attachments = array(
         'image',
     );
-
-    protected $appends = ['status', 'title', 'thumb', 'category_name'];
 
     /**
      * A project belongs to a category.
