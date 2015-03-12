@@ -27,10 +27,10 @@ class PublicController extends BasePublicController
         $relatedModels = array('translations', 'category', 'category.translations');
 
         if ($category) {
-            $models = $this->repository->getAllBy('category_id', $category->id, $relatedModels, false);
+            $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
             TypiCMS::setModel($category); // Needed for building lang switcher
         } else {
-            $models = $this->repository->getAll($relatedModels, false);
+            $models = $this->repository->all($relatedModels, false);
         }
 
         return view('projects::public.index')
