@@ -17,8 +17,6 @@ class Project extends Base
 
     protected $presenter = 'TypiCMS\Modules\Projects\Presenters\ModulePresenter';
 
-    protected $dates = ['date'];
-
     protected $fillable = array(
         'category_id',
         'image',
