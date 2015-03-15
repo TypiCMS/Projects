@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->increments('id');
             $table->integer('category_id')->unsigned();
             $table->date('date');
-            $table->date('website');
+            $table->string('website')->nullable();
             $table->string('image')->nullable();
 
             $table->timestamps();
