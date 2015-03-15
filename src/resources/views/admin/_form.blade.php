@@ -20,7 +20,7 @@
 {!! BootForm::text(trans('validation.attributes.tags'), 'tags')->value(implode(', ', $model->tags->lists('tag'))) !!}
 <div class="row">
     <div class="col-sm-6">
-        {!! BootForm::date(trans('validation.attributes.date'), 'date')->value($model->present()->dateOrNow('date'))->placeholder(trans('validation.attributes.DDMMYYYY'))->addClass('datepicker') !!}
+        {!! BootForm::date(trans('validation.attributes.date'), 'date')->value($model->present()->dateOrNow('date'))->addClass('datepicker') !!}
     </div>
 </div>
 {!! BootForm::text(trans('validation.attributes.website'), 'website')->placeholder('http://') !!}
