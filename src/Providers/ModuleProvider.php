@@ -69,7 +69,7 @@ class ModuleProvider extends ServiceProvider
             $repository = new EloquentProject(
                 new Project
             );
-            if (! Config::get('app.cache')) {
+            if (! config('typicms.cache')) {
                 return $repository;
             }
             $laravelCache = new LaravelCache($app['cache'], ['projects', 'tags'], 10);
