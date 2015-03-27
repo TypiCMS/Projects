@@ -6,7 +6,7 @@
 
 @section('main')
 
-    <h2>@lang('projects::global.name')</h2>
+    <h1>@lang('projects::global.name')</h1>
 
     @if ($models->count())
 
