@@ -4,6 +4,7 @@ namespace TypiCMS\Modules\Projects\Models;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use TypiCMS\Facades\TypiCMS;
 use TypiCMS\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Presenters\PresentableTrait;
@@ -57,8 +58,22 @@ class Project extends Base
     );
 
     /**
+     * Get public uri
+     *
+     * @return string|null
+     */
+    public function uri($locale)
+    {
+        $page = TypiCMS::getPageLinkedToModule($this->getTable());
+        if ($page) {
+            return $page->uri($locale) . '/' . $this->category->translate($locale)->slug . '/' . $this->translate($locale)->slug;
+        }
+        return null;
+    }
+
+    /**
      * A project belongs to a category.
-     * 
+     *
      * @return BelongsTo
      */
     public function category()
