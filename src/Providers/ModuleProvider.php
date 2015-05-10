@@ -1,11 +1,9 @@
 <?php
 namespace TypiCMS\Modules\Projects\Providers;
 
-use Config;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
-use Lang;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectTranslation;
 use TypiCMS\Modules\Projects\Repositories\CacheDecorator;
@@ -14,7 +12,6 @@ use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Core\Observers\TagObserver;
 use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
-use View;
 
 class ModuleProvider extends ServiceProvider
 {
