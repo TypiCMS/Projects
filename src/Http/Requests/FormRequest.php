@@ -11,7 +11,7 @@ class FormRequest extends AbstractFormRequest {
             'category_id' => 'required',
             'date'        => 'date',
             'website'     => 'url',
-            'image'       => 'image|max:2000|image_size:>=500',
+            'image'       => 'image|max:2000',
         ];
         foreach (config('translatable.locales') as $locale) {
             $rules[$locale . '.slug'] = [
