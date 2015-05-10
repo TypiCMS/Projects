@@ -10,10 +10,10 @@ use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectTranslation;
 use TypiCMS\Modules\Projects\Repositories\CacheDecorator;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
-use TypiCMS\Observers\FileObserver;
-use TypiCMS\Observers\SlugObserver;
-use TypiCMS\Observers\TagObserver;
-use TypiCMS\Services\Cache\LaravelCache;
+use TypiCMS\Modules\Core\Observers\FileObserver;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Observers\TagObserver;
+use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use View;
 
 class ModuleProvider extends ServiceProvider

@@ -5,8 +5,8 @@ use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Laracasts\Presenter\PresentableTrait;
-use TypiCMS\Facades\TypiCMS;
-use TypiCMS\Models\Base;
+use TypiCMS\Modules\Core\Facades\TypiCMS;
+use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class Project extends Base

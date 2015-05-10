@@ -2,7 +2,7 @@
 namespace TypiCMS\Modules\Projects\Repositories;
 
 use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
 
 class EloquentProject extends RepositoriesAbstract implements ProjectInterface
 {

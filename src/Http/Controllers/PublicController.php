@@ -3,7 +3,7 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Support\Str;
 use TypiCMS;
-use TypiCMS\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
 use View;
 

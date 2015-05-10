@@ -1,7 +1,7 @@
 <?php
 namespace TypiCMS\Modules\Projects\Repositories;
 
-use TypiCMS\Repositories\RepositoryInterface;
+use TypiCMS\Modules\Core\Repositories\RepositoryInterface;
 
 interface ProjectInterface extends RepositoryInterface
 {
