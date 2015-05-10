@@ -4,10 +4,10 @@ namespace TypiCMS\Modules\Projects\Models;
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Laracasts\Presenter\PresentableTrait;
 use TypiCMS\Facades\TypiCMS;
 use TypiCMS\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
-use TypiCMS\Presenters\PresentableTrait;
 
 class Project extends Base
 {
