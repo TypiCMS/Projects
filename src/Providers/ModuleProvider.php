@@ -4,14 +4,14 @@ namespace TypiCMS\Modules\Projects\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider;
+use TypiCMS\Modules\Core\Observers\FileObserver;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectTranslation;
 use TypiCMS\Modules\Projects\Repositories\CacheDecorator;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
-use TypiCMS\Modules\Core\Observers\FileObserver;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Observers\TagObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
+use TypiCMS\Modules\Tags\Observers\TagObserver;
 
 class ModuleProvider extends ServiceProvider
 {
