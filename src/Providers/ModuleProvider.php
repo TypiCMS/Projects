@@ -58,6 +58,12 @@ class ModuleProvider extends ServiceProvider
         $app->register('TypiCMS\Modules\Projects\Providers\RouteServiceProvider');
 
         /**
+         * Register Tags and Categories
+         */
+        $app->register('TypiCMS\Modules\Tags\Providers\ModuleProvider');
+        $app->register('TypiCMS\Modules\Categories\Providers\ModuleProvider');
+
+        /**
          * Sidebar view composer
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Projects\Composers\SidebarViewComposer');
