@@ -27,7 +27,7 @@ class AdminController extends BaseAdminController
     public function create($parent = null)
     {
         JavaScript::put([
-            'tags' => Tag::lists('tag')
+            'tags' => Tag::lists('tag')->all()
         ]);
 
         $model = $this->repository->getModel();
