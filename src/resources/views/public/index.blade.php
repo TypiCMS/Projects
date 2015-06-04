@@ -1,5 +1,5 @@
 @extends('pages::public.master')
-<?php $page = TypiCMS::getPageLinkedToModule('projects') ?>
+@inject('page', 'typicms.projects.page')
 
 @section('bodyClass', 'body-projects body-projects-index body-page body-page-' . $page->id)
 
