@@ -26,10 +26,6 @@ class AdminController extends BaseAdminController
      */
     public function create($parent = null)
     {
-        JavaScript::put([
-            'tags' => Tag::lists('tag')->all()
-        ]);
-
         $model = $this->repository->getModel();
         return view('core::admin.create')
             ->with(compact('model'));
@@ -43,10 +39,6 @@ class AdminController extends BaseAdminController
      */
     public function edit($model, $child = null)
     {
-        JavaScript::put([
-            'tags' => Tag::lists('tag')
-        ]);
-
         return view('core::admin.edit')
             ->with(compact('model'));
     }
