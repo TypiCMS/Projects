@@ -2,14 +2,10 @@
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
-use JavaScript;
-use Response;
-use Session;
+use Illuminate\Support\Facades\Response;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
-use TypiCMS\Modules\Tags\Models\Tag;
-use View;
 
 class AdminController extends BaseAdminController
 {
