@@ -2,7 +2,6 @@
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Response;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
@@ -18,7 +17,7 @@ class AdminController extends BaseAdminController
     /**
      * Show the form for creating a new resource.
      *
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function create($parent = null)
     {
@@ -31,7 +30,7 @@ class AdminController extends BaseAdminController
      * Show the form for editing the specified resource.
      *
      * @param  Model    $model
-     * @return Response
+     * @return \Illuminate\Support\Facades\Response
      */
     public function edit($model, $child = null)
     {
