@@ -16,18 +16,20 @@ class CreateProjectsTable extends Migration
             $table->engine = 'InnoDB';
 
             $table->increments('id');
-            $table->integer('category_id')->unsigned();
+            $table->integer('category_id')->unsigned()->nullable();
             $table->date('date');
             $table->string('website')->nullable();
             $table->string('image')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
         });
 
         Schema::create('project_translations', function (Blueprint $table) {
             $table->engine = 'InnoDB';
 
-            $table->increments('id')->unsigned();
+            $table->increments('id');
             $table->integer('project_id')->unsigned();
 
             $table->string('locale')->index();
