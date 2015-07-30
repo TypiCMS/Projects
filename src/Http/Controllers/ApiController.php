@@ -10,4 +10,15 @@ class ApiController extends BaseApiController
     {
         parent::__construct($repository);
     }
+
+    /**
+     * Get models
+     *
+     * @return \Illuminate\Support\Facades\Response
+     */
+    public function index()
+    {
+        $models = $this->repository->all(['category'], true);
+        return response()->json($models, 200);
+    }
 }
