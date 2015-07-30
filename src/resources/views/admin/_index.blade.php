@@ -16,11 +16,15 @@
                     <th class="edit"></th>
                     <th st-sort="status" class="status st-sort">Status</th>
                     <th st-sort="image" class="image st-sort">Image</th>
+                    <th st-sort="date" st-sort-default="reverse" class="date st-sort">Date</th>
                     <th st-sort="title" class="title st-sort">Title</th>
                     <th st-sort="category_name" class="category st-sort">Category</th>
                 </tr>
                 <tr>
                     <td colspan="4"></td>
+                    <td>
+                        <input st-search="date" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
+                    </td>
                     <td>
                         <input st-search="title" class="form-control input-sm" placeholder="@lang('global.Search')…" type="text">
                     </td>
@@ -40,13 +44,14 @@
                     <td>
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
+                    <td>@{{ model.date | dateFromMySQL:'dd/MM/yyyy' }}</td>
                     <td>@{{ model.title }}</td>
                     <td>@{{ model.category_name }}</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="6" typi-pagination></td>
+                    <td colspan="7" typi-pagination></td>
                 </tr>
             </tfoot>
         </table>
