@@ -46,7 +46,7 @@ class RouteServiceProvider extends ServiceProvider {
                 foreach (config('translatable.locales') as $lang) {
                     $options = $page->private ? ['middleware' => 'auth'] : [] ;
                     if ($uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['as' => $lang.'.projects', 'uses' => 'PublicController@index']);
+                        $router->get($uri, $options + ['as' => $lang.'.projects', 'uses' => 'PublicController@categories']);
                         $router->get($uri.'/{categories}', $options + ['as' => $lang.'.projects.categories', 'uses' => 'PublicController@index']);
                         $router->get($uri.'/{categories}/{slug}', $options + ['as' => $lang.'.projects.categories.slug', 'uses' => 'PublicController@show']);
                     }
@@ -57,7 +57,7 @@ class RouteServiceProvider extends ServiceProvider {
              * Admin routes
              */
             $router->resource('admin/projects', 'AdminController');
-            $router->post('admin/projects/sort', array('as' => 'admin.projects.sort', 'uses' => 'AdminController@projects'));
+            $router->post('admin/projects/sort', ['as' => 'admin.projects.sort', 'uses' => 'AdminController@projects']);
 
             /**
              * API routes

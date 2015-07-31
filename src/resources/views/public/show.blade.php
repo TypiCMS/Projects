@@ -1,7 +1,7 @@
 @extends('core::public.master')
 @inject('page', 'typicms.projects.page')
 
-@section('title', $model->title . ' – ' . trans('news::global.name') . ' – ' . $websiteTitle)
+@section('title', $model->title . ' – ' . trans('projects::global.name') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
 @section('image', $model->present()->thumbAbsoluteSrc())
