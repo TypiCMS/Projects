@@ -43,8 +43,8 @@ class RouteServiceProvider extends ServiceProvider {
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('projects')) {
+                $options = $page->private ? ['middleware' => 'auth'] : [];
                 foreach (config('translatable.locales') as $lang) {
-                    $options = $page->private ? ['middleware' => 'auth'] : [] ;
                     if ($uri = $page->uri($lang)) {
                         $router->get($uri, $options + ['as' => $lang.'.projects', 'uses' => 'PublicController@categories']);
                         $router->get($uri.'/{categories}', $options + ['as' => $lang.'.projects.categories', 'uses' => 'PublicController@index']);

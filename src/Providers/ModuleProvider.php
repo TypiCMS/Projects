@@ -69,6 +69,13 @@ class ModuleProvider extends ServiceProvider
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Projects\Composers\SidebarViewComposer');
 
+        /**
+         * Add the page in the view.
+         */
+        $app->view->composer('projects::public.*', function ($view) {
+            $view->page = TypiCMS::getPageLinkedToModule('projects');
+        });
+
         $app->bind('TypiCMS\Modules\Projects\Repositories\ProjectInterface', function (Application $app) {
             $repository = new EloquentProject(
                 new Project
@@ -79,13 +86,6 @@ class ModuleProvider extends ServiceProvider
             $laravelCache = new LaravelCache($app['cache'], ['projects', 'tags'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
-        });
-
-        /**
-         * Return the page linked to this module (for @inject in views)
-         */
-        $app->singleton('typicms.projects.page', function (Application $app) {
-            return TypiCMS::getPageLinkedToModule('projects');
         });
 
     }
