@@ -1,8 +1,9 @@
 <?php
-return array(
-    'name' => 'Projects',
+
+return [
+    'name'     => 'Projects',
     'projects' => 'project|projects',
-    'New'  => 'New project',
-    'Edit' => 'Edit project',
-    'Back' => 'Back to projects',
-);
+    'New'      => 'New project',
+    'Edit'     => 'Edit project',
+    'Back'     => 'Back to projects',
+];

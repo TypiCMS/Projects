@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
 
 class CreateProjectsTable extends Migration
 {
@@ -44,7 +44,7 @@ class CreateProjectsTable extends Migration
 
             $table->timestamps();
 
-            $table->unique(array('project_id', 'locale'));
+            $table->unique(['project_id', 'locale']);
             $table->foreign('project_id')->references('id')->on('projects')->onDelete('cascade');
 
         });
@@ -60,5 +60,4 @@ class CreateProjectsTable extends Migration
         Schema::drop('project_translations');
         Schema::drop('projects');
     }
-
 }

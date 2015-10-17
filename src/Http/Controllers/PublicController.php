@@ -1,14 +1,13 @@
 <?php
+
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
-use TypiCMS;
+use Categories;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
-use Categories;
 
 class PublicController extends BasePublicController
 {
-
     public function __construct(ProjectInterface $project)
     {
         parent::__construct($project);
@@ -22,6 +21,7 @@ class PublicController extends BasePublicController
     public function categories()
     {
         $categories = Categories::all();
+
         return view('projects::public.categories')
             ->with(compact('categories'));
     }
@@ -35,6 +35,7 @@ class PublicController extends BasePublicController
     {
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
+
         return view('projects::public.index')
             ->with(compact('models', 'category'));
     }
@@ -50,6 +51,7 @@ class PublicController extends BasePublicController
         if ($category->id != $model->category_id) {
             abort(404);
         }
+
         return view('projects::public.show')
             ->with(compact('model'));
     }
