@@ -1,4 +1,5 @@
 <?php
+
 namespace TypiCMS\Modules\Projects\Providers;
 
 use Illuminate\Foundation\AliasLoader;
@@ -16,25 +17,23 @@ use TypiCMS\Modules\Tags\Observers\TagObserver;
 
 class ModuleProvider extends ServiceProvider
 {
-
     public function boot()
     {
-
         $this->mergeConfigFrom(
-            __DIR__ . '/../config/config.php', 'typicms.projects'
+            __DIR__.'/../config/config.php', 'typicms.projects'
         );
 
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['projects' => ['linkable_to_page']], $modules));
 
-        $this->loadViewsFrom(__DIR__ . '/../resources/views/', 'projects');
-        $this->loadTranslationsFrom(__DIR__ . '/../resources/lang', 'projects');
+        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'projects');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'projects');
 
         $this->publishes([
-            __DIR__ . '/../resources/views' => base_path('resources/views/vendor/projects'),
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/projects'),
         ], 'views');
         $this->publishes([
-            __DIR__ . '/../database' => base_path('database'),
+            __DIR__.'/../database' => base_path('database'),
         ], 'migrations');
 
         AliasLoader::getInstance()->alias(
@@ -43,33 +42,32 @@ class ModuleProvider extends ServiceProvider
         );
 
         // Observers
-        ProjectTranslation::observe(new SlugObserver);
-        Project::observe(new FileObserver);
-        Project::observe(new TagObserver);
+        ProjectTranslation::observe(new SlugObserver());
+        Project::observe(new FileObserver());
+        Project::observe(new TagObserver());
     }
 
     public function register()
     {
-
         $app = $this->app;
 
-        /**
+        /*
          * Register route service provider
          */
         $app->register('TypiCMS\Modules\Projects\Providers\RouteServiceProvider');
 
-        /**
+        /*
          * Register Tags and Categories
          */
         $app->register('TypiCMS\Modules\Tags\Providers\ModuleProvider');
         $app->register('TypiCMS\Modules\Categories\Providers\ModuleProvider');
 
-        /**
+        /*
          * Sidebar view composer
          */
         $app->view->composer('core::admin._sidebar', 'TypiCMS\Modules\Projects\Composers\SidebarViewComposer');
 
-        /**
+        /*
          * Add the page in the view.
          */
         $app->view->composer('projects::public.*', function ($view) {
@@ -78,15 +76,14 @@ class ModuleProvider extends ServiceProvider
 
         $app->bind('TypiCMS\Modules\Projects\Repositories\ProjectInterface', function (Application $app) {
             $repository = new EloquentProject(
-                new Project
+                new Project()
             );
-            if (! config('typicms.cache')) {
+            if (!config('typicms.cache')) {
                 return $repository;
             }
             $laravelCache = new LaravelCache($app['cache'], ['projects', 'tags'], 10);
 
             return new CacheDecorator($repository, $laravelCache);
         });
-
     }
 }

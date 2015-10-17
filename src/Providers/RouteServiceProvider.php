@@ -1,12 +1,13 @@
 <?php
+
 namespace TypiCMS\Modules\Projects\Providers;
 
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 use Illuminate\Routing\Router;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 
-class RouteServiceProvider extends ServiceProvider {
-
+class RouteServiceProvider extends ServiceProvider
+{
     /**
      * This namespace is applied to the controller routes in your routes file.
      *
@@ -19,7 +20,8 @@ class RouteServiceProvider extends ServiceProvider {
     /**
      * Define your route model bindings, pattern filters, etc.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function boot(Router $router)
@@ -32,14 +34,15 @@ class RouteServiceProvider extends ServiceProvider {
     /**
      * Define the routes for the application.
      *
-     * @param  \Illuminate\Routing\Router  $router
+     * @param \Illuminate\Routing\Router $router
+     *
      * @return void
      */
     public function map(Router $router)
     {
-        $router->group(['namespace' => $this->namespace], function(Router $router) {
+        $router->group(['namespace' => $this->namespace], function (Router $router) {
 
-            /**
+            /*
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('projects')) {
@@ -53,17 +56,16 @@ class RouteServiceProvider extends ServiceProvider {
                 }
             }
 
-            /**
+            /*
              * Admin routes
              */
             $router->resource('admin/projects', 'AdminController');
             $router->post('admin/projects/sort', ['as' => 'admin.projects.sort', 'uses' => 'AdminController@projects']);
 
-            /**
+            /*
              * API routes
              */
             $router->resource('api/projects', 'ApiController');
         });
     }
-
 }
