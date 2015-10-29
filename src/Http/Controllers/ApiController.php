@@ -14,9 +14,9 @@ class ApiController extends BaseApiController
     }
 
     /**
-     * Get models.
+     * List resources.
      *
-     * @return \Illuminate\Support\Facades\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function index()
     {
@@ -28,7 +28,7 @@ class ApiController extends BaseApiController
     /**
      * Store a newly created resource in storage.
      *
-     * @return Model|false
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store()
     {
@@ -46,7 +46,7 @@ class ApiController extends BaseApiController
      *
      * @param  $model
      *
-     * @return bool
+     * @return \Illuminate\Http\JsonResponse
      */
     public function update($model)
     {
