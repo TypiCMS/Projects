@@ -16,10 +16,10 @@
         </div>
     </div>
 
-    <article>
-        <h1>{{ $model->title }}</h1>
-        <p class="summary">{{ nl2br($model->summary) }}</p>
-        <div class="body">{!! $model->present()->body !!}</div>
+    <article class="project">
+        <h1 class="project-title">{{ $model->title }}</h1>
+        <p class="project-summary">{!! nl2br($model->summary) !!}</p>
+        <div class="project-body">{!! $model->present()->body !!}</div>
     </article>
 
 @stop
