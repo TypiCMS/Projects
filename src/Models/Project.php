@@ -70,7 +70,7 @@ class Project extends Base
             return $page->uri($locale).'/'.$this->category->translate($locale)->slug.'/'.$this->translate($locale)->slug;
         }
 
-        return;
+        return '/';
     }
 
     /**
