@@ -48,12 +48,28 @@ class ApiController extends BaseApiController
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update($model)
+    public function update()
     {
-        $error = $this->repository->update(Request::all()) ? false : true;
+        $updated = $this->repository->update(Request::all());
 
         return response()->json([
-            'error' => $error,
-        ], 200);
+            'error' => !$updated,
+        ]);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Projects\Models\Project $project
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Project $project)
+    {
+        $deleted = $this->repository->delete($project);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
     }
 }
