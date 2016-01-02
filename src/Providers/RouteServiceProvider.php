@@ -18,20 +18,6 @@ class RouteServiceProvider extends ServiceProvider
     protected $namespace = 'TypiCMS\Modules\Projects\Http\Controllers';
 
     /**
-     * Define your route model bindings, pattern filters, etc.
-     *
-     * @param \Illuminate\Routing\Router $router
-     *
-     * @return void
-     */
-    public function boot(Router $router)
-    {
-        parent::boot($router);
-
-        $router->model('projects', 'TypiCMS\Modules\Projects\Models\Project');
-    }
-
-    /**
      * Define the routes for the application.
      *
      * @param \Illuminate\Routing\Router $router
@@ -59,13 +45,19 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->resource('admin/projects', 'AdminController');
+            $router->get('admin/projects', ['as' => 'admin.projects.index', 'uses' => 'AdminController@index']);
+            $router->get('admin/projects/create', ['as' => 'admin.projects.create', 'uses' => 'AdminController@create']);
+            $router->get('admin/projects/{project}/edit', ['as' => 'admin.projects.edit', 'uses' => 'AdminController@edit']);
+            $router->post('admin/projects', ['as' => 'admin.projects.store', 'uses' => 'AdminController@store']);
+            $router->put('admin/projects/{project}', ['as' => 'admin.projects.update', 'uses' => 'AdminController@update']);
             $router->post('admin/projects/sort', ['as' => 'admin.projects.sort', 'uses' => 'AdminController@projects']);
 
             /*
              * API routes
              */
-            $router->resource('api/projects', 'ApiController');
+            $router->get('api/projects', ['as' => 'api.projects.index', 'uses' => 'ApiController@index']);
+            $router->put('api/projects/{project}', ['as' => 'api.projects.update', 'uses' => 'ApiController@update']);
+            $router->delete('api/projects/{project}', ['as' => 'api.projects.destroy', 'uses' => 'ApiController@destroy']);
         });
     }
 }
