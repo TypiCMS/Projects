@@ -20,7 +20,7 @@ class AdminController extends BaseAdminController
      *
      * @return \Illuminate\View\View
      */
-    public function create($parent = null)
+    public function create()
     {
         $model = $this->repository->getModel();
 
@@ -35,7 +35,7 @@ class AdminController extends BaseAdminController
      *
      * @return \Illuminate\View\View
      */
-    public function edit(Project $project, $child = null)
+    public function edit(Project $project)
     {
         return view('core::admin.edit')
             ->with([
