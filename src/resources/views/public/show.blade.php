@@ -22,4 +22,4 @@
         <div class="project-body">{!! $model->present()->body !!}</div>
     </article>
 
-@stop
+@endsection

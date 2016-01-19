@@ -23,4 +23,4 @@
 
     @endif
 
-@stop
+@endsection
