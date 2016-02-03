@@ -13,7 +13,7 @@
         <ul class="list-categories">
             @foreach ($categories as $category)
             <li>
-                <a href="{{ route($lang.'.projects.categories', [$category->slug]) }}">
+                <a href="{{ route($lang.'.projects.category', [$category->slug]) }}">
                     <span class="title">{{ $category->title }}</span>
                     {!! $category->present()->thumb(270, 270) !!}
                 </a>
