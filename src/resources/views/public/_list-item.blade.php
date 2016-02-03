@@ -1,5 +1,5 @@
 <li class="project">
-    <a class="project-anchor" href="{{ route($lang.'.projects.categories.slug', [$project->category->slug, $project->slug]) }}">
+    <a class="project-anchor" href="{{ route($lang.'.projects.category.slug', [$project->category->slug, $project->slug]) }}">
         {!! $project->present()->thumb(540, 400) !!}
         <div class="project-info">
             <div class="project-title">{{ $project->title }}</div>
