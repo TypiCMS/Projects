@@ -10,9 +10,9 @@
 
     <div class="btn-group-prev-next">
         <div class="btn-group">
-            <a class="btn btn-sm btn-prev btn-default @if(!$prev = Projects::prev($model, $model->category_id))disabled @endif" href="@if($prev){{ route($lang . '.' . $model->getTable() . '.categories.slug', [$prev->category->slug, $prev->slug]) }}@endif">@lang('core::global.Previous')</a>
-            <a class="btn btn-sm btn-prev btn-default" href="{{ route($lang . '.' . $model->getTable() . '.categories', $model->category->slug) }}">{{ $model->category->title }}</a>
-            <a class="btn btn-sm btn-next btn-default @if(!$next = Projects::next($model, $model->category_id))disabled @endif" href="@if($next){{ route($lang . '.' . $model->getTable() . '.categories.slug', [$next->category->slug, $next->slug]) }}@endif">@lang('core::global.Next')</a>
+            <a class="btn btn-sm btn-prev btn-default @if(!$prev = Projects::prev($model, $model->category_id))disabled @endif" href="@if($prev){{ route($lang . '.' . $model->getTable() . '.category.slug', [$prev->category->slug, $prev->slug]) }}@endif">@lang('core::global.Previous')</a>
+            <a class="btn btn-sm btn-prev btn-default" href="{{ route($lang . '.' . $model->getTable() . '.category', $model->category->slug) }}">{{ $model->category->title }}</a>
+            <a class="btn btn-sm btn-next btn-default @if(!$next = Projects::next($model, $model->category_id))disabled @endif" href="@if($next){{ route($lang . '.' . $model->getTable() . '.category.slug', [$next->category->slug, $next->slug]) }}@endif">@lang('core::global.Next')</a>
         </div>
     </div>
 

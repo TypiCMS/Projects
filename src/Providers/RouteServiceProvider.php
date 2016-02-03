@@ -36,8 +36,8 @@ class RouteServiceProvider extends ServiceProvider
                 foreach (config('translatable.locales') as $lang) {
                     if ($uri = $page->uri($lang)) {
                         $router->get($uri, $options + ['as' => $lang.'.projects', 'uses' => 'PublicController@categories']);
-                        $router->get($uri.'/{categories}', $options + ['as' => $lang.'.projects.categories', 'uses' => 'PublicController@index']);
-                        $router->get($uri.'/{categories}/{slug}', $options + ['as' => $lang.'.projects.categories.slug', 'uses' => 'PublicController@show']);
+                        $router->get($uri.'/{category}', $options + ['as' => $lang.'.projects.category', 'uses' => 'PublicController@index']);
+                        $router->get($uri.'/{category}/{slug}', $options + ['as' => $lang.'.projects.category.slug', 'uses' => 'PublicController@show']);
                     }
                 }
             }
