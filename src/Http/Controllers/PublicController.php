@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Categories;
+use TypiCMS\Modules\Categories\Models\CategoryTranslation;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
 
@@ -33,6 +34,12 @@ class PublicController extends BasePublicController
      */
     public function index($category = null)
     {
+        if (is_string($category)) {
+            $category = CategoryTranslation::where('slug', $category)->first();
+            if (!$category) {
+                abort(404);
+            }
+        }
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
 
@@ -48,7 +55,12 @@ class PublicController extends BasePublicController
     public function show($category = null, $slug = null)
     {
         $model = $this->repository->bySlug($slug);
-        if ($category->id != $model->category_id) {
+        if (is_string($category)) {
+            $category = CategoryTranslation::where('slug', $category)->first();
+            if (!$category || ($category->category_id != $model->category_id)) {
+                abort(404);
+            }
+        } elseif ($category->id != $model->category_id) {
             abort(404);
         }
 
