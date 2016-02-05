@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "typicms/categories": "~2.6.0",
-        "typicms/tags": "~2.6.0",
+        "typicms/categories": "~2.7.0",
+        "typicms/tags": "~2.7.0",
         "typicms/core": "~2.7.0"
     },
     "autoload": {
