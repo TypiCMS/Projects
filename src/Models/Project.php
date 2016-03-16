@@ -107,7 +107,5 @@ class Project extends Base
         if (isset($this->category) and $this->category) {
             return $this->category->title;
         }
-
-        return;
     }
 }
