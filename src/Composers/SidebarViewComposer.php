@@ -16,7 +16,7 @@ class SidebarViewComposer
                 $item->icon = config('typicms.projects.sidebar.icon', 'icon fa fa-fw fa-cube');
                 $item->weight = config('typicms.projects.sidebar.weight');
                 $item->route('admin::index-projects');
-                $item->append('admin::create-projects');
+                $item->append('admin::create-project');
                 $item->authorize(
                     Gate::allows('index-projects')
                 );
