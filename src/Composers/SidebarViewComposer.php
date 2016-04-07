@@ -3,11 +3,11 @@
 namespace TypiCMS\Modules\Projects\Composers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\Gate;
 use Maatwebsite\Sidebar\SidebarGroup;
 use Maatwebsite\Sidebar\SidebarItem;
-use TypiCMS\Modules\Core\Composers\BaseSidebarViewComposer;
 
-class SidebarViewComposer extends BaseSidebarViewComposer
+class SidebarViewComposer
 {
     public function compose(View $view)
     {
@@ -15,10 +15,10 @@ class SidebarViewComposer extends BaseSidebarViewComposer
             $group->addItem(trans('projects::global.name'), function (SidebarItem $item) {
                 $item->icon = config('typicms.projects.sidebar.icon', 'icon fa fa-fw fa-cube');
                 $item->weight = config('typicms.projects.sidebar.weight');
-                $item->route('admin.projects.index');
-                $item->append('admin.projects.create');
+                $item->route('admin::index-projects');
+                $item->append('admin::create-projects');
                 $item->authorize(
-                    $this->auth->hasAccess('projects.index')
+                    Gate::allows('index-projects')
                 );
             });
         });

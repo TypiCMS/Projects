@@ -45,19 +45,19 @@ class RouteServiceProvider extends ServiceProvider
             /*
              * Admin routes
              */
-            $router->get('admin/projects', ['as' => 'admin.projects.index', 'uses' => 'AdminController@index']);
-            $router->get('admin/projects/create', ['as' => 'admin.projects.create', 'uses' => 'AdminController@create']);
-            $router->get('admin/projects/{project}/edit', ['as' => 'admin.projects.edit', 'uses' => 'AdminController@edit']);
-            $router->post('admin/projects', ['as' => 'admin.projects.store', 'uses' => 'AdminController@store']);
-            $router->put('admin/projects/{project}', ['as' => 'admin.projects.update', 'uses' => 'AdminController@update']);
-            $router->post('admin/projects/sort', ['as' => 'admin.projects.sort', 'uses' => 'AdminController@projects']);
+            $router->get('admin/projects', 'AdminController@index')->name('admin::index-projects');
+            $router->get('admin/projects/create', 'AdminController@create')->name('admin::create-projects');
+            $router->get('admin/projects/{project}/edit', 'AdminController@edit')->name('admin::edit-projects');
+            $router->post('admin/projects', 'AdminController@store')->name('admin::store-projects');
+            $router->put('admin/projects/{project}', 'AdminController@update')->name('admin::update-projects');
+            $router->post('admin/projects/sort', 'AdminController@projects')->name('admin::sort-projects');
 
             /*
              * API routes
              */
-            $router->get('api/projects', ['as' => 'api.projects.index', 'uses' => 'ApiController@index']);
-            $router->put('api/projects/{project}', ['as' => 'api.projects.update', 'uses' => 'ApiController@update']);
-            $router->delete('api/projects/{project}', ['as' => 'api.projects.destroy', 'uses' => 'ApiController@destroy']);
+            $router->get('api/projects', 'ApiController@index')->name('api::index-projects');
+            $router->put('api/projects/{project}', 'ApiController@update')->name('api::update-projects');
+            $router->delete('api/projects/{project}', 'ApiController@destroy')->name('api::destroy-projects');
         });
     }
 }
