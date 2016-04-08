@@ -16,6 +16,21 @@ class AdminController extends BaseAdminController
     }
 
     /**
+     * List models.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function index()
+    {
+        $module = $this->repository->getTable();
+        $models = $this->repository->all([], true);
+        app('JavaScript')->put('models', $models);
+
+        return view('projects::admin.index')
+            ->with(compact('module', 'models'));
+    }
+
+    /**
      * Create form for a new resource.
      *
      * @return \Illuminate\View\View
@@ -24,7 +39,7 @@ class AdminController extends BaseAdminController
     {
         $model = $this->repository->getModel();
 
-        return view('core::admin.create')
+        return view('projects::admin.create')
             ->with(compact('model'));
     }
 
@@ -37,7 +52,7 @@ class AdminController extends BaseAdminController
      */
     public function edit(Project $project)
     {
-        return view('core::admin.edit')
+        return view('projects::admin.edit')
             ->with([
                 'model' => $project,
             ]);
