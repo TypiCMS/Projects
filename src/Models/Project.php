@@ -2,30 +2,27 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
-use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class Project extends Base
 {
+    use HasTranslations;
     use Historable;
-    use Translatable;
     use PresentableTrait;
 
     protected $presenter = 'TypiCMS\Modules\Projects\Presenters\ModulePresenter';
 
     protected $dates = ['date'];
 
-    protected $fillable = [
-        'category_id',
-        'image',
-        'date',
-        'website',
-        // Translatable columns
+    protected $guarded = ['id'];
+
+    public $translatable = [
         'title',
         'slug',
         'status',
@@ -33,26 +30,8 @@ class Project extends Base
         'body',
     ];
 
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
-        'title',
-        'slug',
-        'status',
-        'summary',
-        'body',
-    ];
+    protected $appends = ['thumb', 'category_name'];
 
-    protected $appends = ['status', 'title', 'thumb', 'category_name'];
-
-    /**
-     * Columns that are file.
-     *
-     * @var array
-     */
     public $attachments = [
         'image',
     ];
@@ -94,26 +73,6 @@ class Project extends Base
             ->withPivot('position')
             ->orderBy('position')
             ->withTimestamps();
-    }
-
-    /**
-     * Append status attribute from translation table.
-     *
-     * @return string
-     */
-    public function getStatusAttribute()
-    {
-        return $this->status;
-    }
-
-    /**
-     * Append title attribute from translation table.
-     *
-     * @return string title
-     */
-    public function getTitleAttribute()
-    {
-        return $this->title;
     }
 
     /**
