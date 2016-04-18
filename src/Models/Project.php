@@ -20,7 +20,7 @@ class Project extends Base
 
     protected $dates = ['date'];
 
-    protected $guarded = ['id'];
+    protected $guarded = ['id', 'exit', 'tags', 'galleries'];
 
     public $translatable = [
         'title',
@@ -75,21 +75,11 @@ class Project extends Base
             ->withTimestamps();
     }
 
-    /**
-     * Append thumb attribute.
-     *
-     * @return string
-     */
     public function getThumbAttribute()
     {
         return $this->present()->thumbSrc(null, 22);
     }
 
-    /**
-     * Append category_name attribute from translation table.
-     *
-     * @return string
-     */
     public function getCategoryNameAttribute()
     {
         if (isset($this->category) and $this->category) {
