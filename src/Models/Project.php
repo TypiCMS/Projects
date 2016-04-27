@@ -46,7 +46,7 @@ class Project extends Base
         $locale = $locale ?: config('app.locale');
         $page = TypiCMS::getPageLinkedToModule($this->getTable());
         if ($page) {
-            return $page->uri($locale).'/'.$this->category->translate($locale)->slug.'/'.$this->translate($locale)->slug;
+            return $page->uri($locale).'/'.$this->category->translate('slug', $locale).'/'.$this->translate('slug', $locale);
         }
 
         return '/';

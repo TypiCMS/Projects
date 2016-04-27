@@ -18,6 +18,8 @@
     };
     </script>
 
+    @include('core::admin._table-config')
+
     @include('core::admin._button-create', ['module' => 'projects'])
 
     <h1>@lang('projects::global.name')</h1>
