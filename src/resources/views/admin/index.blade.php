@@ -29,8 +29,9 @@
     </div>
 
     <div class="table-responsive">
-        @include('core::admin._v-client-table', ['data' => Projects::allFiltered(config('typicms.projects.select'), ['category'])])
-        {{-- For server side filtering, use @include('core::admin._v-server-table', ['url' => route('api::index-projects')]) --}}
+        @include('core::admin._v-server-table', ['url' => route('api::index-projects')])
+        {{-- For client side filtering: --}}
+        {{-- @include('core::admin._v-client-table', ['data' => Projects::allFiltered(config('typicms.projects.select'))]) --}}
     </div>
 
 </div>
