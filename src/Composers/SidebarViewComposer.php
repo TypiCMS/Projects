@@ -13,6 +13,7 @@ class SidebarViewComposer
     {
         $view->sidebar->group(trans('global.menus.content'), function (SidebarGroup $group) {
             $group->addItem(trans('projects::global.name'), function (SidebarItem $item) {
+                $item->id = 'projects';
                 $item->icon = config('typicms.projects.sidebar.icon', 'icon fa fa-fw fa-cube');
                 $item->weight = config('typicms.projects.sidebar.weight');
                 $item->route('admin::index-projects');
