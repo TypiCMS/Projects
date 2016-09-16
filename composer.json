@@ -11,7 +11,7 @@
     "require": {
         "typicms/categories": "dev-dev",
         "typicms/tags": "dev-dev",
-        "typicms/core": "~3.0.0"
+        "typicms/core": "dev-dev"
     },
     "autoload": {
         "psr-4": {
