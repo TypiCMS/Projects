@@ -11,7 +11,7 @@
     "require": {
         "typicms/categories": "~2.8.0",
         "typicms/tags": "~2.8.0",
-        "typicms/core": "~2.8.0"
+        "typicms/core": "~3.0.0"
     },
     "autoload": {
         "psr-4": {
