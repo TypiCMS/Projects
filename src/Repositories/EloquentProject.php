@@ -2,13 +2,11 @@
 
 namespace TypiCMS\Modules\Projects\Repositories;
 
-use Illuminate\Database\Eloquent\Model;
-use TypiCMS\Modules\Core\Repositories\RepositoriesAbstract;
+use TypiCMS\Modules\Projects\Models\Project;
 
-class EloquentProject extends RepositoriesAbstract implements ProjectInterface
+class EloquentProject extends EloquentRepository
 {
-    public function __construct(Model $model)
-    {
-        $this->model = $model;
-    }
+    protected $repositoryId = 'projects';
+
+    protected $model = Project::class;
 }

@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\Project;
-use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
+use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(ProjectInterface $project)
+    public function __construct(EloquentProject $project)
     {
         parent::__construct($project);
     }

@@ -8,9 +8,7 @@ use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Services\Cache\LaravelCache;
 use TypiCMS\Modules\Projects\Models\Project;
-use TypiCMS\Modules\Projects\Repositories\CacheDecorator;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 use TypiCMS\Modules\Tags\Observers\TagObserver;
 
@@ -73,16 +71,6 @@ class ModuleProvider extends ServiceProvider
             $view->page = TypiCMS::getPageLinkedToModule('projects');
         });
 
-        $app->bind('TypiCMS\Modules\Projects\Repositories\ProjectInterface', function (Application $app) {
-            $repository = new EloquentProject(
-                new Project()
-            );
-            if (!config('typicms.cache')) {
-                return $repository;
-            }
-            $laravelCache = new LaravelCache($app['cache'], ['projects', 'tags'], 10);
-
-            return new CacheDecorator($repository, $laravelCache);
-        });
+        $app->bind('Projects', EloquentProject::class);
     }
 }

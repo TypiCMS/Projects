@@ -4,11 +4,11 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Categories;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
+use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(ProjectInterface $project)
+    public function __construct(EloquentProject $project)
     {
         parent::__construct($project);
     }

@@ -5,7 +5,7 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 use Illuminate\Support\Facades\Request;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Projects\Models\Project;
-use TypiCMS\Modules\Projects\Repositories\ProjectInterface as Repository;
+use TypiCMS\Modules\Projects\Repositories\EloquentProject as Repository;
 
 class ApiController extends BaseApiController
 {
