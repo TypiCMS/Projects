@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "typicms/categories": "~2.8.0",
-        "typicms/tags": "~2.8.0",
+        "typicms/categories": "dev-dev",
+        "typicms/tags": "dev-dev",
         "typicms/core": "~3.0.0"
     },
     "autoload": {
