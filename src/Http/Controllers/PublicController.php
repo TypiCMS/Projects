@@ -2,7 +2,7 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
-use Categories;
+use TypiCMS\Modules\Categories\Facades\Categories;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
@@ -20,7 +20,7 @@ class PublicController extends BasePublicController
      */
     public function categories()
     {
-        $categories = Categories::all();
+        $categories = Categories::published()->findAll();
 
         return view('projects::public.categories')
             ->with(compact('categories'));
@@ -47,7 +47,7 @@ class PublicController extends BasePublicController
      */
     public function show($category = null, $slug = null)
     {
-        $model = $this->repository->bySlug($slug);
+        $model = $this->repository->published()->bySlug($slug);
         if ($category->id != $model->category_id) {
             abort(404);
         }
