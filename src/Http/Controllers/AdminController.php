@@ -77,8 +77,24 @@ class AdminController extends BaseAdminController
      */
     public function update(Project $project, FormRequest $request)
     {
-        $this->repository->update(request('id'), $request->all());
+        $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $project);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Projects\Models\Project $project
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Project $project)
+    {
+        $deleted = $this->repository->delete($project);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
     }
 }

@@ -51,15 +51,8 @@ class RouteServiceProvider extends ServiceProvider
                 $router->post('projects', 'AdminController@store')->name('admin::store-project');
                 $router->put('projects/{project}', 'AdminController@update')->name('admin::update-project');
                 $router->post('projects/sort', 'AdminController@projects')->name('admin::sort-projects');
-            });
-
-            /*
-             * API routes
-             */
-            $router->group(['middleware' => 'api', 'prefix' => 'api'], function (Router $router) {
-                $router->get('projects', 'ApiController@index')->name('api::index-projects');
-                $router->put('projects/{project}', 'ApiController@update')->name('api::update-project');
-                $router->delete('projects/{project}', 'ApiController@destroy')->name('api::destroy-project');
+                $router->patch('projects/{project}', 'AdminController@ajaxUpdate');
+                $router->delete('projects/{project}', 'AdminController@destroy')->name('admin::destroy-project');
             });
         });
     }
