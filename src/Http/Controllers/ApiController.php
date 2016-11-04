@@ -15,18 +15,6 @@ class ApiController extends BaseApiController
     }
 
     /**
-     * List resources.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function index()
-    {
-        $models = $this->repository->all(['category'], true);
-
-        return response()->json($models, 200);
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @return \Illuminate\Http\JsonResponse
