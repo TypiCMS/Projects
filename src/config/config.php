@@ -2,8 +2,8 @@
 
 return [
     'per_page' => 50,
-    'select'   => ['id', 'title', 'image', 'status', 'date'],
-    'order'    => [
+    'select' => ['id', 'title', 'image', 'status', 'date'],
+    'order' => [
         'date' => 'desc',
     ],
     'sidebar' => [
