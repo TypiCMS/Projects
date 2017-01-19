@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'name'     => 'Projets',
+    'name' => 'Projets',
     'projects' => 'projet|projets',
-    'New'      => 'Nouveau projet',
-    'Edit'     => 'Modifier le projet',
-    'Back'     => 'Retour à la liste des projets',
+    'New' => 'Nouveau projet',
+    'Edit' => 'Modifier le projet',
+    'Back' => 'Retour à la liste des projets',
 ];
