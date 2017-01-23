@@ -13,6 +13,7 @@
     </h1>
 
     <div class="btn-toolbar">
+        <a class="btn btn-success" href="{{ route('admin::index-project-categories') }}">@lang('projects::global.categories')</a>
         @include('core::admin._lang-switcher')
     </div>
 

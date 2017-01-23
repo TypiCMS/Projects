@@ -8,7 +8,9 @@ use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\FileObserver;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Projects\Models\Project;
+use TypiCMS\Modules\Projects\Models\ProjectCategory;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
+use TypiCMS\Modules\Projects\Repositories\EloquentProjectCategory;
 use TypiCMS\Modules\Tags\Observers\TagObserver;
 
 class ModuleProvider extends ServiceProvider
@@ -17,6 +19,9 @@ class ModuleProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(
             __DIR__.'/../config/config.php', 'typicms.projects'
+        );
+        $this->mergeConfigFrom(
+            __DIR__.'/../config/config-categories.php', 'typicms.project-categories'
         );
 
         $modules = $this->app['config']['typicms']['modules'];
@@ -37,10 +42,17 @@ class ModuleProvider extends ServiceProvider
             'TypiCMS\Modules\Projects\Facades\Projects'
         );
 
+        AliasLoader::getInstance()->alias(
+            'ProjectCategories',
+            'TypiCMS\Modules\Projects\Facades\ProjectCategories'
+        );
+
         // Observers
         Project::observe(new SlugObserver());
         Project::observe(new FileObserver());
         Project::observe(new TagObserver());
+        ProjectCategory::observe(new SlugObserver());
+        ProjectCategory::observe(new FileObserver());
     }
 
     public function register()
@@ -56,7 +68,6 @@ class ModuleProvider extends ServiceProvider
          * Register Tags and Categories
          */
         $app->register('TypiCMS\Modules\Tags\Providers\ModuleProvider');
-        $app->register('TypiCMS\Modules\Categories\Providers\ModuleProvider');
 
         /*
          * Sidebar view composer
@@ -71,5 +82,6 @@ class ModuleProvider extends ServiceProvider
         });
 
         $app->bind('Projects', EloquentProject::class);
+        $app->bind('ProjectCategories', EloquentProjectCategory::class);
     }
 }

@@ -6,4 +6,6 @@ return [
     'New' => 'New project',
     'Edit' => 'Edit project',
     'Back' => 'Back to projects',
+    'categories' => 'Projects categories',
+    'New category' => 'New projects category',
 ];

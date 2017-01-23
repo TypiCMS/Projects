@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "typicms/categories": "dev-dev",
         "typicms/tags": "dev-dev",
         "laravel/framework": "~5.4.0"
     },

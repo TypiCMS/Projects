@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
-use TypiCMS\Modules\Categories\Models\Category;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
@@ -60,7 +59,7 @@ class Project extends Base
      */
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->belongsTo(ProjectCategory::class);
     }
 
     /**

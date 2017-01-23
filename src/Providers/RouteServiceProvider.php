@@ -53,6 +53,15 @@ class RouteServiceProvider extends ServiceProvider
                 $router->post('projects/sort', 'AdminController@projects')->name('admin::sort-projects');
                 $router->patch('projects/{project}', 'AdminController@ajaxUpdate');
                 $router->delete('projects/{project}', 'AdminController@destroy')->name('admin::destroy-project');
+
+                $router->get('projects/categories', 'CategoriesAdminController@index')->name('admin::index-project-categories');
+                $router->get('projects/categories/create', 'CategoriesAdminController@create')->name('admin::create-project-category');
+                $router->get('projects/categories/{category}/edit', 'CategoriesAdminController@edit')->name('admin::edit-project-category');
+                $router->post('projects/categories', 'CategoriesAdminController@store')->name('admin::store-project-category');
+                $router->put('projects/categories/{category}', 'CategoriesAdminController@update')->name('admin::update-project-category');
+                $router->post('projects/categories/sort', 'CategoriesAdminController@sort')->name('admin::sort-project-categories');
+                $router->patch('projects/categories/{category}', 'CategoriesAdminController@ajaxUpdate');
+                $router->delete('projects/categories/{category}', 'CategoriesAdminController@destroy')->name('admin::destroy-project-category');
             });
         });
     }
