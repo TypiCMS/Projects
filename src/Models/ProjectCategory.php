@@ -43,4 +43,32 @@ class ProjectCategory extends Base
     {
         return $this->present()->thumbSrc(null, 22);
     }
+
+    /**
+     * Get edit url of model.
+     *
+     * @return string|void
+     */
+    public function editUrl()
+    {
+        try {
+            return route('admin::edit-project-category', [$this->id]);
+        } catch (InvalidArgumentException $e) {
+            Log::error($e->getMessage());
+        }
+    }
+
+    /**
+     * Get back office’s index of models url.
+     *
+     * @return string|void
+     */
+    public function indexUrl()
+    {
+        try {
+            return route('admin::index-project-categories');
+        } catch (InvalidArgumentException $e) {
+            Log::error($e->getMessage());
+        }
+    }
 }
