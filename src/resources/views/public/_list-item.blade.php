@@ -1,10 +1,10 @@
-<li class="project">
-    <a class="project-anchor" href="{{ route($lang.'::project', [$project->category->slug, $project->slug]) }}">
+<li class="projects-item">
+    <a class="projects-item-anchor" href="{{ route($lang.'::project', [$project->category->slug, $project->slug]) }}">
         {!! $project->present()->thumb(540, 400) !!}
-        <div class="project-info">
-            <div class="project-title">{{ $project->title }}</div>
-            <div class="project-summary">{{ $project->summary }}</div>
-            <div class="project-date">{{ $project->present()->dateLocalized }}</div>
+        <div class="projects-item-info">
+            <div class="projects-item-title">{{ $project->title }}</div>
+            <div class="projects-item-summary">{{ $project->summary }}</div>
+            <div class="projects-item-date">{{ $project->present()->dateLocalized }}</div>
         </div>
     </a>
 </li>
