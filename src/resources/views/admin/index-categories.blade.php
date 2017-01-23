@@ -35,7 +35,7 @@
                 <tr ng-repeat="model in displayedModels">
                     <td typi-btn-delete action="delete(model)"></td>
                     <td>
-                        @include('core::admin._button-edit', ['module' => 'project-categories'])
+                        @include('core::admin._button-edit', ['module' => 'categories'])
                     </td>
                     <td typi-btn-status action="toggleStatus(model)" model="model"></td>
                     <td>
