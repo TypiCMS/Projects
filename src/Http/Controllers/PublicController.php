@@ -18,11 +18,11 @@ class PublicController extends BasePublicController
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function categories()
+    public function index()
     {
         $categories = Categories::published()->findAll();
 
-        return view('projects::public.categories')
+        return view('projects::public.index')
             ->with(compact('categories'));
     }
 
@@ -31,12 +31,12 @@ class PublicController extends BasePublicController
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function index($category = null)
+    public function indexOfCategory($category = null)
     {
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
 
-        return view('projects::public.index')
+        return view('projects::public.index-of-category')
             ->with(compact('models', 'category'));
     }
 

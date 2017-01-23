@@ -1,6 +1,6 @@
 @extends('pages::public.master')
 
-@section('bodyClass', 'body-projects body-projects-index body-page body-page-'.$page->id)
+@section('bodyClass', 'body-projects body-projects-categories body-page body-page-'.$page->id)
 
 @section('content')
 
@@ -8,8 +8,19 @@
 
     @include('galleries::public._galleries', ['model' => $page])
 
-    @if ($models->count())
-    @include('projects::public._list', ['items' => $models])
+    @if ($categories->count())
+
+        <ul class="list-categories">
+            @foreach ($categories as $category)
+            <li>
+                <a href="{{ route($lang.'::projects-category', [$category->slug]) }}">
+                    <span class="title">{{ $category->title }}</span>
+                    {!! $category->present()->thumb(270, 270) !!}
+                </a>
+            </li>
+            @endforeach
+        </ul>
+
     @endif
 
 @endsection
