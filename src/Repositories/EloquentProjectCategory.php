@@ -36,7 +36,7 @@ class EloquentProjectCategory extends EloquentRepository
      */
     public function allForMenu($uri = '')
     {
-        $categories = $this->all();
+        $categories = $this->findAll();
         $categories->each(function ($category) use ($uri) {
             $category->url = $uri.'/'.$category->slug;
         });
