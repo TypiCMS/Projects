@@ -22,7 +22,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->findAllTranslated();
+        $models = $this->repository->with('category')->findAllTranslated();
         app('JavaScript')->put('models', $models);
 
         return view('projects::admin.index');
