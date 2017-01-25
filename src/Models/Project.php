@@ -82,8 +82,6 @@ class Project extends Base
 
     public function getCategoryNameAttribute()
     {
-        if (isset($this->category) and $this->category) {
-            return $this->category->title;
-        }
+        return $this->category->title ?? null;
     }
 }
