@@ -27,7 +27,7 @@
                     <th st-sort="status" class="status st-sort">{{ __('Status') }}</th>
                     <th st-sort="image" class="image st-sort">{{ __('Image') }}</th>
                     <th st-sort="position" st-sort-default="true" class="position st-sort">{{ __('Position') }}</th>
-                    <th st-sort="title" class="title st-sort">{{ __('Title') }}</th>
+                    <th st-sort="title_translated" class="title_translated st-sort">{{ __('Title') }}</th>
                 </tr>
             </thead>
 
@@ -44,7 +44,7 @@
                     <td>
                         <input class="form-control input-sm" min="0" type="number" name="position" ng-model="model.position" ng-change="update(model)">
                     </td>
-                    <td>@{{ model.title | translated }}</td>
+                    <td>@{{ model.title_translated }}</td>
                 </tr>
             </tbody>
         </table>

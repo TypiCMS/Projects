@@ -27,7 +27,7 @@
                     <th st-sort="status" class="status st-sort">{{ __('Status') }}</th>
                     <th st-sort="image" class="image st-sort">{{ __('Image') }}</th>
                     <th st-sort="date" st-sort-default="reverse" class="date st-sort">{{ __('Date') }}</th>
-                    <th st-sort="title" class="title st-sort">{{ __('Title') }}</th>
+                    <th st-sort="title_translated" class="title_translated st-sort">{{ __('Title') }}</th>
                     <th st-sort="category_name" class="category st-sort">{{ __('Category') }}</th>
                 </tr>
                 <tr>
@@ -36,7 +36,7 @@
                         <input st-search="date" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                     <td>
-                        <input st-search="title" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
                     </td>
                     <td>
                         <input st-search="category_name" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
@@ -55,7 +55,7 @@
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
                     <td>@{{ model.date | dateFromMySQL:'dd/MM/yyyy' }}</td>
-                    <td>@{{ model.title | translated }}</td>
+                    <td>@{{ model.title_translated }}</td>
                     <td>@{{ model.category_name }}</td>
                 </tr>
             </tbody>

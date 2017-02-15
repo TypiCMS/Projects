@@ -23,7 +23,7 @@ class ProjectCategory extends Base
         'status',
     ];
 
-    protected $appends = ['thumb'];
+    protected $appends = ['thumb', 'title_translated'];
 
     public $attachments = [
         'image',
@@ -32,6 +32,17 @@ class ProjectCategory extends Base
     public function projects()
     {
         return $this->hasMany(Project::class)->order();
+    }
+
+    /**
+     * Append title_translated attribute.
+     *
+     * @return string
+     */
+    public function getTitleTranslatedAttribute()
+    {
+        $locale = config('app.locale');
+        return $this->translate('title', config('typicms.content_locale', $locale));
     }
 
     /**

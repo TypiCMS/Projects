@@ -30,7 +30,7 @@ class Project extends Base
         'body',
     ];
 
-    protected $appends = ['thumb', 'category_name'];
+    protected $appends = ['thumb', 'title_translated', 'category_name'];
 
     public $attachments = [
         'image',
@@ -75,11 +75,32 @@ class Project extends Base
             ->withTimestamps();
     }
 
+    /**
+     * Append title_translated attribute.
+     *
+     * @return string
+     */
+    public function getTitleTranslatedAttribute()
+    {
+        $locale = config('app.locale');
+        return $this->translate('title', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * Append thumb attribute.
+     *
+     * @return string
+     */
     public function getThumbAttribute()
     {
         return $this->present()->thumbSrc(null, 22);
     }
 
+    /**
+     * Append category_name attribute.
+     *
+     * @return string
+     */
     public function getCategoryNameAttribute()
     {
         return $this->category->title ?? null;
