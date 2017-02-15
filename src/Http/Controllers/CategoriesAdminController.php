@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
+use TypiCMS\Modules\Projects\Facades\Projects;
 use TypiCMS\Modules\Projects\Http\Requests\CategoryFormRequest;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
@@ -79,6 +80,7 @@ class CategoriesAdminController extends BaseAdminController
     public function update(ProjectCategory $category, CategoryFormRequest $request)
     {
         $this->repository->update($request->id, $request->all());
+        Projects::forgetCache();
 
         return $this->redirect($request, $category);
     }
