@@ -14,7 +14,7 @@
 
     <div class="btn-toolbar">
         <a class="btn btn-success" href="{{ route('admin::index-project-categories') }}">@lang('projects::global.categories')</a>
-        @include('core::admin._lang-switcher')
+        @include('core::admin._lang-switcher-for-list')
     </div>
 
     <div class="table-responsive">
