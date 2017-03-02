@@ -51,8 +51,8 @@ class RouteServiceProvider extends ServiceProvider
                 $router->post('projects', 'AdminController@store')->name('admin::store-project');
                 $router->put('projects/{project}', 'AdminController@update')->name('admin::update-project');
                 $router->post('projects/sort', 'AdminController@projects')->name('admin::sort-projects');
-                $router->patch('projects/{project}', 'AdminController@ajaxUpdate');
-                $router->delete('projects/{project}', 'AdminController@destroy')->name('admin::destroy-project');
+                $router->patch('projects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-project');
+                $router->delete('projects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-project');
 
                 $router->get('projects/categories', 'CategoriesAdminController@index')->name('admin::index-project-categories');
                 $router->get('projects/categories/create', 'CategoriesAdminController@create')->name('admin::create-project-category');
@@ -60,8 +60,8 @@ class RouteServiceProvider extends ServiceProvider
                 $router->post('projects/categories', 'CategoriesAdminController@store')->name('admin::store-project-category');
                 $router->put('projects/categories/{category}', 'CategoriesAdminController@update')->name('admin::update-project-category');
                 $router->post('projects/categories/sort', 'CategoriesAdminController@sort')->name('admin::sort-project-categories');
-                $router->patch('projects/categories/{category}', 'CategoriesAdminController@ajaxUpdate');
-                $router->delete('projects/categories/{category}', 'CategoriesAdminController@destroy')->name('admin::destroy-project-category');
+                $router->patch('projects/categories/{ids}', 'CategoriesAdminController@ajaxUpdate')->name('admin::update-category');
+                $router->delete('projects/categories/{category}', 'CategoriesAdminController@destroyMultiple')->name('admin::destroy-project-category');
             });
         });
     }
