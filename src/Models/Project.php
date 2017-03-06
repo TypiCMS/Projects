@@ -9,6 +9,7 @@ use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
 
 class Project extends Base
 {
@@ -16,7 +17,7 @@ class Project extends Base
     use Historable;
     use PresentableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\Projects\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
     protected $dates = ['date'];
 
