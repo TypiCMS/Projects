@@ -9,7 +9,7 @@ class CategoryFormRequest extends AbstractFormRequest
     public function rules()
     {
         return [
-            'image' => 'image|max:2000',
+            'image_id' => 'nullable|integer',
             'title.*' => 'nullable|max:255',
             'slug.*' => 'nullable|alpha_dash|max:255',
         ];

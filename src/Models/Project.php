@@ -8,6 +8,7 @@ use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
 
@@ -33,10 +34,6 @@ class Project extends Base
 
     protected $appends = ['thumb', 'title_translated', 'category_name'];
 
-    public $attachments = [
-        'image',
-    ];
-
     /**
      * Get public uri.
      *
@@ -61,19 +58,6 @@ class Project extends Base
     public function category()
     {
         return $this->belongsTo(ProjectCategory::class);
-    }
-
-    /**
-     * A project has many galleries.
-     *
-     * @return MorphToMany
-     */
-    public function galleries()
-    {
-        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
-            ->withPivot('position')
-            ->orderBy('position')
-            ->withTimestamps();
     }
 
     /**
@@ -105,5 +89,28 @@ class Project extends Base
     public function getCategoryNameAttribute()
     {
         return $this->category->title ?? null;
+    }
+
+    /**
+     * A project has many galleries.
+     *
+     * @return MorphToMany
+     */
+    public function galleries()
+    {
+        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
+            ->withPivot('position')
+            ->orderBy('position')
+            ->withTimestamps();
+    }
+
+    /**
+     * This model belongs to one image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_id');
     }
 }

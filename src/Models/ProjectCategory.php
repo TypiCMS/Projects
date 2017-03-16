@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\Projects\Models;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
 
 class ProjectCategory extends Base
@@ -24,15 +25,6 @@ class ProjectCategory extends Base
     ];
 
     protected $appends = ['thumb', 'title_translated'];
-
-    public $attachments = [
-        'image',
-    ];
-
-    public function projects()
-    {
-        return $this->hasMany(Project::class)->order();
-    }
 
     /**
      * Append title_translated attribute.
@@ -81,5 +73,25 @@ class ProjectCategory extends Base
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
         }
+    }
+
+    /**
+     * A category has many projects.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function projects()
+    {
+        return $this->hasMany(Project::class)->order();
+    }
+
+    /**
+     * This model belongs to one image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_id');
     }
 }

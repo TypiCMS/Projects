@@ -12,7 +12,7 @@ class FormRequest extends AbstractFormRequest
             'category_id' => 'required',
             'date' => 'required|date',
             'website' => 'nullable|url|max:255',
-            'image' => 'image|max:2000',
+            'image_id' => 'nullable|integer',
             'title.*' => 'nullable|max:255',
             'slug.*' => 'nullable|alpha_dash|max:255',
         ];
