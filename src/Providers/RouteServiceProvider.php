@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->post('projects', 'AdminController@store')->name('admin::store-project');
                 $router->put('projects/{project}', 'AdminController@update')->name('admin::update-project');
                 $router->post('projects/sort', 'AdminController@projects')->name('admin::sort-projects');
-                $router->patch('projects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-project');
+                $router->patch('projects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-project-ajax');
                 $router->delete('projects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-project');
 
                 $router->get('projects/categories', 'CategoriesAdminController@index')->name('admin::index-project-categories');
