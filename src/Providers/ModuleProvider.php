@@ -31,13 +31,11 @@ class ModuleProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'projects');
         $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'projects');
+        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/projects'),
         ], 'views');
-        $this->publishes([
-            __DIR__.'/../database' => base_path('database'),
-        ], 'migrations');
 
         AliasLoader::getInstance()->alias('Projects', Projects::class);
         AliasLoader::getInstance()->alias('ProjectCategories', ProjectCategories::class);
