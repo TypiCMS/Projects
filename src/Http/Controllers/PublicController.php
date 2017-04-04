@@ -2,8 +2,9 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
-use TypiCMS\Modules\Categories\Facades\Categories;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
+use TypiCMS\Modules\Projects\Facades\ProjectCategories;
+use TypiCMS\Modules\Projects\Models\ProjectCategory;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class PublicController extends BasePublicController
@@ -20,7 +21,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $categories = Categories::published()->findAll();
+        $categories = ProjectCategories::published()->findAll();
 
         return view('projects::public.index')
             ->with(compact('categories'));
@@ -33,6 +34,7 @@ class PublicController extends BasePublicController
      */
     public function indexOfCategory($category = null)
     {
+        $category = ProjectCategories::bySlug($category);
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
 
