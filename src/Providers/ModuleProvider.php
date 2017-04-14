@@ -23,6 +23,9 @@ class ModuleProvider extends ServiceProvider
             __DIR__.'/../config/config.php', 'typicms.projects'
         );
         $this->mergeConfigFrom(
+            __DIR__.'/../config/permissions.php', 'typicms.permissions'
+        );
+        $this->mergeConfigFrom(
             __DIR__.'/../config/config-categories.php', 'typicms.project-categories'
         );
 
