@@ -15,7 +15,9 @@
     <div class="btn-toolbar">
         @include('core::admin._button-select')
         @include('core::admin._button-actions')
+        @can('index-project-categories')
         <a class="btn btn-success" href="{{ route('admin::index-project-categories') }}">@lang('projects::global.categories')</a>
+        @endcan
         @include('core::admin._lang-switcher-for-list')
     </div>
 
