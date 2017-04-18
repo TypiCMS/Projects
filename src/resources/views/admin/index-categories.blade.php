@@ -9,7 +9,7 @@
     <a href="{{ route('admin::index-projects') }}" title="{{ __('projects::global.Back') }}" class="btn-back">
         <span class="text-muted fa fa-arrow-circle-left"></span><span class="sr-only">{{ __('projects::global.Back') }}</span>
     </a>
-    @include('core::admin._button-create', ['module' => 'project-categories'])
+    @include('core::admin._button-create', ['module' => 'project_categories'])
 
     <h1>@lang('projects::global.categories')</h1>
 
@@ -39,7 +39,7 @@
                         <input type="checkbox" checklist-model="checked.models" checklist-value="model">
                     </td>
                     <td>
-                        @include('core::admin._button-edit', ['permission' => 'edit-project-category', 'module' => 'categories'])
+                        @include('core::admin._button-edit', ['permission' => 'edit-project_category', 'module' => 'categories'])
                     </td>
                     <td typi-btn-status action="toggleStatus(model)" model="model"></td>
                     <td>

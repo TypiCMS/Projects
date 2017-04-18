@@ -68,7 +68,7 @@ class ProjectCategory extends Base
     public function editUrl()
     {
         try {
-            return route('admin::edit-project-category', [$this->id]);
+            return route('admin::edit-project_category', [$this->id]);
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
         }
@@ -82,7 +82,7 @@ class ProjectCategory extends Base
     public function indexUrl()
     {
         try {
-            return route('admin::index-project-categories');
+            return route('admin::index-project_categories');
         } catch (InvalidArgumentException $e) {
             Log::error($e->getMessage());
         }
