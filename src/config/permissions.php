@@ -2,15 +2,15 @@
 
 return [
     'projects' => [
-        'index-projects' => 'View list',
+        'see-all-projects' => 'View list',
         'create-project' => 'Create',
-        'edit-project' => 'Edit',
-        'destroy-project' => 'Destroy',
+        'update-project' => 'Edit',
+        'delete-project' => 'Delete',
     ],
     'project-categories' => [
-        'index-project_categories' => 'View list',
+        'see-all-project_categories' => 'View list',
         'create-project_category' => 'Create',
-        'edit-project_category' => 'Edit',
-        'destroy-project_category' => 'Destroy',
+        'update-project_category' => 'Edit',
+        'delete-project_category' => 'Delete',
     ],
 ];

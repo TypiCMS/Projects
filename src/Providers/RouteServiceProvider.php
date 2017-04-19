@@ -45,23 +45,23 @@ class RouteServiceProvider extends ServiceProvider
              * Admin routes
              */
             $router->group(['middleware' => 'admin', 'prefix' => 'admin'], function (Router $router) {
-                $router->get('projects', 'AdminController@index')->name('admin::index-projects');
-                $router->get('projects/create', 'AdminController@create')->name('admin::create-project');
-                $router->get('projects/{project}/edit', 'AdminController@edit')->name('admin::edit-project');
-                $router->post('projects', 'AdminController@store')->name('admin::store-project');
-                $router->put('projects/{project}', 'AdminController@update')->name('admin::update-project');
+                $router->get('projects', 'AdminController@index')->name('admin::index-projects')->middleware('can:see-all-projects');
+                $router->get('projects/create', 'AdminController@create')->name('admin::create-project')->middleware('can:create-project');
+                $router->get('projects/{project}/edit', 'AdminController@edit')->name('admin::edit-project')->middleware('can:update-project');
+                $router->post('projects', 'AdminController@store')->name('admin::store-project')->middleware('can:create-project');
+                $router->put('projects/{project}', 'AdminController@update')->name('admin::update-project')->middleware('can:update-project');
                 $router->post('projects/sort', 'AdminController@projects')->name('admin::sort-projects');
-                $router->patch('projects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-project-ajax');
-                $router->delete('projects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-project');
+                $router->patch('projects/{ids}', 'AdminController@ajaxUpdate')->name('admin::update-project-ajax')->middleware('can:update-project');
+                $router->delete('projects/{ids}', 'AdminController@destroyMultiple')->name('admin::destroy-project')->middleware('can:delete-project');
 
-                $router->get('projects/categories', 'CategoriesAdminController@index')->name('admin::index-project_categories');
-                $router->get('projects/categories/create', 'CategoriesAdminController@create')->name('admin::create-project_category');
-                $router->get('projects/categories/{category}/edit', 'CategoriesAdminController@edit')->name('admin::edit-project_category');
-                $router->post('projects/categories', 'CategoriesAdminController@store')->name('admin::store-project_category');
-                $router->put('projects/categories/{category}', 'CategoriesAdminController@update')->name('admin::update-project_category');
+                $router->get('projects/categories', 'CategoriesAdminController@index')->name('admin::index-project_categories')->middleware('can:see-all-project_categories');
+                $router->get('projects/categories/create', 'CategoriesAdminController@create')->name('admin::create-project_category')->middleware('can:create-project_category');
+                $router->get('projects/categories/{category}/edit', 'CategoriesAdminController@edit')->name('admin::edit-project_category')->middleware('can:update-project_category');
+                $router->post('projects/categories', 'CategoriesAdminController@store')->name('admin::store-project_category')->middleware('can:create-project_category');
+                $router->put('projects/categories/{category}', 'CategoriesAdminController@update')->name('admin::update-project_category')->middleware('can:update-project_category');
                 $router->post('projects/categories/sort', 'CategoriesAdminController@sort')->name('admin::sort-project_categories');
-                $router->patch('projects/categories/{ids}', 'CategoriesAdminController@ajaxUpdate')->name('admin::update-project_category');
-                $router->delete('projects/categories/{category}', 'CategoriesAdminController@destroyMultiple')->name('admin::destroy-project_category');
+                $router->patch('projects/categories/{ids}', 'CategoriesAdminController@ajaxUpdate')->name('admin::update-project_category')->middleware('can:update-project_category');
+                $router->delete('projects/categories/{category}', 'CategoriesAdminController@destroyMultiple')->name('admin::destroy-project_category')->middleware('can:delete-project_category');
             });
         });
     }
