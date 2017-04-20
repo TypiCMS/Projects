@@ -39,7 +39,7 @@
                         <input type="checkbox" checklist-model="checked.models" checklist-value="model">
                     </td>
                     <td>
-                        @include('core::admin._button-edit', ['permission' => 'edit-project_category', 'module' => 'categories'])
+                        @include('core::admin._button-edit', ['permission' => 'update-project_category', 'module' => 'categories'])
                     </td>
                     <td typi-btn-status action="toggleStatus(model)" model="model"></td>
                     <td>
