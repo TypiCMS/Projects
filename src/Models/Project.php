@@ -32,7 +32,7 @@ class Project extends Base
         'body',
     ];
 
-    protected $appends = ['thumb', 'title_translated', 'category_name', 'status_translated'];
+    protected $appends = ['image', 'thumb', 'title_translated', 'category_name', 'status_translated'];
 
     /**
      * Get public uri.
@@ -85,6 +85,16 @@ class Project extends Base
     }
 
     /**
+     * Append image attribute.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return $this->files->first();
+    }
+
+    /**
      * Append thumb attribute.
      *
      * @return string
@@ -105,25 +115,13 @@ class Project extends Base
     }
 
     /**
-     * A project has many galleries.
+     * A news can have many files.
      *
-     * @return MorphToMany
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
      */
-    public function galleries()
+    public function files()
     {
-        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
-            ->withPivot('position')
-            ->orderBy('position')
-            ->withTimestamps();
-    }
-
-    /**
-     * This model belongs to one image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function image()
-    {
-        return $this->belongsTo(File::class, 'image_id');
+        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
+            ->orderBy('model_has_files.position');
     }
 }

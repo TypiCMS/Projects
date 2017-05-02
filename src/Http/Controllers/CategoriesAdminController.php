@@ -23,7 +23,7 @@ class CategoriesAdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->findAll();
+        $models = $this->repository->with('image')->findAll();
         app('JavaScript')->put('models', $models);
 
         return view('projects::admin.index-categories');

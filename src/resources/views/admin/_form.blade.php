@@ -7,13 +7,11 @@
 
 {!! BootForm::hidden('id') !!}
 
-@include('core::admin._image-fieldset', ['field' => 'image'])
+@include('files::admin._files-selector')
 
 @include('core::form._title-and-slug')
 {!! TranslatableBootForm::hidden('status')->value(0) !!}
 {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
-
-@include('core::admin._galleries-fieldset')
 
 {!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect()) !!}
 {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(', ', $model->tags->pluck('tag')->all())) !!}

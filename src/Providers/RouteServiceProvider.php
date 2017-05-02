@@ -48,6 +48,7 @@ class RouteServiceProvider extends ServiceProvider
                 $router->get('projects', 'AdminController@index')->name('admin::index-projects')->middleware('can:see-all-projects');
                 $router->get('projects/create', 'AdminController@create')->name('admin::create-project')->middleware('can:create-project');
                 $router->get('projects/{project}/edit', 'AdminController@edit')->name('admin::edit-project')->middleware('can:update-project');
+                $router->get('projects/{project}/files', 'AdminController@files')->name('admin::edit-project-files')->middleware('can:update-project');
                 $router->post('projects', 'AdminController@store')->name('admin::store-project')->middleware('can:create-project');
                 $router->put('projects/{project}', 'AdminController@update')->name('admin::update-project')->middleware('can:update-project');
                 $router->post('projects/sort', 'AdminController@projects')->name('admin::sort-projects');
