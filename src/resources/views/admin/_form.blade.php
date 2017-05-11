@@ -13,7 +13,7 @@
 {!! TranslatableBootForm::hidden('status')->value(0) !!}
 {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
 
-{!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect()) !!}
+{!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->required() !!}
 {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(', ', $model->tags->pluck('tag')->all())) !!}
 <div class="row">
     <div class="col-sm-6">
