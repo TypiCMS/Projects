@@ -22,7 +22,7 @@ class Project extends Base
 
     protected $dates = ['date'];
 
-    protected $guarded = ['id', 'exit', 'tags', 'galleries'];
+    protected $guarded = ['id', 'exit', 'tags'];
 
     public $translatable = [
         'title',

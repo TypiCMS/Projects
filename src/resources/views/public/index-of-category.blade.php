@@ -6,7 +6,7 @@
 
     {!! $page->present()->body !!}
 
-    @include('galleries::public._galleries', ['model' => $page])
+    @include('files::public._files', ['model' => $page])
 
     @if ($models->count())
     @include('projects::public._list', ['items' => $models])

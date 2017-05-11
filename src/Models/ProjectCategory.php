@@ -16,7 +16,7 @@ class ProjectCategory extends Base
 
     protected $presenter = 'TypiCMS\Modules\Projects\Presenters\CategoryPresenter';
 
-    protected $guarded = ['id', 'exit', 'galleries'];
+    protected $guarded = ['id', 'exit'];
 
     public $translatable = [
         'title',
