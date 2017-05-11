@@ -16,7 +16,7 @@
         @include('core::admin._button-select')
         @include('core::admin._button-actions')
         @can('see-all-project_categories')
-        <a class="btn btn-success" href="{{ route('admin::index-project_categories') }}">@lang('projects::global.categories')</a>
+        <a class="btn btn-success" href="{{ route('admin::index-project_categories') }}">@lang('project_categories::global.name')</a>
         @endcan
         @include('core::admin._lang-switcher-for-list')
     </div>

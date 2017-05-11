@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', __('projects::global.categories'))
+@section('title', __('project_categories::global.name'))
 
 @section('content')
 
@@ -11,7 +11,7 @@
     </a>
     @include('core::admin._button-create', ['module' => 'project_categories'])
 
-    <h1>@lang('projects::global.categories')</h1>
+    <h1>@{{ models.length }} @choice('project_categories::global.project-categories', 2)</h1>
 
     <div class="btn-toolbar">
         @include('core::admin._button-select')

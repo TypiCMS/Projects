@@ -34,7 +34,7 @@ class ModuleProvider extends ServiceProvider
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'projects');
         $this->loadTranslationsFrom(__DIR__.'/../resources/projects/lang', 'projects');
-        $this->loadTranslationsFrom(__DIR__.'/../resources/project-categories/lang', 'project-categories');
+        $this->loadTranslationsFrom(__DIR__.'/../resources/project_categories/lang', 'project_categories');
         $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
 
         $this->publishes([
