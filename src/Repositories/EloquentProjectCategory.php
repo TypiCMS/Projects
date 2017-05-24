@@ -7,7 +7,7 @@ use TypiCMS\Modules\Core\Repositories\EloquentRepository;
 
 class EloquentProjectCategory extends EloquentRepository
 {
-    protected $repositoryId = 'categories';
+    protected $repositoryId = 'project_categories';
 
     protected $model = ProjectCategory::class;
 
