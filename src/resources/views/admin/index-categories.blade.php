@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div ng-app="typicms" ng-cloak ng-controller="ListController">
+<div ng-cloak ng-controller="ListController">
 
     <a href="{{ route('admin::index-projects') }}" title="{{ __('projects::global.Back') }}" class="btn-back">
         <span class="text-muted fa fa-arrow-circle-left"></span><span class="sr-only">{{ __('projects::global.Back') }}</span>
