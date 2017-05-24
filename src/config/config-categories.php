@@ -5,7 +5,4 @@ return [
     'order' => [
         'position' => 'asc',
     ],
-    'sidebar' => [
-        'weight' => 6,
-    ],
 ];
