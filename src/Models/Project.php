@@ -51,16 +51,6 @@ class Project extends Base
     }
 
     /**
-     * A project belongs to a category.
-     *
-     * @return BelongsTo
-     */
-    public function category()
-    {
-        return $this->belongsTo(ProjectCategory::class);
-    }
-
-    /**
      * Append title_translated attribute.
      *
      * @return string
@@ -112,6 +102,16 @@ class Project extends Base
     public function getCategoryNameAttribute()
     {
         return $this->category->title ?? null;
+    }
+
+    /**
+     * A project belongs to a category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(ProjectCategory::class);
     }
 
     /**
