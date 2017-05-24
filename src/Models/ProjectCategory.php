@@ -3,16 +3,19 @@
 namespace TypiCMS\Modules\Projects\Models;
 
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
 
-class ProjectCategory extends Base
+class ProjectCategory extends Base implements Sortable
 {
     use HasTranslations;
     use Historable;
     use PresentableTrait;
+    use SortableTrait;
 
     protected $presenter = 'TypiCMS\Modules\Projects\Presenters\CategoryPresenter';
 
@@ -22,6 +25,10 @@ class ProjectCategory extends Base
         'title',
         'slug',
         'status',
+    ];
+
+    public $sortable = [
+        'order_column_name' => 'position',
     ];
 
     protected $appends = ['thumb', 'title_translated', 'status_translated'];
