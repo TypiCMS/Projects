@@ -7,7 +7,7 @@ return [
         'update-project' => 'Edit',
         'delete-project' => 'Delete',
     ],
-    'project_categories' => [
+    'project categories' => [
         'see-all-project_categories' => 'View list',
         'create-project_category' => 'Create',
         'update-project_category' => 'Edit',

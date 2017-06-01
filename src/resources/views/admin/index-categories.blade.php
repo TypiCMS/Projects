@@ -1,17 +1,17 @@
 @extends('core::admin.master')
 
-@section('title', __('project_categories::global.name'))
+@section('title', __('Project categories'))
 
 @section('content')
 
 <div ng-cloak ng-controller="ListController">
 
-    <a href="{{ route('admin::index-projects') }}" title="{{ __('projects::global.Back') }}" class="btn-back">
-        <span class="text-muted fa fa-arrow-circle-left"></span><span class="sr-only">{{ __('projects::global.Back') }}</span>
+    <a href="{{ route('admin::index-projects') }}" title="{{ __('Back to projects list') }}" class="btn-back">
+        <span class="text-muted fa fa-arrow-circle-left"></span><span class="sr-only">{{ __('Back') }}</span>
     </a>
     @include('core::admin._button-create', ['module' => 'project_categories'])
 
-    <h1>@{{ models.length }} @choice('project_categories::global.project-categories', 2)</h1>
+    <h1>@lang('Project categories')</h1>
 
     <div class="btn-toolbar">
         @include('core::admin._button-select')

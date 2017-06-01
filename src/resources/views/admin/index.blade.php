@@ -1,6 +1,6 @@
 @extends('core::admin.master')
 
-@section('title', __('projects::global.name'))
+@section('title', __('Projects'))
 
 @section('content')
 
@@ -8,15 +8,13 @@
 
     @include('core::admin._button-create', ['module' => 'projects'])
 
-    <h1>
-        <span>@{{ models.length }} @choice('projects::global.projects', 2)</span>
-    </h1>
+    <h1>@lang('Projects')</h1>
 
     <div class="btn-toolbar">
         @include('core::admin._button-select')
         @include('core::admin._button-actions')
-        @can('see-all-project_categories')
-        <a class="btn btn-success" href="{{ route('admin::index-project_categories') }}">@lang('project_categories::global.name')</a>
+        @can ('see-all-project_categories')
+        <a class="btn btn-success" href="{{ route('admin::index-project_categories') }}">@lang('Project categories')</a>
         @endcan
         @include('core::admin._lang-switcher-for-list')
     </div>
@@ -37,13 +35,13 @@
                 <tr>
                     <td colspan="4"></td>
                     <td>
-                        <input st-search="date" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="date" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="category_name" class="form-control input-sm" placeholder="@lang('Search')…" type="text">
+                        <input st-search="category_name" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                 </tr>
             </thead>
