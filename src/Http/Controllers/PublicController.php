@@ -32,9 +32,9 @@ class PublicController extends BasePublicController
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function indexOfCategory($category = null)
+    public function indexOfCategory($categorySlug = null)
     {
-        $category = ProjectCategories::bySlug($category);
+        $category = ProjectCategories::bySlug($categorySlug);
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
 
@@ -47,8 +47,9 @@ class PublicController extends BasePublicController
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function show($category = null, $slug = null)
+    public function show($categorySlug = null, $slug = null)
     {
+        $category = ProjectCategories::bySlug($categorySlug);
         $model = $this->repository->published()->bySlug($slug);
         if ($category->id != $model->category_id) {
             abort(404);
