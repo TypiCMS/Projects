@@ -46,6 +46,18 @@ class ModuleProvider extends ServiceProvider
         Project::observe(new SlugObserver());
         Project::observe(new TagObserver());
         ProjectCategory::observe(new SlugObserver());
+
+        /*
+         * Sidebar view composer
+         */
+        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
+
+        /*
+         * Add the page in the view.
+         */
+        $this->app->view->composer('projects::public.*', function ($view) {
+            $view->page = TypiCMS::getPageLinkedToModule('projects');
+        });
     }
 
     public function register()
@@ -61,18 +73,6 @@ class ModuleProvider extends ServiceProvider
          * Register Tags and Categories
          */
         $app->register('TypiCMS\Modules\Tags\Providers\ModuleProvider');
-
-        /*
-         * Sidebar view composer
-         */
-        $app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
-
-        /*
-         * Add the page in the view.
-         */
-        $app->view->composer('projects::public.*', function ($view) {
-            $view->page = TypiCMS::getPageLinkedToModule('projects');
-        });
 
         $app->bind('Projects', EloquentProject::class);
         $app->bind('ProjectCategories', EloquentProjectCategory::class);
