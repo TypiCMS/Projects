@@ -8,14 +8,14 @@
 
     @include('files::public._files', ['model' => $page])
 
-    @if ($categories->count())
+    @if ($categories->count() > 0)
 
-        <ul class="list-categories">
+        <ul class="categories-list">
             @foreach ($categories as $category)
-            <li>
-                <a href="{{ route($lang.'::projects-category', [$category->slug]) }}">
-                    <span class="title">{{ $category->title }}</span>
-                    {!! $category->present()->thumb(270, 270) !!}
+            <li class="categories-item">
+                <a class="categories-item-link" href="{{ route($lang.'::projects-category', [$category->slug]) }}">
+                    <div class="categories-item-title">{{ $category->title }}</div>
+                    <div class="categories-item-image">{!! $category->present()->thumb(270, 270) !!}</div>
                 </a>
             </li>
             @endforeach
