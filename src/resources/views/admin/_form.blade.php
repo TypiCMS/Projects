@@ -14,7 +14,11 @@
 {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
 
 {!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->required() !!}
-{!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(', ', $model->tags->pluck('tag')->all())) !!}
+
+@php
+    JavaScript::put('tags', Tags::allForInput());
+@endphp
+{!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(',', $model->tags->pluck('tag')->all())) !!}
 <div class="row">
     <div class="col-sm-6">
         {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
