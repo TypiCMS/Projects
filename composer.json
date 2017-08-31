@@ -9,9 +9,8 @@
         }
     ],
     "require": {
-        "typicms/categories": "~2.9.0",
-        "typicms/tags": "~2.9.0",
-        "typicms/core": "~2.9.0"
+        "typicms/tags": "dev-dev",
+        "laravel/framework": "~5.5.0"
     },
     "autoload": {
         "psr-4": {

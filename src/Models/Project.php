@@ -2,37 +2,29 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
-use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Laracasts\Presenter\PresentableTrait;
+use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
 
 class Project extends Base
 {
+    use HasTranslations;
     use Historable;
-    use Translatable;
     use PresentableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\Projects\Presenters\ModulePresenter';
+    protected $presenter = ModulePresenter::class;
 
     protected $dates = ['date'];
 
-    protected $fillable = [
-        'category_id',
-        'image',
-        'date',
-        'website',
-    ];
+    protected $guarded = ['id', 'exit', 'tags'];
 
-    /**
-     * Translatable model configs.
-     *
-     * @var array
-     */
-    public $translatedAttributes = [
+    public $translatable = [
         'title',
         'slug',
         'status',
@@ -40,16 +32,7 @@ class Project extends Base
         'body',
     ];
 
-    protected $appends = ['status', 'title', 'thumb', 'category_name'];
-
-    /**
-     * Columns that are file.
-     *
-     * @var array
-     */
-    public $attachments = [
-        'image',
-    ];
+    protected $appends = ['image', 'thumb', 'title_translated', 'category_name', 'status_translated'];
 
     /**
      * Get public uri.
@@ -61,53 +44,44 @@ class Project extends Base
         $locale = $locale ?: config('app.locale');
         $page = TypiCMS::getPageLinkedToModule($this->getTable());
         if ($page) {
-            return $page->uri($locale).'/'.$this->category->translate($locale)->slug.'/'.$this->translate($locale)->slug;
+            return $page->uri($locale).'/'.$this->category->translate('slug', $locale).'/'.$this->translate('slug', $locale);
         }
 
         return '/';
     }
 
     /**
-     * A project belongs to a category.
-     *
-     * @return BelongsTo
-     */
-    public function category()
-    {
-        return $this->belongsTo('TypiCMS\Modules\Categories\Models\Category');
-    }
-
-    /**
-     * A project has many galleries.
-     *
-     * @return MorphToMany
-     */
-    public function galleries()
-    {
-        return $this->morphToMany('TypiCMS\Modules\Galleries\Models\Gallery', 'galleryable')
-            ->withPivot('position')
-            ->orderBy('position')
-            ->withTimestamps();
-    }
-
-    /**
-     * Append status attribute from translation table.
+     * Append title_translated attribute.
      *
      * @return string
      */
-    public function getStatusAttribute($value)
+    public function getTitleTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('title', config('typicms.content_locale', $locale));
     }
 
     /**
-     * Append title attribute from translation table.
+     * Append status_translated attribute.
      *
-     * @return string title
+     * @return string
      */
-    public function getTitleAttribute($value)
+    public function getStatusTranslatedAttribute()
     {
-        return $value;
+        $locale = config('app.locale');
+
+        return $this->translate('status', config('typicms.content_locale', $locale));
+    }
+
+    /**
+     * Append image attribute.
+     *
+     * @return string
+     */
+    public function getImageAttribute()
+    {
+        return $this->files->first();
     }
 
     /**
@@ -121,14 +95,33 @@ class Project extends Base
     }
 
     /**
-     * Append category_name attribute from translation table.
+     * Append category_name attribute.
      *
      * @return string
      */
     public function getCategoryNameAttribute()
     {
-        if (isset($this->category) and $this->category) {
-            return $this->category->title;
-        }
+        return $this->category->title ?? null;
+    }
+
+    /**
+     * A project belongs to a category.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function category()
+    {
+        return $this->belongsTo(ProjectCategory::class);
+    }
+
+    /**
+     * A news can have many files.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
+     */
+    public function files()
+    {
+        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
+            ->orderBy('model_has_files.position');
     }
 }

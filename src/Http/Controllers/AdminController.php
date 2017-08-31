@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\Project;
-use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
+use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class AdminController extends BaseAdminController
 {
-    public function __construct(ProjectInterface $project)
+    public function __construct(EloquentProject $project)
     {
         parent::__construct($project);
     }
@@ -22,7 +22,7 @@ class AdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->all([], true);
+        $models = $this->repository->with(['category', 'files'])->findAll();
         app('JavaScript')->put('models', $models);
 
         return view('projects::admin.index');
@@ -35,7 +35,8 @@ class AdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->getModel();
+        $model = $this->repository->createModel();
+        app('JavaScript')->put('model', $model);
 
         return view('projects::admin.create')
             ->with(compact('model'));
@@ -50,6 +51,8 @@ class AdminController extends BaseAdminController
      */
     public function edit(Project $project)
     {
+        app('JavaScript')->put('model', $project);
+
         return view('projects::admin.edit')
             ->with([
                 'model' => $project,
@@ -80,8 +83,38 @@ class AdminController extends BaseAdminController
      */
     public function update(Project $project, FormRequest $request)
     {
-        $this->repository->update($request->all());
+        $this->repository->update($request->id, $request->all());
 
         return $this->redirect($request, $project);
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param \TypiCMS\Modules\Projects\Models\Project $project
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function destroy(Project $project)
+    {
+        $deleted = $this->repository->delete($project);
+
+        return response()->json([
+            'error' => !$deleted,
+        ]);
+    }
+
+    /**
+     * List models.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function files(Project $project)
+    {
+        $data = [
+            'models' => $project->files,
+        ];
+
+        return response()->json($data, 200);
     }
 }

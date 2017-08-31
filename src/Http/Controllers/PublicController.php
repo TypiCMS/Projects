@@ -2,13 +2,14 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
-use Categories;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Projects\Repositories\ProjectInterface;
+use TypiCMS\Modules\Projects\Facades\ProjectCategories;
+use TypiCMS\Modules\Projects\Models\ProjectCategory;
+use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(ProjectInterface $project)
+    public function __construct(EloquentProject $project)
     {
         parent::__construct($project);
     }
@@ -18,11 +19,11 @@ class PublicController extends BasePublicController
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function categories()
+    public function index()
     {
-        $categories = Categories::all();
+        $categories = ProjectCategories::published()->findAll();
 
-        return view('projects::public.categories')
+        return view('projects::public.index')
             ->with(compact('categories'));
     }
 
@@ -31,12 +32,13 @@ class PublicController extends BasePublicController
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function index($category = null)
+    public function indexOfCategory($categorySlug = null)
     {
+        $category = ProjectCategories::bySlug($categorySlug);
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
 
-        return view('projects::public.index')
+        return view('projects::public.index-of-category')
             ->with(compact('models', 'category'));
     }
 
@@ -45,9 +47,10 @@ class PublicController extends BasePublicController
      *
      * @return \Illuminate\Support\Facades\Response
      */
-    public function show($category = null, $slug = null)
+    public function show($categorySlug = null, $slug = null)
     {
-        $model = $this->repository->bySlug($slug);
+        $category = ProjectCategories::bySlug($categorySlug);
+        $model = $this->repository->published()->bySlug($slug);
         if ($category->id != $model->category_id) {
             abort(404);
         }

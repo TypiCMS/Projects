@@ -1,12 +1,12 @@
 @extends('core::admin.master')
 
-@section('title', trans('projects::global.New'))
+@section('title', __('New project'))
 
-@section('main')
+@section('content')
 
     @include('core::admin._button-back', ['module' => 'projects'])
     <h1>
-        @lang('projects::global.New')
+        @lang('New project')
     </h1>
 
     {!! BootForm::open()->action(route('admin::index-projects'))->multipart()->role('form') !!}
