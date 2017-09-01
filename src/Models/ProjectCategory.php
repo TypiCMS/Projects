@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Exception;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -76,7 +77,7 @@ class ProjectCategory extends Base implements Sortable
     {
         try {
             return route('admin::edit-project_category', [$this->id]);
-        } catch (InvalidArgumentException $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
     }
@@ -90,7 +91,7 @@ class ProjectCategory extends Base implements Sortable
     {
         try {
             return route('admin::index-project_categories');
-        } catch (InvalidArgumentException $e) {
+        } catch (Exception $e) {
             Log::error($e->getMessage());
         }
     }
