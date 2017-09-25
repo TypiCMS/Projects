@@ -37,7 +37,7 @@ class ModuleProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../resources/views' => base_path('resources/views/vendor/projects'),
-        ], 'views');
+        ], 'typicms-views');
 
         AliasLoader::getInstance()->alias('Projects', Projects::class);
         AliasLoader::getInstance()->alias('ProjectCategories', ProjectCategories::class);
