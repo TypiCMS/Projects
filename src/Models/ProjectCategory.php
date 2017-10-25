@@ -103,7 +103,7 @@ class ProjectCategory extends Base implements Sortable
      */
     public function projects()
     {
-        return $this->hasMany(Project::class)->order();
+        return $this->hasMany(Project::class, 'category_id')->order();
     }
 
     /**
