@@ -50,7 +50,7 @@ class PublicController extends BasePublicController
     public function show($categorySlug = null, $slug = null)
     {
         $category = ProjectCategories::bySlug($categorySlug);
-        $model = $this->repository->published()->bySlug($slug);
+        $model = $this->repository->with('files')->published()->bySlug($slug);
         if ($category->id != $model->category_id) {
             abort(404);
         }
