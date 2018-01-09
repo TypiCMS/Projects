@@ -31,14 +31,16 @@ class RouteServiceProvider extends ServiceProvider
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('projects')) {
-                $options = $page->private ? ['middleware' => 'auth'] : [];
-                foreach (locales() as $lang) {
-                    if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                        $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-projects');
-                        $router->get($uri.'/{category}', $options + ['uses' => 'PublicController@indexOfCategory'])->name($lang.'::projects-category');
-                        $router->get($uri.'/{category}/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::project');
+                $router->middleware('public')->group(function (Router $router) use ($page) {
+                    $options = $page->private ? ['middleware' => 'auth'] : [];
+                    foreach (locales() as $lang) {
+                        if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
+                            $router->get($uri, $options + ['uses' => 'PublicController@index'])->name($lang.'::index-projects');
+                            $router->get($uri.'/{category}', $options + ['uses' => 'PublicController@indexOfCategory'])->name($lang.'::projects-category');
+                            $router->get($uri.'/{category}/{slug}', $options + ['uses' => 'PublicController@show'])->name($lang.'::project');
+                        }
                     }
-                }
+                });
             }
 
             /*
