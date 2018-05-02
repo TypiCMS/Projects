@@ -18,9 +18,8 @@ class EloquentProjectCategory extends EloquentRepository
      */
     public function allForSelect()
     {
-        $categories = $this->make()
-            ->order()
-            ->get()
+        $categories = $this->order()
+            ->findAll()
             ->pluck('title', 'id')
             ->all();
 
