@@ -46,7 +46,7 @@
                         <img ng-src="@{{ model.thumb }}" alt="">
                     </td>
                     <td>
-                        <input class="form-control input-sm" min="0" type="number" name="position" ng-model="model.position" ng-change="update(model, 'position')">
+                        <input class="form-control form-control-sm" min="0" type="number" name="position" ng-model="model.position" ng-change="update(model, 'position')">
                     </td>
                     <td>@{{ model.title_translated }}</td>
                 </tr>

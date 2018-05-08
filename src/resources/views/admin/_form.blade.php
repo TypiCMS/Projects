@@ -10,8 +10,10 @@
 @include('files::admin._files-selector')
 
 @include('core::form._title-and-slug')
-{!! TranslatableBootForm::hidden('status')->value(0) !!}
-{!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+<div class="form-group">
+    {!! TranslatableBootForm::hidden('status')->value(0) !!}
+    {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+</div>
 
 {!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->required() !!}
 

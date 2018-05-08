@@ -14,7 +14,7 @@
         @include('core::admin._button-select')
         @include('core::admin._button-actions')
         @can ('see-all-project_categories')
-        <a class="btn btn-success" href="{{ route('admin::index-project_categories') }}">@lang('Project categories')</a>
+        <a class="btn btn-secondary ml-2" href="{{ route('admin::index-project_categories') }}">@lang('Project categories')</a>
         @endcan
         @include('core::admin._lang-switcher-for-list')
     </div>
@@ -35,13 +35,13 @@
                 <tr>
                     <td colspan="4"></td>
                     <td>
-                        <input st-search="date" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="date" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="title_translated" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="title_translated" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                     <td>
-                        <input st-search="category_name" class="form-control input-sm" placeholder="@lang('Filter')…" type="text">
+                        <input st-search="category_name" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
                     </td>
                 </tr>
             </thead>
