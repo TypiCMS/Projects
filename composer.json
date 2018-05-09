@@ -9,7 +9,7 @@
         }
     ],
     "require": {
-        "typicms/tags": "~3.0.0",
+        "typicms/tags": "~4.0.0",
         "laravel/framework": "~5.5.0"
     },
     "autoload": {
