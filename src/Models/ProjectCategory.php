@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Projects\Models;
 
 use Exception;
+use Illuminate\Support\Facades\Log;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
