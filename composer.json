@@ -9,8 +9,8 @@
         }
     ],
     "require": {
-        "typicms/tags": "~4.0.0",
-        "laravel/framework": "~5.5.0"
+        "typicms/tags": "dev-vue",
+        "laravel/framework": "~5.7.0"
     },
     "autoload": {
         "psr-4": {
