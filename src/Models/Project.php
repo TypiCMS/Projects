@@ -32,7 +32,7 @@ class Project extends Base
         'body',
     ];
 
-    protected $appends = ['image', 'thumb', 'title_translated', 'category_name', 'status_translated'];
+    protected $appends = ['image', 'thumb', 'category_name'];
 
     /**
      * Get public uri.
@@ -48,30 +48,6 @@ class Project extends Base
         }
 
         return '/';
-    }
-
-    /**
-     * Append title_translated attribute.
-     *
-     * @return string
-     */
-    public function getTitleTranslatedAttribute()
-    {
-        $locale = config('app.locale');
-
-        return $this->translate('title', config('typicms.content_locale', $locale));
-    }
-
-    /**
-     * Append status_translated attribute.
-     *
-     * @return string
-     */
-    public function getStatusTranslatedAttribute()
-    {
-        $locale = config('app.locale');
-
-        return $this->translate('status', config('typicms.content_locale', $locale));
     }
 
     /**
