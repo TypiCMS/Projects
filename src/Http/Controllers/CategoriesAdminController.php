@@ -24,7 +24,6 @@ class CategoriesAdminController extends BaseAdminController
     public function index()
     {
         $models = $this->repository->with('image')->findAll();
-        app('JavaScript')->put('models', $models);
 
         return view('projects::admin.index-categories');
     }
@@ -86,21 +85,5 @@ class CategoriesAdminController extends BaseAdminController
         Projects::forgetCache();
 
         return $this->redirect($request, $category);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \TypiCMS\Modules\Projects\Models\ProjectCategory $category
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function destroy(ProjectCategory $category)
-    {
-        $deleted = $this->repository->delete($category);
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
     }
 }

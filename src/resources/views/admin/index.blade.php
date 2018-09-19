@@ -4,74 +4,42 @@
 
 @section('content')
 
-<div ng-cloak ng-controller="ListController">
+<item-list
+    url-base="{{ route('api::index-projects') }}"
+    locale="{{ config('typicms.content_locale') }}"
+    fields="id,date"
+    translatable-fields="status,title"
+    table="projects"
+    title="projects"
+    :searchable="['date']"
+    :sorting="['-date']">
 
-    @include('core::admin._button-create', ['module' => 'projects'])
+    <template slot="add-button">
+        @include('core::admin._button-create', ['module' => 'projects'])
+    </template>
 
-    <h1>@lang('Projects')</h1>
-
-    <div class="btn-toolbar">
-        @include('core::admin._button-select')
-        @include('core::admin._button-actions')
-        @can ('see-all-project_categories')
-        <a class="btn btn-secondary ml-2" href="{{ route('admin::index-project_categories') }}">@lang('Project categories')</a>
-        @endcan
+    <template slot="buttons">
         @include('core::admin._lang-switcher-for-list')
-    </div>
+    </template>
 
-    <div class="table-responsive">
+    <template slot="columns" slot-scope="{ sortArray }">
+        <item-list-column-header name="checkbox"></item-list-column-header>
+        <item-list-column-header name="edit"></item-list-column-header>
+        <item-list-column-header name="status_translated" sortable :sort-array="sortArray" :label="$t('Status')"></item-list-column-header>
+        <item-list-column-header name="image" :label="$t('Image')"></item-list-column-header>
+        <item-list-column-header name="date" sortable :sort-array="sortArray" :label="$t('Date')"></item-list-column-header>
+        <item-list-column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></item-list-column-header>
+    </template>
 
-        <table st-persist="projectsTable" st-table="displayedModels" st-safe-src="models" st-order st-filter class="table table-main">
-            <thead>
-                <tr>
-                    <th class="delete"></th>
-                    <th class="edit"></th>
-                    <th st-sort="status_translated" class="status st-sort">{{ __('Status') }}</th>
-                    <th st-sort="image" class="image st-sort">{{ __('Image') }}</th>
-                    <th st-sort="date" st-sort-default="reverse" class="date st-sort">{{ __('Date') }}</th>
-                    <th st-sort="title_translated" class="title_translated st-sort">{{ __('Title') }}</th>
-                    <th st-sort="category_name" class="category st-sort">{{ __('Category') }}</th>
-                </tr>
-                <tr>
-                    <td colspan="4"></td>
-                    <td>
-                        <input st-search="date" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
-                    </td>
-                    <td>
-                        <input st-search="title_translated" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
-                    </td>
-                    <td>
-                        <input st-search="category_name" class="form-control form-control-sm" placeholder="@lang('Filter')…" type="text">
-                    </td>
-                </tr>
-            </thead>
+    <template slot="table-row" slot-scope="{ model, checkedModels, loading }">
+        <td class="checkbox"><item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox></td>
+        <td>@include('core::admin._button-edit', ['module' => 'projects'])</td>
+        <td><item-list-status-button :model="model"></item-list-status-button></td>
+        <td><img :src="model.thumb" alt=""></td>
+        <td>@{{ model.date | date }}</td>
+        <td>@{{ model.title_translated }}</td>
+    </template>
 
-            <tbody>
-                <tr ng-repeat="model in displayedModels">
-                    <td>
-                        <input type="checkbox" checklist-model="checked.models" checklist-value="model">
-                    </td>
-                    <td>
-                        @include('core::admin._button-edit', ['module' => 'projects'])
-                    </td>
-                    <td typi-btn-status action="toggleStatus(model)" model="model"></td>
-                    <td>
-                        <img ng-src="@{{ model.thumb }}" alt="">
-                    </td>
-                    <td>@{{ model.date | dateFromMySQL:'dd/MM/yyyy' }}</td>
-                    <td>@{{ model.title_translated }}</td>
-                    <td>@{{ model.category_name }}</td>
-                </tr>
-            </tbody>
-            <tfoot>
-                <tr>
-                    <td colspan="7" typi-pagination></td>
-                </tr>
-            </tfoot>
-        </table>
-
-    </div>
-
-</div>
+</item-list>
 
 @endsection
