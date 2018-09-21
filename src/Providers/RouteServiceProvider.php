@@ -66,14 +66,14 @@ class RouteServiceProvider extends ServiceProvider
              */
             $router->middleware('api')->prefix('api')->group(function (Router $router) {
                 $router->middleware('auth:api')->group(function (Router $router) {
-                    $router->get('projects', 'ApiController@index')->name('api::index-projects')->middleware('can:see-all-projects');
-                    $router->patch('projects/{project}', 'ApiController@updatePartial')->name('api::update-project')->middleware('can:update-project');
-                    $router->delete('projects/{project}', 'ApiController@destroy')->name('api::destroy-project')->middleware('can:delete-project');
+                    $router->get('projects', 'ApiController@index')->middleware('can:see-all-projects');
+                    $router->patch('projects/{project}', 'ApiController@updatePartial')->middleware('can:update-project');
+                    $router->delete('projects/{project}', 'ApiController@destroy')->middleware('can:delete-project');
 
-                    $router->get('projects/categories', 'CategoriesApiController@index')->name('api::index-project_categories')->middleware('can:see-all-project_categories');
-                    $router->patch('projects/categories/{category}', 'CategoriesApiController@updatePartial')->name('api::update-project_category')->middleware('can:update-project_category');
-                    $router->post('projects/categories/sort', 'CategoriesApiController@sort')->name('api::sort-project_categories')->middleware('can:update-project_category');
-                    $router->delete('projects/categories/{category}', 'CategoriesApiController@destroy')->name('api::destroy-project_category')->middleware('can:delete-project_category');
+                    $router->get('projects/categories', 'CategoriesApiController@index')->middleware('can:see-all-project_categories');
+                    $router->patch('projects/categories/{category}', 'CategoriesApiController@updatePartial')->middleware('can:update-project_category');
+                    $router->post('projects/categories/sort', 'CategoriesApiController@sort')->middleware('can:update-project_category');
+                    $router->delete('projects/categories/{category}', 'CategoriesApiController@destroy')->middleware('can:delete-project_category');
                 });
             });
         });
