@@ -20,6 +20,8 @@
         <h1 class="project-title">{{ $model->title }}</h1>
         <p class="project-summary">{!! nl2br($model->summary) !!}</p>
         <div class="project-body">{!! $model->present()->body !!}</div>
+        @include('files::public._documents')
+        @include('files::public._images')
     </article>
 
 @endsection

@@ -2,10 +2,10 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
@@ -58,13 +58,6 @@ class ApiController extends BaseApiController
         ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param \TypiCMS\Modules\Projects\Models\Project $project
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
     public function destroy(Project $project)
     {
         $deleted = $this->repository->delete($project);
@@ -72,5 +65,20 @@ class ApiController extends BaseApiController
         return response()->json([
             'error' => !$deleted,
         ]);
+    }
+
+    public function files(Project $project)
+    {
+        return $project->files;
+    }
+
+    public function attachFiles(Project $project, Request $request)
+    {
+        return $this->repository->attachFiles($project, $request);
+    }
+
+    public function detachFile(Project $project, File $file)
+    {
+        return $this->repository->detachFile($project, $file);
     }
 }

@@ -70,6 +70,10 @@ class RouteServiceProvider extends ServiceProvider
                     $router->patch('projects/{project}', 'ApiController@updatePartial')->middleware('can:update-project');
                     $router->delete('projects/{project}', 'ApiController@destroy')->middleware('can:delete-project');
 
+                    $router->get('projects/{project}/files', 'ApiController@files')->middleware('can:update-project');
+                    $router->post('projects/{project}/files', 'ApiController@attachFiles')->middleware('can:update-project');
+                    $router->delete('projects/{project}/files/{file}', 'ApiController@detachFile')->middleware('can:update-project');
+
                     $router->get('projects/categories', 'CategoriesApiController@index')->middleware('can:see-all-project_categories');
                     $router->patch('projects/categories/{category}', 'CategoriesApiController@updatePartial')->middleware('can:update-project_category');
                     $router->post('projects/categories/sort', 'CategoriesApiController@sort')->middleware('can:update-project_category');

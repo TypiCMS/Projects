@@ -9,11 +9,13 @@ use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Files\Models\File;
+use TypiCMS\Modules\Files\Traits\HasFiles;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
 
 class Project extends Base
 {
+    use HasFiles;
     use HasTranslations;
     use Historable;
     use PresentableTrait;
@@ -88,16 +90,5 @@ class Project extends Base
     public function category()
     {
         return $this->belongsTo(ProjectCategory::class);
-    }
-
-    /**
-     * A news can have many files.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphToMany
-     */
-    public function files()
-    {
-        return $this->morphToMany(File::class, 'model', 'model_has_files', 'model_id', 'file_id')
-            ->orderBy('model_has_files.position');
     }
 }
