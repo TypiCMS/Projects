@@ -69,11 +69,6 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        /*
-         * Register Tags and Categories
-         */
-        $app->register('TypiCMS\Modules\Tags\Providers\ModuleProvider');
-
         $app->bind('Projects', EloquentProject::class);
         $app->bind('ProjectCategories', EloquentProjectCategory::class);
     }

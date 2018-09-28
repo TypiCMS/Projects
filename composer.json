@@ -9,7 +9,6 @@
         }
     ],
     "require": {
-        "typicms/tags": "dev-vue",
         "laravel/framework": "~5.7.0"
     },
     "autoload": {
