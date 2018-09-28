@@ -3,7 +3,8 @@
 
 {!! BootForm::hidden('id') !!}
 
-@include('core::admin._image-fieldset', ['field' => 'image'])
+<filepicker related-table="{{ $model->getTable() }}" :related-id="{{ $model->id ?? 0 }}"></filepicker>
+<file-field type="image" field="image_id" data="{{ $model->image }}"></file-field>
 
 @include('core::form._title-and-slug')
 <div class="form-group">
