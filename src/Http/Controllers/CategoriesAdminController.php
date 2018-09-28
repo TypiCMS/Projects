@@ -36,7 +36,6 @@ class CategoriesAdminController extends BaseAdminController
     public function create()
     {
         $model = $this->repository->createModel();
-        app('JavaScript')->put('model', $model);
 
         return view('projects::admin.create-category')
             ->with(compact('model'));
@@ -51,8 +50,6 @@ class CategoriesAdminController extends BaseAdminController
      */
     public function edit(ProjectCategory $category)
     {
-        app('JavaScript')->put('model', $category);
-
         return view('projects::admin.edit-category')
             ->with(['model' => $category]);
     }
