@@ -16,6 +16,7 @@
 
     <template slot="add-button">
         @include('core::admin._button-create', ['module' => 'projects'])
+        <a href="{{ route('admin::index-project_categories') }}" class="btn btn-sm btn-secondary">@lang('Categories')</a>
     </template>
 
     <template slot="columns" slot-scope="{ sortArray }">
