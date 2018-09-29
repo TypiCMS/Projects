@@ -2,8 +2,8 @@
 
 namespace TypiCMS\Modules\Projects\Repositories;
 
-use TypiCMS\Modules\Projects\Models\ProjectCategory;
 use TypiCMS\Modules\Core\Repositories\EloquentRepository;
+use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class EloquentProjectCategory extends EloquentRepository
 {

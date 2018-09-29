@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 

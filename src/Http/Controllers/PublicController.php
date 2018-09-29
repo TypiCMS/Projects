@@ -4,7 +4,6 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Facades\ProjectCategories;
-use TypiCMS\Modules\Projects\Models\ProjectCategory;
 use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class PublicController extends BasePublicController

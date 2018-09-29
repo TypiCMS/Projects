@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Facades\Projects;
 use TypiCMS\Modules\Projects\Http\Requests\CategoryFormRequest;
-use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 use TypiCMS\Modules\Projects\Repositories\EloquentProjectCategory;
 
@@ -71,7 +70,7 @@ class CategoriesAdminController extends BaseAdminController
     /**
      * Update the specified resource in storage.
      *
-     * @param \TypiCMS\Modules\Projects\Models\ProjectCategory           $category
+     * @param \TypiCMS\Modules\Projects\Models\ProjectCategory            $category
      * @param \TypiCMS\Modules\Projects\Http\Requests\CategoryFormRequest $request
      *
      * @return \Illuminate\Http\RedirectResponse
