@@ -3,7 +3,9 @@
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
+use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Projects\Models\Project;
@@ -24,9 +26,11 @@ class ApiController extends BaseApiController
     public function index(Request $request)
     {
         $data = QueryBuilder::for(Project::class)
-            ->allowedFilters('start_date')
+            ->allowedFilters([
+                Filter::custom('date,title', FilterOr::class),
+            ])
+            ->allowedIncludes('files','images')
             ->translated($request->input('translatable_fields'))
-            ->with('files')
             ->paginate($request->input('per_page'));
 
         return $data;

@@ -11,6 +11,8 @@
     translatable-fields="status,title"
     table="project_categories"
     title="categories"
+    include="image"
+    :searchable="['title']"
     :sorting="['position']">
 
     <template slot="back-button">
