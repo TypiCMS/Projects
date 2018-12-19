@@ -2,8 +2,7 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
-use Exception;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
@@ -52,11 +51,12 @@ class ProjectCategory extends Base implements Sortable
      */
     public function editUrl()
     {
-        try {
-            return route('admin::edit-project_category', [$this->id]);
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
+        $route = 'admin::edit-project_category';
+        if (Route::has($route)) {
+            return route($route, $this->id);
         }
+
+        return route('dashboard');
     }
 
     /**
@@ -66,11 +66,12 @@ class ProjectCategory extends Base implements Sortable
      */
     public function indexUrl()
     {
-        try {
-            return route('admin::index-project_categories');
-        } catch (Exception $e) {
-            Log::error($e->getMessage());
+        $route = 'admin::index-project_categories';
+        if (Route::has($route)) {
+            return route($route);
         }
+
+        return route('dashboard');
     }
 
     /**
