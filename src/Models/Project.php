@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Projects\Models;
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Str;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
@@ -41,7 +42,7 @@ class Project extends Base
     public function uri($locale = null)
     {
         $locale = $locale ?: config('app.locale');
-        $route = $locale.'::'.str_singular($this->getTable());
+        $route = $locale.'::'.Str::singular($this->getTable());
         if (Route::has($route)) {
             return route($route, [$this->category->slug, $this->slug]);
         }
