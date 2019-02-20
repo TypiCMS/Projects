@@ -22,8 +22,6 @@ class CategoriesAdminController extends BaseAdminController
      */
     public function index()
     {
-        $models = $this->repository->with('image')->findAll();
-
         return view('projects::admin.index-categories');
     }
 
