@@ -16,7 +16,9 @@
             <li class="category-list-item">
                 <a class="category-list-item-link" href="{{ route($lang.'::projects-category', [$category->slug]) }}">
                     <div class="category-list-item-title">{{ $category->title }}</div>
-                    <div class="category-list-item-image">{!! $category->present()->thumb(270, 270) !!}</div>
+                    <div class="category-list-item-image">
+                        <img src="{!! $category->present()->image(270, 270) !!}" alt="">
+                    </div>
                 </a>
             </li>
             @endforeach

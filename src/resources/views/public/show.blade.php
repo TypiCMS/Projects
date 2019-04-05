@@ -3,7 +3,7 @@
 @section('title', $model->title.' – '.__('Projects').' – '.$websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('image', $model->present()->thumbUrl())
+@section('image', $model->present()->image())
 @section('bodyClass', 'body-projects body-project-'.$model->id.' body-page body-page-'.$page->id)
 
 @section('content')
