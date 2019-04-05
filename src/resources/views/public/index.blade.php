@@ -11,12 +11,12 @@
 
     @if ($categories->count() > 0)
 
-        <ul class="categories-list">
+        <ul class="category-list-list">
             @foreach ($categories as $category)
-            <li class="categories-item">
-                <a class="categories-item-link" href="{{ route($lang.'::projects-category', [$category->slug]) }}">
-                    <div class="categories-item-title">{{ $category->title }}</div>
-                    <div class="categories-item-image">{!! $category->present()->thumb(270, 270) !!}</div>
+            <li class="category-list-item">
+                <a class="category-list-item-link" href="{{ route($lang.'::projects-category', [$category->slug]) }}">
+                    <div class="category-list-item-title">{{ $category->title }}</div>
+                    <div class="category-list-item-image">{!! $category->present()->thumb(270, 270) !!}</div>
                 </a>
             </li>
             @endforeach

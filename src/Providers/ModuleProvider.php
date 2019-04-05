@@ -39,6 +39,10 @@ class ModuleProvider extends ServiceProvider
             __DIR__.'/../resources/views' => resource_path('views/vendor/projects'),
         ], 'views');
 
+        $this->publishes([
+            __DIR__.'/../resources/scss' => resource_path('scss'),
+        ], 'resources');
+
         AliasLoader::getInstance()->alias('Projects', Projects::class);
         AliasLoader::getInstance()->alias('ProjectCategories', ProjectCategories::class);
 
