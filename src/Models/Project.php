@@ -7,6 +7,7 @@ use Illuminate\Support\Str;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
+use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Traits\HasFiles;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
@@ -24,6 +25,8 @@ class Project extends Base
 
     protected $guarded = ['id', 'exit', 'tags'];
 
+    protected $appends = ['thumb', 'category_name'];
+
     public $translatable = [
         'title',
         'slug',
@@ -31,8 +34,6 @@ class Project extends Base
         'summary',
         'body',
     ];
-
-    protected $appends = ['image', 'thumb', 'category_name'];
 
     /**
      * Get public uri.
@@ -51,23 +52,13 @@ class Project extends Base
     }
 
     /**
-     * Append image attribute.
-     *
-     * @return string
-     */
-    public function getImageAttribute()
-    {
-        return $this->images->first();
-    }
-
-    /**
      * Append thumb attribute.
      *
      * @return string
      */
     public function getThumbAttribute()
     {
-        return $this->present()->thumbSrc(null, 22);
+        return $this->present()->thumbSrc(null, 44);
     }
 
     /**
@@ -88,5 +79,15 @@ class Project extends Base
     public function category()
     {
         return $this->belongsTo(ProjectCategory::class);
+    }
+
+    /**
+     * This model belongs to one image.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function image()
+    {
+        return $this->belongsTo(File::class, 'image_id');
     }
 }
