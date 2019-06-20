@@ -20,7 +20,7 @@ class PublicController extends BasePublicController
      */
     public function index()
     {
-        $categories = ProjectCategories::all();
+        $categories = ProjectCategories::with('image')->all();
 
         return view('projects::public.index')
             ->with(compact('categories'));
@@ -33,7 +33,7 @@ class PublicController extends BasePublicController
      */
     public function indexOfCategory($categorySlug = null)
     {
-        $category = ProjectCategories::bySlug($categorySlug);
+        $category = ProjectCategories::with('image')->bySlug($categorySlug);
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
 
@@ -48,8 +48,14 @@ class PublicController extends BasePublicController
      */
     public function show($categorySlug = null, $slug = null)
     {
-        $category = ProjectCategories::bySlug($categorySlug);
-        $model = $this->repository->bySlug($slug);
+        $category = ProjectCategories::with('image')->bySlug($categorySlug);
+        $model = $this->repository
+            ->with([
+                'image',
+                'images',
+                'documents',
+            ])
+            ->bySlug($slug);
         if ($category->id != $model->category_id) {
             abort(404);
         }
