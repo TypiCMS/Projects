@@ -8,15 +8,9 @@ use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
-use TypiCMS\Modules\Projects\Repositories\EloquentProjectCategory;
 
 class CategoriesApiController extends BaseApiController
 {
-    public function __construct(EloquentProjectCategory $category)
-    {
-        parent::__construct($category);
-    }
-
     /**
      * List models.
      *
@@ -53,7 +47,7 @@ class CategoriesApiController extends BaseApiController
         }
         $saved = $category->save();
 
-        $this->repository->forgetCache();
+        $this->model->forgetCache();
 
         return response()->json([
             'error' => !$saved,
@@ -62,7 +56,7 @@ class CategoriesApiController extends BaseApiController
 
     public function destroy(ProjectCategory $category)
     {
-        $deleted = $this->repository->delete($category);
+        $deleted = $category->delete();
 
         return response()->json([
             'error' => !$deleted,

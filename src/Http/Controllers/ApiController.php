@@ -9,15 +9,9 @@ use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Projects\Models\Project;
-use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class ApiController extends BaseApiController
 {
-    public function __construct(EloquentProject $project)
-    {
-        parent::__construct($project);
-    }
-
     /**
      * List models.
      *
@@ -54,7 +48,7 @@ class ApiController extends BaseApiController
         }
         $saved = $project->save();
 
-        $this->repository->forgetCache();
+        $this->model->forgetCache();
 
         return response()->json([
             'error' => !$saved,
@@ -63,7 +57,7 @@ class ApiController extends BaseApiController
 
     public function destroy(Project $project)
     {
-        $deleted = $this->repository->delete($project);
+        $deleted = $project->delete();
 
         return response()->json([
             'error' => !$deleted,
@@ -77,11 +71,11 @@ class ApiController extends BaseApiController
 
     public function attachFiles(Project $project, Request $request)
     {
-        return $this->repository->attachFiles($project, $request);
+        return $this->model->attachFiles($project, $request);
     }
 
     public function detachFile(Project $project, File $file)
     {
-        return $this->repository->detachFile($project, $file);
+        return $this->model->detachFile($project, $file);
     }
 }

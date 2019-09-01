@@ -11,8 +11,6 @@ use TypiCMS\Modules\Projects\Facades\ProjectCategories;
 use TypiCMS\Modules\Projects\Facades\Projects;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
-use TypiCMS\Modules\Projects\Repositories\EloquentProject;
-use TypiCMS\Modules\Projects\Repositories\EloquentProjectCategory;
 use TypiCMS\Modules\Tags\Observers\TagObserver;
 
 class ModuleProvider extends ServiceProvider
@@ -73,7 +71,7 @@ class ModuleProvider extends ServiceProvider
          */
         $app->register(RouteServiceProvider::class);
 
-        $app->bind('Projects', EloquentProject::class);
-        $app->bind('ProjectCategories', EloquentProjectCategory::class);
+        $app->bind('Projects', Project::class);
+        $app->bind('ProjectCategories', ProjectCategory::class);
     }
 }

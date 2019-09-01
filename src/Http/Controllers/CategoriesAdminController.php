@@ -6,15 +6,9 @@ use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Facades\Projects;
 use TypiCMS\Modules\Projects\Http\Requests\CategoryFormRequest;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
-use TypiCMS\Modules\Projects\Repositories\EloquentProjectCategory;
 
 class CategoriesAdminController extends BaseAdminController
 {
-    public function __construct(EloquentProjectCategory $category)
-    {
-        parent::__construct($category);
-    }
-
     /**
      * List models.
      *
@@ -32,7 +26,7 @@ class CategoriesAdminController extends BaseAdminController
      */
     public function create()
     {
-        $model = $this->repository->createModel();
+        $model = new;
 
         return view('projects::admin.create-category')
             ->with(compact('model'));
@@ -60,7 +54,7 @@ class CategoriesAdminController extends BaseAdminController
      */
     public function store(CategoryFormRequest $request)
     {
-        $category = $this->repository->create($request->all());
+        $category = ::create($request->all());
 
         return $this->redirect($request, $category);
     }
@@ -75,7 +69,7 @@ class CategoriesAdminController extends BaseAdminController
      */
     public function update(ProjectCategory $category, CategoryFormRequest $request)
     {
-        $this->repository->update($request->id, $request->all());
+        ::update($request->id, $request->all());
         Projects::forgetCache();
 
         return $this->redirect($request, $category);

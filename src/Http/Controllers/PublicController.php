@@ -4,15 +4,9 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Facades\ProjectCategories;
-use TypiCMS\Modules\Projects\Repositories\EloquentProject;
 
 class PublicController extends BasePublicController
 {
-    public function __construct(EloquentProject $project)
-    {
-        parent::__construct($project);
-    }
-
     /**
      * Display a listing of the resource.
      *
@@ -35,7 +29,7 @@ class PublicController extends BasePublicController
     {
         $category = ProjectCategories::with('image')->bySlug($categorySlug);
         $relatedModels = ['translations', 'category', 'category.translations'];
-        $models = $this->repository->allBy('category_id', $category->id, $relatedModels, false);
+        $models = $this->model->allBy('category_id', $category->id, $relatedModels, false);
 
         return view('projects::public.index-of-category')
             ->with(compact('models', 'category'));
