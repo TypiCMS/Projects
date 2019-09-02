@@ -12,7 +12,7 @@
     table="projects"
     title="projects"
     include="image"
-    :searchable="['date,title']"
+    :searchable="['title']"
     :sorting="['-date']">
 
     <template slot="add-button">

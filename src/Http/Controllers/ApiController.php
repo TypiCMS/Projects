@@ -21,7 +21,7 @@ class ApiController extends BaseApiController
     {
         $data = QueryBuilder::for(Project::class)
             ->allowedFilters([
-                Filter::custom('date,title', FilterOr::class),
+                Filter::custom('title', FilterOr::class),
             ])
             ->allowedIncludes('image')
             ->translated($request->input('translatable_fields'))
