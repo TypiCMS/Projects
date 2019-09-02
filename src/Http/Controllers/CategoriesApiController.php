@@ -9,6 +9,7 @@ use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
+use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class CategoriesApiController extends BaseApiController

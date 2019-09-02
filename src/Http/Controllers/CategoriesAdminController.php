@@ -5,8 +5,8 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
-use TypiCMS\Modules\Projects\Facades\Projects;
 use TypiCMS\Modules\Projects\Http\Requests\CategoryFormRequest;
+use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class CategoriesAdminController extends BaseAdminController
@@ -18,7 +18,7 @@ class CategoriesAdminController extends BaseAdminController
 
     public function create(): View
     {
-        $model = new ProjectCategory;
+        $model = new ProjectCategory();
 
         return view('projects::admin.create-category')
             ->with(compact('model'));
