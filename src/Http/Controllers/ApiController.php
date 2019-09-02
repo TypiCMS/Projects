@@ -2,7 +2,10 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
@@ -12,12 +15,7 @@ use TypiCMS\Modules\Projects\Models\Project;
 
 class ApiController extends BaseApiController
 {
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         $data = QueryBuilder::for(Project::class)
             ->allowedFilters([
@@ -30,7 +28,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Project $project, Request $request)
+    protected function updatePartial(Project $project, Request $request): JsonResponse
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -48,14 +46,12 @@ class ApiController extends BaseApiController
         }
         $saved = $project->save();
 
-        $this->model->forgetCache();
-
         return response()->json([
             'error' => !$saved,
         ]);
     }
 
-    public function destroy(Project $project)
+    public function destroy(Project $project): JsonResponse
     {
         $deleted = $project->delete();
 
@@ -64,18 +60,18 @@ class ApiController extends BaseApiController
         ]);
     }
 
-    public function files(Project $project)
+    public function files(Project $project): Collection
     {
         return $project->files;
     }
 
-    public function attachFiles(Project $project, Request $request)
+    public function attachFiles(Project $project, Request $request): JsonResponse
     {
-        return $this->model->attachFiles($project, $request);
+        return $project->attachFiles($request);
     }
 
-    public function detachFile(Project $project, File $file)
+    public function detachFile(Project $project, File $file): array
     {
-        return $this->model->detachFile($project, $file);
+        return $project->detachFile($file);
     }
 }

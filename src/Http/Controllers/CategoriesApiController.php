@@ -2,7 +2,9 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\Filter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
@@ -11,12 +13,7 @@ use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class CategoriesApiController extends BaseApiController
 {
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index(Request $request)
+    public function index(Request $request): LengthAwarePaginator
     {
         $data = QueryBuilder::for(ProjectCategory::class)
             ->allowedFilters([
@@ -29,7 +26,7 @@ class CategoriesApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(ProjectCategory $category, Request $request)
+    protected function updatePartial(ProjectCategory $category, Request $request): JsonResponse
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -47,14 +44,12 @@ class CategoriesApiController extends BaseApiController
         }
         $saved = $category->save();
 
-        $this->model->forgetCache();
-
         return response()->json([
             'error' => !$saved,
         ]);
     }
 
-    public function destroy(ProjectCategory $category)
+    public function destroy(ProjectCategory $category): JsonResponse
     {
         $deleted = $category->delete();
 

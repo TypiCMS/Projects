@@ -3,45 +3,29 @@
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\Project;
 
 class AdminController extends BaseAdminController
 {
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function index()
+    public function index(): View
     {
-        $models = $this->model->with(['category', 'files'])->findAll();
-
         return view('projects::admin.index');
     }
 
-    /**
-     * Create form for a new resource.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create()
+    public function create(): View
     {
-        $model = new;
+        $model = new Project;
 
         return view('projects::admin.create')
             ->with(compact('model'));
     }
 
-    /**
-     * Edit form for the specified resource.
-     *
-     * @param \TypiCMS\Modules\Projects\Models\Project $project
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(Project $project)
+    public function edit(Project $project): View
     {
         return view('projects::admin.edit')
             ->with([
@@ -49,41 +33,21 @@ class AdminController extends BaseAdminController
             ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param \TypiCMS\Modules\Projects\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function store(FormRequest $request)
+    public function store(FormRequest $request): RedirectResponse
     {
-        $project = ::create($request->all());
+        $project = Project::create($request->all());
 
         return $this->redirect($request, $project);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param \TypiCMS\Modules\Projects\Models\Project            $model
-     * @param \TypiCMS\Modules\Projects\Http\Requests\FormRequest $request
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Project $project, FormRequest $request)
+    public function update(Project $project, FormRequest $request): RedirectResponse
     {
-        ::update($request->id, $request->all());
+        $project->update($request->all());
 
         return $this->redirect($request, $project);
     }
 
-    /**
-     * List models.
-     *
-     * @return \Illuminate\View\View
-     */
-    public function files(Project $project)
+    public function files(Project $project): JsonResponse
     {
         $data = [
             'models' => $project->files,
