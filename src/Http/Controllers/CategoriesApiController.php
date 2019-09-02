@@ -44,6 +44,7 @@ class CategoriesApiController extends BaseApiController
             $category->$key = $value;
         }
         $saved = $category->save();
+        (new Project)->flushCache();
 
         return response()->json([
             'error' => !$saved,
