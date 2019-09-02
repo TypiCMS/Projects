@@ -40,7 +40,7 @@ class CategoriesAdminController extends BaseAdminController
     public function update(ProjectCategory $category, CategoryFormRequest $request): RedirectResponse
     {
         $category->update($request->all());
-        (new Project)->flushCache();
+        (new Project())->flushCache();
 
         return $this->redirect($request, $category);
     }
