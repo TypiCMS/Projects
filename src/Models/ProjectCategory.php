@@ -34,6 +34,16 @@ class ProjectCategory extends Base implements Sortable
         'order_column_name' => 'position',
     ];
 
+    public function allForSelect()
+    {
+        $categories = $this->order()
+            ->get()
+            ->pluck('title', 'id')
+            ->all();
+
+        return ['' => ''] + $categories;
+    }
+
     /**
      * Append thumb attribute.
      *
