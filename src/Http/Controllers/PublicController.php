@@ -2,32 +2,26 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
+use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Facades\ProjectCategories;
+use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class PublicController extends BasePublicController
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Support\Facades\Response
-     */
-    public function index()
+    public function index(): View
     {
-        $categories = ProjectCategories::with('image')->all();
+        $categories = ProjectCategory::with('image')->all();
 
         return view('projects::public.index')
             ->with(compact('categories'));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Support\Facades\Response
-     */
-    public function indexOfCategory($categorySlug = null)
+    public function indexOfCategory($categorySlug = null): View
     {
-        $category = ProjectCategories::with('image')->bySlug($categorySlug);
+        $category = ProjectCategory::with('image')
+            ->where(column('slug'), $categorySlug)
+            ->firstOrFails();
         $relatedModels = ['translations', 'category', 'category.translations'];
         $models = $this->model->allBy('category_id', $category->id, $relatedModels, false);
 
@@ -35,21 +29,16 @@ class PublicController extends BasePublicController
             ->with(compact('models', 'category'));
     }
 
-    /**
-     * Show resource.
-     *
-     * @return \Illuminate\Support\Facades\Response
-     */
-    public function show($categorySlug = null, $slug = null)
+    public function show($categorySlug = null, $slug = null): View
     {
         $category = ProjectCategories::with('image')->bySlug($categorySlug);
-        $model = $this->repository
-            ->with([
+        $model = Project::with([
                 'image',
                 'images',
                 'documents',
             ])
-            ->bySlug($slug);
+            ->where(column('slug'), $slug)
+            ->firstOrFails();
         if ($category->id != $model->category_id) {
             abort(404);
         }
