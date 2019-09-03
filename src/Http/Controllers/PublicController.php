@@ -22,7 +22,7 @@ class PublicController extends BasePublicController
     {
         $category = ProjectCategory::published()
             ->with('image')
-            ->where(column('slug'), $categorySlug)
+            ->bySlug($categorySlug)
             ->firstOrFail();
         $models = Project::published()->where('category_id', $category->id)
             ->get();
