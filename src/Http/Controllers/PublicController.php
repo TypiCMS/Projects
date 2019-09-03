@@ -22,7 +22,7 @@ class PublicController extends BasePublicController
     {
         $category = ProjectCategory::published()
             ->with('image')
-            ->bySlug($categorySlug)
+            ->whereSlugIs($categorySlug)
             ->firstOrFail();
         $models = Project::published()->where('category_id', $category->id)
             ->get();
@@ -34,7 +34,7 @@ class PublicController extends BasePublicController
     public function show($categorySlug = null, $slug = null): View
     {
         $category = ProjectCategories::with('image')
-            ->bySlug($categorySlug)
+            ->whereSlugIs($categorySlug)
             ->firstOrFail();
         $model = Project::published()
             ->with([
@@ -42,7 +42,7 @@ class PublicController extends BasePublicController
                 'images',
                 'documents',
             ])
-            ->bySlug($slug)
+            ->whereSlugIs($slug)
             ->firstOrFail();
         if ($category->id != $model->category_id) {
             abort(404);
