@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Laracasts\Presenter\PresentableTrait;
@@ -35,12 +36,7 @@ class Project extends Base
         'body',
     ];
 
-    /**
-     * Get public uri.
-     *
-     * @return string|null
-     */
-    public function uri($locale = null)
+    public function uri($locale = null): string
     {
         $locale = $locale ?: config('app.locale');
         $route = $locale.'::'.Str::singular($this->getTable());
@@ -48,45 +44,25 @@ class Project extends Base
             return route($route, [$this->category->slug, $this->slug]);
         }
 
-        return '/';
+        return url('/');
     }
 
-    /**
-     * Append thumb attribute.
-     *
-     * @return string
-     */
-    public function getThumbAttribute()
+    public function getThumbAttribute(): string
     {
         return $this->present()->image(null, 54);
     }
 
-    /**
-     * Append category_name attribute.
-     *
-     * @return string
-     */
-    public function getCategoryNameAttribute()
+    public function getCategoryNameAttribute(): ?string
     {
         return $this->category->title ?? null;
     }
 
-    /**
-     * A project belongs to a category.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function category()
+    public function category(): BelongsTo
     {
         return $this->belongsTo(ProjectCategory::class);
     }
 
-    /**
-     * This model belongs to one image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function image()
+    public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_id');
     }

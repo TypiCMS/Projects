@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
@@ -34,7 +35,7 @@ class ProjectCategory extends Base implements Sortable
         'order_column_name' => 'position',
     ];
 
-    public function allForSelect()
+    public function allForSelect(): array
     {
         $categories = $this->order()
             ->get()
@@ -44,22 +45,12 @@ class ProjectCategory extends Base implements Sortable
         return ['' => ''] + $categories;
     }
 
-    /**
-     * Append thumb attribute.
-     *
-     * @return string
-     */
-    public function getThumbAttribute()
+    public function getThumbAttribute(): string
     {
         return $this->present()->image(null, 54);
     }
 
-    /**
-     * Get edit url of model.
-     *
-     * @return string|void
-     */
-    public function editUrl()
+    public function editUrl(): string
     {
         $route = 'admin::edit-project_category';
         if (Route::has($route)) {
@@ -69,12 +60,7 @@ class ProjectCategory extends Base implements Sortable
         return route('dashboard');
     }
 
-    /**
-     * Get back office’s index of models url.
-     *
-     * @return string|void
-     */
-    public function indexUrl()
+    public function indexUrl(): string
     {
         $route = 'admin::index-project_categories';
         if (Route::has($route)) {
@@ -84,22 +70,12 @@ class ProjectCategory extends Base implements Sortable
         return route('dashboard');
     }
 
-    /**
-     * A category has many projects.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function projects()
+    public function projects(): BelongsTo
     {
         return $this->hasMany(Project::class, 'category_id')->order();
     }
 
-    /**
-     * This model belongs to one image.
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function image()
+    public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_id');
     }
