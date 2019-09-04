@@ -20,7 +20,7 @@ class CategoriesApiController extends BaseApiController
             ->selectFields($request->input('fields.project_categories'))
             ->allowedSorts(['status_translated', 'position', 'title_translated'])
             ->allowedFilters([
-                AllowedFilter::custom('title', new FilterOr),
+                AllowedFilter::custom('title', new FilterOr()),
             ])
             ->allowedIncludes(['image'])
             ->paginate($request->input('per_page'));
