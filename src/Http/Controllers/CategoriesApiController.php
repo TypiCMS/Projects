@@ -5,7 +5,7 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Spatie\QueryBuilder\Filter;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
@@ -17,11 +17,12 @@ class CategoriesApiController extends BaseApiController
     public function index(Request $request): LengthAwarePaginator
     {
         $data = QueryBuilder::for(ProjectCategory::class)
+            ->selectFields($request->input('fields.project_categories'))
+            ->allowedSorts(['status_translated', 'position', 'title_translated'])
             ->allowedFilters([
-                Filter::custom('title', FilterOr::class),
+                AllowedFilter::custom('title', new FilterOr),
             ])
-            ->allowedIncludes('image')
-            ->translated($request->input('translatable_fields'))
+            ->allowedIncludes(['image'])
             ->paginate($request->input('per_page'));
 
         return $data;

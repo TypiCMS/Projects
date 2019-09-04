@@ -7,8 +7,7 @@
 <item-list
     url-base="/api/projects/categories"
     locale="{{ config('typicms.content_locale') }}"
-    fields="id,image_id,position"
-    translatable-fields="status,title"
+    fields="id,image_id,position,status,title"
     table="project_categories"
     title="categories"
     include="image"
