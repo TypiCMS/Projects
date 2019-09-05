@@ -26,7 +26,7 @@ class Project extends Base
 
     protected $guarded = ['id', 'exit', 'tags'];
 
-    protected $appends = ['thumb', 'category_name'];
+    protected $appends = ['category_name'];
 
     public $translatable = [
         'title',
