@@ -1,5 +1,6 @@
 @push('js')
-    <script src="{{ asset('components/ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('components/ckeditor4/ckeditor.js') }}"></script>
+    <script src="{{ asset('components/ckeditor4/config-full.js') }}"></script>
 @endpush
 
 @component('core::admin._buttons-form', ['model' => $model])
@@ -28,4 +29,4 @@
 {!! BootForm::text(__('Website'), 'website')->placeholder('http://') !!}
 
 {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
-{!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor') !!}
+{!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
