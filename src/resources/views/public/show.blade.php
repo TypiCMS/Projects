@@ -21,8 +21,12 @@
         @isset($model->image)
         <img class="project-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
         @endisset
+        @isset($model->summary)
         <p class="project-summary">{!! nl2br($model->summary) !!}</p>
+        @endisset
+        @isset($model->body)
         <div class="project-body">{!! $model->present()->body !!}</div>
+        @endisset
         @include('files::public._documents')
         @include('files::public._images')
     </article>
