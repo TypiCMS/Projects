@@ -18,6 +18,9 @@
 
     <article class="project">
         <h1 class="project-title">{{ $model->title }}</h1>
+        @isset($model->image)
+        <img class="project-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
+        @endisset
         <p class="project-summary">{!! nl2br($model->summary) !!}</p>
         <div class="project-body">{!! $model->present()->body !!}</div>
         @include('files::public._documents')
