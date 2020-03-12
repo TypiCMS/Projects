@@ -7,8 +7,6 @@ class CreateProjectCategoriesTable extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return null
      */
     public function up()
     {
@@ -26,8 +24,6 @@ class CreateProjectCategoriesTable extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return null
      */
     public function down()
     {
