@@ -19,7 +19,12 @@
     <article class="project">
         <h1 class="project-title">{{ $model->title }}</h1>
         @empty(!$model->image)
-        <img class="project-image" src="{!! $model->present()->image(null, 1000) !!}" alt="">
+        <picture class="project-picture">
+            <img class="project-picture-image" src="{!! $model->present()->image(2000, 1000) !!}" alt="">
+            @empty(!$model->image->description)
+            <legend class="project-picture-legend">{{ $model->image->description }}</legend>
+            @endempty
+        </picture>
         @endempty
         @empty(!$model->summary)
         <p class="project-summary">{!! nl2br($model->summary) !!}</p>
