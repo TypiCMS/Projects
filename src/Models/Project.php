@@ -24,7 +24,7 @@ class Project extends Base
 
     protected $dates = ['date'];
 
-    protected $guarded = ['id', 'exit', 'tags'];
+    protected $guarded = [];
 
     protected $appends = ['category_name'];
 

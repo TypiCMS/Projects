@@ -34,7 +34,7 @@ class AdminController extends BaseAdminController
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $data = $request->except('file_ids');
+        $data = $request->validated();
         $project = Project::create($data);
 
         return $this->redirect($request, $project);
@@ -42,7 +42,7 @@ class AdminController extends BaseAdminController
 
     public function update(Project $project, FormRequest $request): RedirectResponse
     {
-        $data = $request->except('file_ids');
+        $data = $request->validated();
         $project->update($data);
 
         return $this->redirect($request, $project);
