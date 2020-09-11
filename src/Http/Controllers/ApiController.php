@@ -29,7 +29,7 @@ class ApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(Project $project, Request $request): JsonResponse
+    protected function updatePartial(Project $project, Request $request)
     {
         $data = [];
         foreach ($request->all() as $column => $content) {
@@ -43,22 +43,14 @@ class ApiController extends BaseApiController
         }
 
         foreach ($data as $key => $value) {
-            $project->$key = $value;
+            $project->{$key} = $value;
         }
-        $saved = $project->save();
-
-        return response()->json([
-            'error' => !$saved,
-        ]);
+        $project->save();
     }
 
-    public function destroy(Project $project): JsonResponse
+    public function destroy(Project $project)
     {
-        $deleted = $project->delete();
-
-        return response()->json([
-            'error' => !$deleted,
-        ]);
+        $project->delete();
     }
 
     /**
