@@ -21,7 +21,7 @@ class ProjectCategory extends Base implements Sortable
 
     protected $presenter = 'TypiCMS\Modules\Projects\Presenters\CategoryPresenter';
 
-    protected $guarded = ['id', 'exit'];
+    protected $guarded = [];
 
     public $translatable = [
         'title',

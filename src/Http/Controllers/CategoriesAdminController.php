@@ -32,14 +32,14 @@ class CategoriesAdminController extends BaseAdminController
 
     public function store(CategoryFormRequest $request): RedirectResponse
     {
-        $category = ProjectCategory::create($request->all());
+        $category = ProjectCategory::create($request->validated());
 
         return $this->redirect($request, $category);
     }
 
     public function update(ProjectCategory $category, CategoryFormRequest $request): RedirectResponse
     {
-        $category->update($request->all());
+        $category->update($request->validated());
         (new Project())->flushCache();
 
         return $this->redirect($request, $category);
