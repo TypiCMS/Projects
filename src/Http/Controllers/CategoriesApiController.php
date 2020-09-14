@@ -8,7 +8,6 @@ use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
-use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class CategoriesApiController extends BaseApiController
@@ -29,26 +28,17 @@ class CategoriesApiController extends BaseApiController
 
     protected function updatePartial(ProjectCategory $category, Request $request)
     {
-        $data = [];
-        foreach ($request->all() as $column => $content) {
-            if (is_array($content)) {
-                foreach ($content as $key => $value) {
-                    $data[$column.'->'.$key] = $value;
+        foreach ($request->only('status', 'position') as $key => $content) {
+            if ($category->isTranslatableAttribute($key)) {
+                foreach ($content as $lang => $value) {
+                    $category->setTranslation($key, $lang, $value);
                 }
             } else {
-                $data[$column] = $content;
+                $category->{$key} = $content;
             }
         }
-
-        foreach ($data as $key => $value) {
-            $category->{$key} = $value;
-        }
-        $saved = $category->save();
         (new Project())->flushCache();
-
-        return response()->json([
-            'error' => !$saved,
-        ]);
+        $category->save();
     }
 
     public function destroy(ProjectCategory $category)
