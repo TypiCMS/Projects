@@ -12,11 +12,19 @@
     <header class="project-header">
         <div class="project-header-container">
             <div class="project-header-navigator">
-                <div class="btn-group-prev-next">
-                    <div class="btn-group">
-                        <a class="btn btn-sm btn-outline-secondary btn-prev @if (!$prev = Projects::prev($model, $model->category_id))disabled @endif" href="@if ($prev){{ route($lang.'::project', [$prev->category->slug, $prev->slug]) }}@endif">{{ __('Previous') }}</a>
-                        <a class="btn btn-sm btn-outline-secondary btn-list" href="{{ route($lang.'::projects-category', $model->category->slug) }}">{{ $model->category->title }}</a>
-                        <a class="btn btn-sm btn-outline-secondary btn-next @if (!$next = Projects::next($model, $model->category_id))disabled @endif" href="@if ($next){{ route($lang.'::project', [$next->category->slug, $next->slug]) }}@endif">{{ __('Next') }}</a>
+                <div class="items-navigator">
+                    <a class="items-navigator-back" href="{{ route($lang.'::projects-category', $model->category->slug) }}">
+                        ← {{ $model->category->title }}
+                    </a>
+                    <div class="items-navigator-previous-next">
+                        <a class="items-navigator-previous @if (!$prev = Projects::prev($model, $model->category_id))disabled @endif"
+                            href="@if ($prev){{ route($lang.'::project', [$prev->category->slug, $prev->slug]) }}@endif">
+                            ← @lang('Previous')
+                        </a>
+                        <a class="items-navigator-next @if (!$next = Projects::next($model, $model->category_id))disabled @endif"
+                            href="@if ($next){{ route($lang.'::project', [$next->category->slug, $next->slug]) }}@endif">
+                            @lang('Next') →
+                        </a>
                     </div>
                 </div>
             </div>
