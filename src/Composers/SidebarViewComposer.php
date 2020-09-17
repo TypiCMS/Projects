@@ -11,7 +11,7 @@ class SidebarViewComposer
 {
     public function compose(View $view)
     {
-        if (Gate::denies('see-all-projects')) {
+        if (Gate::denies('read projects')) {
             return;
         }
         $view->sidebar->group(__('Content'), function (SidebarGroup $group) {
