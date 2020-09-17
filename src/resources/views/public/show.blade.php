@@ -8,16 +8,26 @@
 
 @section('content')
 
-    <div class="btn-group-prev-next">
-        <div class="btn-group">
-            <a class="btn btn-sm btn-outline-secondary btn-prev @if (!$prev = Projects::prev($model, $model->category_id))disabled @endif" href="@if ($prev){{ route($lang.'::project', [$prev->category->slug, $prev->slug]) }}@endif">{{ __('Previous') }}</a>
-            <a class="btn btn-sm btn-outline-secondary btn-list" href="{{ route($lang.'::projects-category', $model->category->slug) }}">{{ $model->category->title }}</a>
-            <a class="btn btn-sm btn-outline-secondary btn-next @if (!$next = Projects::next($model, $model->category_id))disabled @endif" href="@if ($next){{ route($lang.'::project', [$next->category->slug, $next->slug]) }}@endif">{{ __('Next') }}</a>
+<article class="project">
+    <header class="project-header">
+        <div class="project-header-container">
+            <div class="project-header-navigator">
+                <div class="btn-group-prev-next">
+                    <div class="btn-group">
+                        <a class="btn btn-sm btn-outline-secondary btn-prev @if (!$prev = Projects::prev($model, $model->category_id))disabled @endif" href="@if ($prev){{ route($lang.'::project', [$prev->category->slug, $prev->slug]) }}@endif">{{ __('Previous') }}</a>
+                        <a class="btn btn-sm btn-outline-secondary btn-list" href="{{ route($lang.'::projects-category', $model->category->slug) }}">{{ $model->category->title }}</a>
+                        <a class="btn btn-sm btn-outline-secondary btn-next @if (!$next = Projects::next($model, $model->category_id))disabled @endif" href="@if ($next){{ route($lang.'::project', [$next->category->slug, $next->slug]) }}@endif">{{ __('Next') }}</a>
+                    </div>
+                </div>
+            </div>
+            <h1 class="project-title">{{ $model->title }}</h1>
+            <div class="project-date">{{ $model->present()->dateLocalized }}</div>
         </div>
-    </div>
-
-    <article class="project">
-        <h1 class="project-title">{{ $model->title }}</h1>
+    </header>
+    <div class="project-body">
+        @empty(!$model->summary)
+        <p class="project-summary">{!! nl2br($model->summary) !!}</p>
+        @endempty
         @empty(!$model->image)
         <picture class="project-picture">
             <img class="project-picture-image" src="{!! $model->present()->image(2000, 1000) !!}" alt="">
@@ -26,14 +36,12 @@
             @endempty
         </picture>
         @endempty
-        @empty(!$model->summary)
-        <p class="project-summary">{!! nl2br($model->summary) !!}</p>
-        @endempty
         @empty(!$model->body)
-        <div class="project-body">{!! $model->present()->body !!}</div>
+        <div class="rich-content">{!! $model->present()->body !!}</div>
         @endempty
         @include('files::public._documents')
         @include('files::public._images')
-    </article>
+    </div>
+</article>
 
 @endsection
