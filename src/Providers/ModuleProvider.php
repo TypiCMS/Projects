@@ -25,7 +25,11 @@ class ModuleProvider extends ServiceProvider
         $this->app['config']->set('typicms.modules', array_merge(['projects' => ['linkable_to_page']], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../resources/views/', 'projects');
-        $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
+
+        $this->publishes([
+            __DIR__.'/../database/migrations/create_project_categories_table.php.stub' => getMigrationFileName('create_project_categories_table'),
+            __DIR__.'/../database/migrations/create_projects_table.php.stub' => getMigrationFileName('create_projects_table'),
+        ], 'migrations');
 
         $this->publishes([
             __DIR__.'/../resources/views' => resource_path('views/vendor/projects'),
