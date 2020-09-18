@@ -24,13 +24,13 @@ class RouteServiceProvider extends ServiceProvider
              * Front office routes
              */
             if ($page = TypiCMS::getPageLinkedToModule('projects')) {
-                $router->middleware('public')->group(function (Router $router) use ($page) {
-                    $options = $page->private ? ['middleware' => 'auth'] : [];
+                $middleware = $page->private ? ['public', 'auth'] : ['public'];
+                $router->middleware($middleware)->group(function (Router $router) use ($page) {
                     foreach (locales() as $lang) {
                         if ($page->translate('status', $lang) && $uri = $page->uri($lang)) {
-                            $router->get($uri, $options + ['uses' => [PublicController::class, 'index']])->name($lang.'::index-projects');
-                            $router->get($uri.'/{category}', $options + ['uses' => [PublicController::class, 'indexOfCategory']])->name($lang.'::projects-category');
-                            $router->get($uri.'/{category}/{slug}', $options + ['uses' => [PublicController::class, 'show']])->name($lang.'::project');
+                            $router->get($uri, [PublicController::class, 'index'])->name($lang.'::index-projects');
+                            $router->get($uri.'/{category}', [PublicController::class, 'indexOfCategory'])->name($lang.'::projects-category');
+                            $router->get($uri.'/{category}/{slug}', [PublicController::class, 'show'])->name($lang.'::project');
                         }
                     }
                 });
