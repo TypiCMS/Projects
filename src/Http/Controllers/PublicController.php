@@ -15,7 +15,7 @@ class PublicController extends BasePublicController
         $categories = ProjectCategory::published()
             ->order()
             ->with('image')
-            ->all();
+            ->get();
 
         return view('projects::public.index')
             ->with(compact('categories'));
