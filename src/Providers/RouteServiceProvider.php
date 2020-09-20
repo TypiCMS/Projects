@@ -42,14 +42,14 @@ class RouteServiceProvider extends ServiceProvider
             $router->middleware('admin')->prefix('admin')->group(function (Router $router) {
                 $router->get('projects', [AdminController::class, 'index'])->name('admin::index-projects')->middleware('can:read projects');
                 $router->get('projects/create', [AdminController::class, 'create'])->name('admin::create-project')->middleware('can:create projects');
-                $router->get('projects/{project}/edit', [AdminController::class, 'edit'])->name('admin::edit-project')->middleware('can:update projects');
+                $router->get('projects/{project}/edit', [AdminController::class, 'edit'])->name('admin::edit-project')->middleware('can:read projects');
                 $router->get('projects/{project}/files', [AdminController::class, 'files'])->name('admin::edit-project-files')->middleware('can:update projects');
                 $router->post('projects', [AdminController::class, 'store'])->name('admin::store-project')->middleware('can:create projects');
                 $router->put('projects/{project}', [AdminController::class, 'update'])->name('admin::update-project')->middleware('can:update projects');
 
                 $router->get('projects/categories', [CategoriesAdminController::class, 'index'])->name('admin::index-project_categories')->middleware('can:read project_categories');
                 $router->get('projects/categories/create', [CategoriesAdminController::class, 'create'])->name('admin::create-project_category')->middleware('can:create project_categories');
-                $router->get('projects/categories/{category}/edit', [CategoriesAdminController::class, 'edit'])->name('admin::edit-project_category')->middleware('can:update project_categories');
+                $router->get('projects/categories/{category}/edit', [CategoriesAdminController::class, 'edit'])->name('admin::edit-project_category')->middleware('can:read project_categories');
                 $router->post('projects/categories', [CategoriesAdminController::class, 'store'])->name('admin::store-project_category')->middleware('can:create project_categories');
                 $router->put('projects/categories/{category}', [CategoriesAdminController::class, 'update'])->name('admin::update-project_category')->middleware('can:update project_categories');
             });
