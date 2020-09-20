@@ -18,7 +18,7 @@
     {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
 </div>
 
-{!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->required() !!}
+{!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->addClass('custom-select')->required() !!}
 
 {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(',', $model->tags->pluck('tag')->all())) !!}
 <div class="row">
