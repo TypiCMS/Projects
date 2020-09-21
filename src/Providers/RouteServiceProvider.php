@@ -40,6 +40,7 @@ class RouteServiceProvider extends ServiceProvider
          */
         Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
             $router->get('projects', [AdminController::class, 'index'])->name('index-projects')->middleware('can:read projects');
+            $router->get('projects/export', [AdminController::class, 'export'])->name('admin::export-projects')->middleware('can:read projects');
             $router->get('projects/create', [AdminController::class, 'create'])->name('create-project')->middleware('can:create projects');
             $router->get('projects/{project}/edit', [AdminController::class, 'edit'])->name('edit-project')->middleware('can:read projects');
             $router->get('projects/{project}/files', [AdminController::class, 'files'])->name('edit-project-files')->middleware('can:update projects');
