@@ -19,7 +19,7 @@ class SidebarViewComposer
             $group->weight = 30;
             $group->addItem(__('Projects'), function (SidebarItem $item) {
                 $item->id = 'projects';
-                $item->icon = config('typicms.projects.sidebar.icon', 'icon fa fa-fw fa-cube');
+                $item->icon = config('typicms.projects.sidebar.icon');
                 $item->weight = config('typicms.projects.sidebar.weight');
                 $item->route('admin::index-projects');
                 $item->append('admin::create-project');
