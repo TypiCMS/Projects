@@ -17,10 +17,12 @@
     :sorting="['-date']">
 
     <template slot="add-button">
-        <a class="btn btn-primary btn-sm header-btn-add mr-2" href="{{ route('admin::create-project') }}" v-if="$can('create projects')">
-            <span class="fa fa-plus text-white-50"></span> @lang('Add')
+        <span v-if="$can('create projects')">
+            @include('core::admin._button-create', ['url' => route('admin::create-project')])
+        </span>
+        <a href="{{ route('admin::index-project_categories') }}" class="btn btn-sm btn-secondary" v-if="$can('read project_categories')">
+            @lang('Categories')
         </a>
-        <a href="{{ route('admin::index-project_categories') }}" class="btn btn-sm btn-secondary" v-if="$can('read project_categories')">@lang('Categories')</a>
     </template>
 
     <template slot="columns" slot-scope="{ sortArray }">
