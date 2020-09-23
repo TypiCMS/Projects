@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Projects\Models;
 
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
@@ -68,7 +69,7 @@ class ProjectCategory extends Base implements Sortable
         return route('dashboard');
     }
 
-    public function projects(): BelongsTo
+    public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'category_id')->order();
     }
