@@ -44,6 +44,9 @@ class CategoriesApiController extends BaseApiController
 
     public function destroy(ProjectCategory $category)
     {
+        if ($category->projects->count() > 0) {
+            return response(['message' => 'This category cannot be deleted as it contains projects.'], 403);
+        }
         $category->delete();
     }
 }
