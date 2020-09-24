@@ -2,28 +2,36 @@
 
 @section('bodyClass', 'body-projects body-projects-categories body-page body-page-'.$page->id)
 
-@section('content')
+@section('page')
 
-    <div class="rich-content">{!! $page->present()->body !!}</div>
+<div class="page-body">
 
-    @include('files::public._documents', ['model' => $page])
-    @include('files::public._images', ['model' => $page])
+    <div class="page-body-container">
 
-    @if ($categories->count() > 0)
+        <div class="rich-content">{!! $page->present()->body !!}</div>
 
-        <ul class="category-list-list">
-            @foreach ($categories as $category)
-            <li class="category-list-item">
-                <a class="category-list-item-link" href="{{ route($lang.'::projects-category', [$category->slug]) }}">
-                    <div class="category-list-item-title">{{ $category->title }}</div>
-                    <div class="category-list-item-image-wrapper">
-                        <img class="category-list-item-image" src="{!! $category->present()->image(270, 270) !!}" alt="">
-                    </div>
-                </a>
-            </li>
-            @endforeach
-        </ul>
+        @include('files::public._documents', ['model' => $page])
+        @include('files::public._images', ['model' => $page])
 
-    @endif
+        @if ($categories->count() > 0)
+
+            <ul class="category-list-list">
+                @foreach ($categories as $category)
+                <li class="category-list-item">
+                    <a class="category-list-item-link" href="{{ route($lang.'::projects-category', [$category->slug]) }}">
+                        <div class="category-list-item-title">{{ $category->title }}</div>
+                        <div class="category-list-item-image-wrapper">
+                            <img class="category-list-item-image" src="{!! $category->present()->image(270, 270) !!}" alt="">
+                        </div>
+                    </a>
+                </li>
+                @endforeach
+            </ul>
+
+        @endif
+
+    </div>
+
+</div>
 
 @endsection
