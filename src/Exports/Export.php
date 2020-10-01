@@ -14,13 +14,14 @@ use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Projects\Models\Project;
 
-class ProjectsExport implements WithColumnFormatting, ShouldAutoSize, FromCollection, WithHeadings, WithMapping
+class Export implements WithColumnFormatting, ShouldAutoSize, FromCollection, WithHeadings, WithMapping
 {
     protected $collection;
 
     public function __construct($request)
     {
         $this->collection = QueryBuilder::for(Project::class)
+            ->selectFields('created_at,updated_at,status,date,website,title,summary,body')
             ->allowedSorts(['status_translated', 'date', 'title_translated'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
@@ -33,12 +34,12 @@ class ProjectsExport implements WithColumnFormatting, ShouldAutoSize, FromCollec
         return [
             Date::dateTimeToExcel($model->created_at),
             Date::dateTimeToExcel($model->updated_at),
-            $model->status,
+            $model->status_translated,
             Date::dateTimeToExcel($model->date),
             $model->website,
-            $model->title,
-            $model->summary,
-            $model->body,
+            $model->title_translated,
+            $model->summary_translated,
+            $model->body_translated,
         ];
     }
 
