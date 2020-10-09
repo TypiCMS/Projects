@@ -9,6 +9,7 @@ use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Projects\Models\Project;
+use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class ApiController extends BaseApiController
 {
@@ -16,7 +17,8 @@ class ApiController extends BaseApiController
     {
         $data = QueryBuilder::for(Project::class)
             ->selectFields($request->input('fields.projects'))
-            ->allowedSorts(['status_translated', 'date', 'title_translated'])
+            ->selectSub(ProjectCategory::select(column('title'))->whereColumn('category_id', 'project_categories.id'), 'category_name')
+            ->allowedSorts(['status_translated', 'date', 'title_translated', 'category_name'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
             ])

@@ -7,7 +7,7 @@
 <item-list
     url-base="/api/projects"
     locale="{{ config('typicms.content_locale') }}"
-    fields="id,image_id,date,status,title"
+    fields="id,image_id,category_id,date,status,title"
     table="projects"
     title="projects"
     include="image"
@@ -31,6 +31,7 @@
         <item-list-column-header name="status_translated" sortable :sort-array="sortArray" :label="$t('Status')"></item-list-column-header>
         <item-list-column-header name="image" :label="$t('Image')"></item-list-column-header>
         <item-list-column-header name="date" sortable :sort-array="sortArray" :label="$t('Date')"></item-list-column-header>
+        <item-list-column-header name="category_name" sortable :sort-array="sortArray" :label="$t('Category')"></item-list-column-header>
         <item-list-column-header name="title_translated" sortable :sort-array="sortArray" :label="$t('Title')"></item-list-column-header>
     </template>
 
@@ -40,6 +41,7 @@
         <td><item-list-status-button :model="model"></item-list-status-button></td>
         <td><img :src="model.thumb" alt="" height="27"></td>
         <td>@{{ model.date | date }}</td>
+        <td>@{{ model.category_name }}</td>
         <td>@{{ model.title_translated }}</td>
     </template>
 

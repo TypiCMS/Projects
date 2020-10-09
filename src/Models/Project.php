@@ -26,8 +26,6 @@ class Project extends Base
 
     protected $guarded = [];
 
-    protected $appends = ['category_name'];
-
     public $translatable = [
         'title',
         'slug',
@@ -50,11 +48,6 @@ class Project extends Base
     public function getThumbAttribute(): string
     {
         return $this->present()->image(null, 54);
-    }
-
-    public function getCategoryNameAttribute(): ?string
-    {
-        return $this->category->title ?? null;
     }
 
     public function category(): BelongsTo
