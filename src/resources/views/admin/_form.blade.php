@@ -13,7 +13,7 @@
 <files-field :init-files="{{ $model->files }}"></files-field>
 
 @include('core::form._title-and-slug')
-<div class="form-group">
+<div class="mb-3">
     {!! TranslatableBootForm::hidden('status')->value(0) !!}
     {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
 </div>
@@ -21,7 +21,7 @@
 {!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->addClass('custom-select')->required() !!}
 
 {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(',', $model->tags->pluck('tag')->all())) !!}
-<div class="form-row">
+<div class="row gx-3">
     <div class="col-sm-6">
         {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
     </div>
