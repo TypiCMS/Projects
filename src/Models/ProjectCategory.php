@@ -56,7 +56,7 @@ class ProjectCategory extends Base implements Sortable
             return route($route, $this->id);
         }
 
-        return route('dashboard');
+        return route('admin::dashboard');
     }
 
     public function indexUrl(): string
@@ -66,7 +66,7 @@ class ProjectCategory extends Base implements Sortable
             return route($route);
         }
 
-        return route('dashboard');
+        return route('admin::dashboard');
     }
 
     public function projects(): HasMany
