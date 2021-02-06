@@ -42,7 +42,7 @@
         <td><img :src="model.thumb" alt="" height="27"></td>
         <td>@{{ model.date | date }}</td>
         <td>@{{ model.category_name }}</td>
-        <td>@{{ model.title_translated }}</td>
+        <td v-html="model.title_translated"></td>
     </template>
 
 </item-list>
