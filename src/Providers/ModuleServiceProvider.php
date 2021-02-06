@@ -11,7 +11,6 @@ use TypiCMS\Modules\Projects\Facades\ProjectCategories;
 use TypiCMS\Modules\Projects\Facades\Projects;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
-use TypiCMS\Modules\Tags\Observers\TagObserver;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -44,7 +43,6 @@ class ModuleServiceProvider extends ServiceProvider
 
         // Observers
         Project::observe(new SlugObserver());
-        Project::observe(new TagObserver());
         ProjectCategory::observe(new SlugObserver());
 
         /*

@@ -12,10 +12,12 @@ use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\Files\Traits\HasFiles;
 use TypiCMS\Modules\History\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
+use TypiCMS\Modules\Tags\Traits\HasTags;
 
 class Project extends Base
 {
     use HasFiles;
+    use HasTags;
     use HasTranslations;
     use Historable;
     use PresentableTrait;
