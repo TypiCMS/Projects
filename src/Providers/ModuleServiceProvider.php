@@ -23,19 +23,19 @@ class ModuleServiceProvider extends ServiceProvider
         $modules = $this->app['config']['typicms']['modules'];
         $this->app['config']->set('typicms.modules', array_merge(['projects' => ['linkable_to_page']], $modules));
 
-        $this->loadViewsFrom(__DIR__.'/../resources/views/', 'projects');
+        $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'projects');
 
         $this->publishes([
-            __DIR__.'/../database/migrations/create_project_categories_table.php.stub' => getMigrationFileName('create_project_categories_table'),
-            __DIR__.'/../database/migrations/create_projects_table.php.stub' => getMigrationFileName('create_projects_table'),
+            __DIR__.'/../../database/migrations/create_project_categories_table.php.stub' => getMigrationFileName('create_project_categories_table'),
+            __DIR__.'/../../database/migrations/create_projects_table.php.stub' => getMigrationFileName('create_projects_table'),
         ], 'migrations');
 
         $this->publishes([
-            __DIR__.'/../resources/views' => resource_path('views/vendor/projects'),
+            __DIR__.'/../../resources/views' => resource_path('views/vendor/projects'),
         ], 'views');
 
         $this->publishes([
-            __DIR__.'/../resources/scss' => resource_path('scss'),
+            __DIR__.'/../../resources/scss' => resource_path('scss'),
         ], 'resources');
 
         AliasLoader::getInstance()->alias('Projects', Projects::class);
