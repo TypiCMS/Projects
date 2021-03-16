@@ -21,6 +21,11 @@
 {!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->required() !!}
 
 {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(',', $model->tags->pluck('tag')->all())) !!}
+
+<div class="row gx-3 mb-4">
+    @include('taxonomies::admin._checkboxes', ['module' => 'projects'])
+</div>
+
 <div class="row gx-3">
     <div class="col-sm-6">
         {!! BootForm::date(__('Date'), 'date')->value(old('date') ? : $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
