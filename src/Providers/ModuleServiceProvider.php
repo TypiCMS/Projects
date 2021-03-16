@@ -21,7 +21,7 @@ class ModuleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__.'/../config/config-project_categories.php', 'typicms.project_categories');
 
         $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['projects' => ['linkable_to_page']], $modules));
+        $this->app['config']->set('typicms.modules', array_merge(['projects' => ['linkable_to_page', 'has_taxonomies']], $modules));
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'projects');
 
