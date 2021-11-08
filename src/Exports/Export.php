@@ -16,11 +16,9 @@ use TypiCMS\Modules\Projects\Models\Project;
 
 class Export implements WithColumnFormatting, ShouldAutoSize, FromCollection, WithHeadings, WithMapping
 {
-    protected $collection;
-
-    public function __construct($request)
+    public function collection()
     {
-        $this->collection = QueryBuilder::for(Project::class)
+        return QueryBuilder::for(Project::class)
             ->allowedSorts(['status_translated', 'date', 'title_translated'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
@@ -63,10 +61,5 @@ class Export implements WithColumnFormatting, ShouldAutoSize, FromCollection, Wi
             'B' => NumberFormat::FORMAT_DATE_DATETIME,
             'D' => NumberFormat::FORMAT_DATE_DMYSLASH,
         ];
-    }
-
-    public function collection()
-    {
-        return $this->collection;
     }
 }
