@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Projects\Providers;
 
 use Illuminate\Foundation\AliasLoader;
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
@@ -14,14 +15,13 @@ use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function boot()
+    public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.projects');
         $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
         $this->mergeConfigFrom(__DIR__.'/../config/config-project_categories.php', 'typicms.project_categories');
 
-        $modules = $this->app['config']['typicms']['modules'];
-        $this->app['config']->set('typicms.modules', array_merge(['projects' => ['linkable_to_page', 'has_taxonomies']], $modules));
+        config(['typicms.modules.projects' => ['linkable_to_page', 'has_taxonomies']]);
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'projects');
 
@@ -45,29 +45,21 @@ class ModuleServiceProvider extends ServiceProvider
         Project::observe(new SlugObserver());
         ProjectCategory::observe(new SlugObserver());
 
-        /*
-         * Sidebar view composer
-         */
-        $this->app->view->composer('core::admin._sidebar', SidebarViewComposer::class);
+        View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
         /*
          * Add the page in the view.
          */
-        $this->app->view->composer('projects::public.*', function ($view) {
+        View::composer('projects::public.*', function ($view) {
             $view->page = TypiCMS::getPageLinkedToModule('projects');
         });
     }
 
-    public function register()
+    public function register(): void
     {
-        $app = $this->app;
+        $this->app->register(RouteServiceProvider::class);
 
-        /*
-         * Register route service provider
-         */
-        $app->register(RouteServiceProvider::class);
-
-        $app->bind('Projects', Project::class);
-        $app->bind('ProjectCategories', ProjectCategory::class);
+        $this->app->bind('Projects', Project::class);
+        $this->app->bind('ProjectCategories', ProjectCategory::class);
     }
 }
