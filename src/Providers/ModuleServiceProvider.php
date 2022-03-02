@@ -18,8 +18,9 @@ class ModuleServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.projects');
-        $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
         $this->mergeConfigFrom(__DIR__.'/../config/config-project_categories.php', 'typicms.project_categories');
+
+        $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
 
         config(['typicms.modules.projects' => ['linkable_to_page', 'has_taxonomies']]);
 
