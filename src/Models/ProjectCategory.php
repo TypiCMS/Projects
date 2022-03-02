@@ -12,6 +12,7 @@ use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Files\Models\File;
 use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Projects\Presenters\CategoryPresenter;
 
 class ProjectCategory extends Base implements Sortable
 {
@@ -20,7 +21,7 @@ class ProjectCategory extends Base implements Sortable
     use PresentableTrait;
     use SortableTrait;
 
-    protected $presenter = 'TypiCMS\Modules\Projects\Presenters\CategoryPresenter';
+    protected $presenter = CategoryPresenter::class;
 
     protected $guarded = [];
 
