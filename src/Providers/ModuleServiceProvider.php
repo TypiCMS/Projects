@@ -17,27 +17,17 @@ class ModuleServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.projects');
-        $this->mergeConfigFrom(__DIR__.'/../config/config-project_categories.php', 'typicms.project_categories');
-
-        $this->mergeConfigFrom(__DIR__.'/../config/permissions.php', 'typicms.permissions');
-
-        config(['typicms.modules.projects' => ['linkable_to_page', 'has_taxonomies']]);
+        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.modules.projects');
+        $this->mergeConfigFrom(__DIR__.'/../config/config-project_categories.php', 'typicms.modules.project_categories');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'projects');
 
         $this->publishes([
             __DIR__.'/../../database/migrations/create_project_categories_table.php.stub' => getMigrationFileName('create_project_categories_table'),
             __DIR__.'/../../database/migrations/create_projects_table.php.stub' => getMigrationFileName('create_projects_table'),
-        ], 'migrations');
-
-        $this->publishes([
-            __DIR__.'/../../resources/views' => resource_path('views/vendor/projects'),
-        ], 'views');
-
-        $this->publishes([
-            __DIR__.'/../../resources/scss' => resource_path('scss'),
-        ], 'resources');
+        ], 'typicms-migrations');
+        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/vendor/projects')], 'typicms-views');
+        $this->publishes([__DIR__.'/../../resources/scss' => resource_path('scss')], 'typicms-resources');
 
         AliasLoader::getInstance()->alias('Projects', Projects::class);
         AliasLoader::getInstance()->alias('ProjectCategories', ProjectCategories::class);

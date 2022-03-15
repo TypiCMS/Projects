@@ -8,12 +8,12 @@ use Illuminate\Support\Str;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Files\Models\File;
-use TypiCMS\Modules\Files\Traits\HasFiles;
-use TypiCMS\Modules\History\Traits\Historable;
+use TypiCMS\Modules\Core\Traits\HasTerms;
+use TypiCMS\Modules\Core\Traits\Historable;
+use TypiCMS\Modules\Core\Models\File;
+use TypiCMS\Modules\Core\Traits\HasFiles;
 use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
-use TypiCMS\Modules\Tags\Traits\HasTags;
-use TypiCMS\Modules\Taxonomies\Traits\HasTerms;
+use TypiCMS\Modules\Core\Traits\HasTags;
 
 class Project extends Base
 {
