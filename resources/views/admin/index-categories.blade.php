@@ -16,7 +16,7 @@
     :sorting="['position']">
 
     <template slot="back-button">
-        @include('core::admin._button-back', ['module' => 'projects'])
+        @include('core::admin._button-back', ['url' => route('admin::index-projects'), 'title' => __('Projects')])
     </template>
 
     <template slot="add-button" v-if="$can('create project_categories')">
