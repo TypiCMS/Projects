@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Route;
@@ -10,8 +11,8 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Core\Models\File;
+use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\CategoryPresenter;
 
 class ProjectCategory extends Base implements Sortable
@@ -24,6 +25,8 @@ class ProjectCategory extends Base implements Sortable
     protected $presenter = CategoryPresenter::class;
 
     protected $guarded = [];
+
+    protected $appends = ['thumb'];
 
     public $translatable = [
         'title',
@@ -45,9 +48,11 @@ class ProjectCategory extends Base implements Sortable
         return ['' => ''] + $categories;
     }
 
-    public function getThumbAttribute(): string
+    protected function thumb(): Attribute
     {
-        return $this->present()->image(null, 54);
+        return new Attribute(
+            get: fn () => $this->present()->image(null, 54),
+        );
     }
 
     public function editUrl(): string

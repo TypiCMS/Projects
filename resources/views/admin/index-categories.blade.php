@@ -11,7 +11,6 @@
     table="project_categories"
     title="categories"
     include="image"
-    appends="thumb"
     :searchable="['title']"
     :sorting="['position']">
 

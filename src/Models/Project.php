@@ -2,18 +2,19 @@
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Str;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
-use TypiCMS\Modules\Core\Traits\HasTerms;
-use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Traits\HasFiles;
-use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
 use TypiCMS\Modules\Core\Traits\HasTags;
+use TypiCMS\Modules\Core\Traits\HasTerms;
+use TypiCMS\Modules\Core\Traits\Historable;
+use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
 
 class Project extends Base
 {
@@ -29,6 +30,8 @@ class Project extends Base
     protected $dates = ['date'];
 
     protected $guarded = [];
+
+    protected $appends = ['thumb'];
 
     public $translatable = [
         'title',
@@ -49,9 +52,11 @@ class Project extends Base
         return url('/');
     }
 
-    public function getThumbAttribute(): string
+    protected function thumb(): Attribute
     {
-        return $this->present()->image(null, 54);
+        return new Attribute(
+            get: fn () => $this->present()->image(null, 54),
+        );
     }
 
     public function category(): BelongsTo

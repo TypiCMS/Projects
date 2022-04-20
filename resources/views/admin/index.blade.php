@@ -11,7 +11,6 @@
     table="projects"
     title="projects"
     include="image"
-    appends="thumb"
     :exportable="true"
     :searchable="['title']"
     :sorting="['-date']">
