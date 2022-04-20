@@ -46,14 +46,16 @@ class AdminController extends BaseAdminController
     {
         $project = Project::create($request->validated());
 
-        return $this->redirect($request, $project);
+        return $this->redirect($request, $project)
+            ->withMessage(__('Item successfully created.'));
     }
 
     public function update(Project $project, FormRequest $request): RedirectResponse
     {
         $project->update($request->validated());
 
-        return $this->redirect($request, $project);
+        return $this->redirect($request, $project)
+            ->withMessage(__('Item successfully updated.'));
     }
 
     public function files(Project $project): JsonResponse

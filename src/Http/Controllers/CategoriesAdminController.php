@@ -34,7 +34,8 @@ class CategoriesAdminController extends BaseAdminController
     {
         $category = ProjectCategory::create($request->validated());
 
-        return $this->redirect($request, $category);
+        return $this->redirect($request, $category)
+            ->withMessage(__('Item successfully created.'));
     }
 
     public function update(ProjectCategory $category, CategoryFormRequest $request): RedirectResponse
@@ -42,6 +43,7 @@ class CategoriesAdminController extends BaseAdminController
         $category->update($request->validated());
         (new Project())->flushCache();
 
-        return $this->redirect($request, $category);
+        return $this->redirect($request, $category)
+            ->withMessage(__('Item successfully updated.'));
     }
 }
