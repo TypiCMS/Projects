@@ -12,9 +12,8 @@ class CreateProjectCategoriesTable extends Migration
     public function up()
     {
         Schema::create('project_categories', function (Blueprint $table) {
-            $table->engine = 'InnoDB';
-            $table->increments('id');
-            $table->integer('image_id')->unsigned()->nullable();
+            $table->id();
+            $table->foreignId('image_id')->nullable();
             $table->integer('position')->unsigned()->default(0);
             $table->json('status');
             $table->json('title');
