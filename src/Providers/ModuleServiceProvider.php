@@ -25,7 +25,7 @@ class ModuleServiceProvider extends ServiceProvider
             __DIR__.'/../../database/migrations/create_project_categories_table.php.stub' => getMigrationFileName('create_project_categories_table'),
             __DIR__.'/../../database/migrations/create_projects_table.php.stub' => getMigrationFileName('create_projects_table'),
         ], 'typicms-migrations');
-        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/vendor/projects')], 'typicms-views');
+        $this->publishes([__DIR__.'/../../resources/views' => resource_path('views/projects')], 'typicms-views');
         $this->publishes([__DIR__.'/../../resources/scss' => resource_path('scss')], 'typicms-resources');
 
         AliasLoader::getInstance()->alias('Projects', Projects::class);
