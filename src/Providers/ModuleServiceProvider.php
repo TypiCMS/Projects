@@ -17,7 +17,8 @@ class ModuleServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'typicms.modules');
+        $this->mergeConfigFrom(__DIR__.'/../config/projects.php', 'typicms.modules.projects');
+        $this->mergeConfigFrom(__DIR__.'/../config/project_categories.php', 'typicms.modules.project_categories');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'projects');
 
