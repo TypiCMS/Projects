@@ -17,7 +17,7 @@ class CreateProjectsTable extends Migration
             $table->foreignId('category_id')->constrained('project_categories')->onDelete('cascade');
             $table->date('date');
             $table->string('website')->nullable();
-            $table->foreignId('image_id')->nullable();
+            $table->foreignId('image_id')->nullable()->constrained('files')->nullOnDelete();
             $table->json('status')->default(new Expression('(JSON_OBJECT())'));
             $table->json('title')->default(new Expression('(JSON_OBJECT())'));
             $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
