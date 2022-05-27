@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -15,9 +16,9 @@ class CreateProjectCategoriesTable extends Migration
             $table->id();
             $table->foreignId('image_id')->nullable();
             $table->integer('position')->unsigned()->default(0);
-            $table->json('status');
-            $table->json('title');
-            $table->json('slug');
+            $table->json('status')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('title')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
             $table->timestamps();
         });
     }

@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
@@ -13,17 +14,16 @@ class CreateProjectsTable extends Migration
     {
         Schema::create('projects', function (Blueprint $table) {
             $table->id();
-            $table->integer('category_id')->unsigned()->nullable();
+            $table->foreignId('category_id')->constrained('project_categories')->onDelete('cascade');
             $table->date('date');
             $table->string('website')->nullable();
             $table->foreignId('image_id')->nullable();
-            $table->json('status');
-            $table->json('title');
-            $table->json('slug');
-            $table->json('summary');
-            $table->json('body');
+            $table->json('status')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('title')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('slug')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('summary')->default(new Expression('(JSON_OBJECT())'));
+            $table->json('body')->default(new Expression('(JSON_OBJECT())'));
             $table->timestamps();
-            $table->foreign('category_id')->references('id')->on('project_categories')->onDelete('cascade');
         });
     }
 
