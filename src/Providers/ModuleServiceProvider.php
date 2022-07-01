@@ -6,6 +6,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
+use TypiCMS\Modules\Core\Models\Tag;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Projects\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Projects\Facades\ProjectCategories;
@@ -37,6 +38,11 @@ class ModuleServiceProvider extends ServiceProvider
         ProjectCategory::observe(new SlugObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
+
+        // A project have tags.
+        Tag::resolveRelationUsing('projects', function ($tag) {
+            return $tag->morphedByMany(Project::class, 'taggable');
+        });
 
         /*
          * Add the page in the view.
