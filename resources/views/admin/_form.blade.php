@@ -28,7 +28,7 @@
 
     {!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->required() !!}
 
-    {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : implode(',', $model->tags->pluck('tag')->all())) !!}
+    {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ? : $model->tags->pluck('tag')->implode(',')) !!}
 
     <div class="row gx-3 mb-4">
         @include('taxonomies::admin._checkboxes', ['module' => 'projects'])
