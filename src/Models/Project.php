@@ -27,7 +27,9 @@ class Project extends Base
 
     protected $presenter = ModulePresenter::class;
 
-    protected $dates = ['date'];
+    protected $casts = [
+        'date' => 'datetime:Y-m-d',
+    ];
 
     protected $guarded = [];
 
