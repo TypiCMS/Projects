@@ -46,7 +46,7 @@ class Project extends Base
     public function uri($locale = null): string
     {
         $locale = $locale ?: config('app.locale');
-        $route = $locale.'::'.Str::singular($this->getTable());
+        $route = $locale . '::' . Str::singular($this->getTable());
         if (Route::has($route)) {
             return route($route, [$this->category->translate('slug', $locale), $this->translate('slug', $locale)]);
         }
