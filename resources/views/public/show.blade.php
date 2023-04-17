@@ -8,48 +8,48 @@
 
 @section('content')
 
-<article class="project">
-    <header class="project-header">
-        <div class="project-header-container">
-            <div class="project-header-navigator">
-                <div class="items-navigator">
-                    <a class="items-navigator-back" href="{{ route($lang.'::projects-category', $model->category->slug) }}">
-                        ← {{ $model->category->title }}
-                    </a>
-                    <div class="items-navigator-previous-next">
-                        <a class="items-navigator-previous @if (!$prev = Projects::prev($model, $model->category_id))disabled @endif"
-                            href="@if ($prev){{ route($lang.'::project', [$prev->category->slug, $prev->slug]) }}@endif">
-                            ← @lang('Previous')
+    <article class="project">
+        <header class="project-header">
+            <div class="project-header-container">
+                <div class="project-header-navigator">
+                    <div class="items-navigator">
+                        <a class="items-navigator-back" href="{{ route($lang.'::projects-category', $model->category->slug) }}">
+                            ← {{ $model->category->title }}
                         </a>
-                        <a class="items-navigator-next @if (!$next = Projects::next($model, $model->category_id))disabled @endif"
-                            href="@if ($next){{ route($lang.'::project', [$next->category->slug, $next->slug]) }}@endif">
-                            @lang('Next') →
-                        </a>
+                        <div class="items-navigator-previous-next">
+                            <a class="items-navigator-previous @if (!$prev = Projects::prev($model, $model->category_id))disabled @endif"
+                               href="@if ($prev){{ route($lang.'::project', [$prev->category->slug, $prev->slug]) }}@endif">
+                                ← @lang('Previous')
+                            </a>
+                            <a class="items-navigator-next @if (!$next = Projects::next($model, $model->category_id))disabled @endif"
+                               href="@if ($next){{ route($lang.'::project', [$next->category->slug, $next->slug]) }}@endif">
+                                @lang('Next') →
+                            </a>
+                        </div>
                     </div>
                 </div>
+                <h1 class="project-title">{{ $model->title }}</h1>
+                <div class="project-date">{{ $model->present()->dateLocalized }}</div>
             </div>
-            <h1 class="project-title">{{ $model->title }}</h1>
-            <div class="project-date">{{ $model->present()->dateLocalized }}</div>
-        </div>
-    </header>
-    <div class="project-body">
-        @empty(!$model->summary)
-        <p class="project-summary">{!! nl2br($model->summary) !!}</p>
-        @endempty
-        @empty(!$model->image)
-        <picture class="project-picture">
-            <img class="project-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
-            @empty(!$model->image->description)
-            <legend class="project-picture-legend">{{ $model->image->description }}</legend>
+        </header>
+        <div class="project-body">
+            @empty(!$model->summary)
+                <p class="project-summary">{!! nl2br($model->summary) !!}</p>
             @endempty
-        </picture>
-        @endempty
-        @empty(!$model->body)
-        <div class="rich-content">{!! $model->present()->body !!}</div>
-        @endempty
-        @include('files::public._document-list')
-        @include('files::public._image-list')
-    </div>
-</article>
+            @empty(!$model->image)
+                <picture class="project-picture">
+                    <img class="project-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="">
+                    @empty(!$model->image->description)
+                        <legend class="project-picture-legend">{{ $model->image->description }}</legend>
+                    @endempty
+                </picture>
+            @endempty
+            @empty(!$model->body)
+                <div class="rich-content">{!! $model->present()->body !!}</div>
+            @endempty
+            @include('files::public._document-list')
+            @include('files::public._image-list')
+        </div>
+    </article>
 
 @endsection
