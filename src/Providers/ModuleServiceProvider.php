@@ -21,6 +21,8 @@ class ModuleServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(__DIR__ . '/../config/projects.php', 'typicms.modules.projects');
         $this->mergeConfigFrom(__DIR__ . '/../config/project_categories.php', 'typicms.modules.project_categories');
 
+        $this->loadRoutesFrom(__DIR__ . '/../routes/projects.php');
+
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'projects');
 
         $this->publishes([
@@ -54,8 +56,6 @@ class ModuleServiceProvider extends ServiceProvider
 
     public function register(): void
     {
-        $this->app->register(RouteServiceProvider::class);
-
         $this->app->bind('Projects', Project::class);
         $this->app->bind('ProjectCategories', ProjectCategory::class);
     }
