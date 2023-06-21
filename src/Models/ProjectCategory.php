@@ -50,7 +50,7 @@ class ProjectCategory extends Base implements Sortable
 
     protected function thumb(): Attribute
     {
-        return Attribute::make(
+        return new Attribute(
             get: fn () => $this->present()->image(null, 54),
         );
     }
