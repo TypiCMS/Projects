@@ -12,12 +12,7 @@
             <div class="project-header-container">
                 <div class="project-header-navigator">
                     <div class="items-navigator">
-                        <a
-                            class="items-navigator-back"
-                            href="{{ route($lang . '::projects-category', $model->category->slug) }}"
-                        >
-                            ← {{ $model->category->title }}
-                        </a>
+                        <a class="items-navigator-back" href="{{ route($lang . '::projects-category', $model->category->slug) }}">← {{ $model->category->title }}</a>
                         <div class="items-navigator-previous-next">
                             <a
                                 class="items-navigator-previous @if (!$prev = Projects::prev($model, $model->category_id))disabled @endif"
@@ -47,13 +42,7 @@
 
             @empty(! $model->image)
                 <figure class="project-picture">
-                    <img
-                        class="project-picture-image"
-                        src="{{ $model->present()->image(2000, 1000) }}"
-                        width="{{ $model->image->width }}"
-                        height="{{ $model->image->height }}"
-                        alt=""
-                    />
+                    <img class="project-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @empty(! $model->image->description)
                         <figcaption class="project-picture-legend">{{ $model->image->description }}</figcaption>
                     @endempty
