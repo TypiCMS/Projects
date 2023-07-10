@@ -3,15 +3,7 @@
 @section('title', __('Project categories'))
 
 @section('content')
-    <item-list
-        url-base="/api/projects/categories"
-        fields="id,image_id,position,status,title"
-        table="project_categories"
-        title="categories"
-        include="image"
-        :searchable="['title']"
-        :sorting="['position']"
-    >
+    <item-list url-base="/api/projects/categories" fields="id,image_id,position,status,title" table="project_categories" title="categories" include="image" :searchable="['title']" :sorting="['position']">
         <template slot="back-button">
             @include('core::admin._button-back', ['url' => route('admin::index-projects'), 'title' => __('Projects')])
         </template>
@@ -34,7 +26,7 @@
                 <item-list-checkbox :model="model" :checked-models-prop="checkedModels" :loading="loading"></item-list-checkbox>
             </td>
             <td v-if="$can('update project_categories')">
-                <item-list-edit-button :url="'/admin/projects/categories/'+model.id+'/edit'"></item-list-edit-button>
+                <item-list-edit-button :url="'/admin/projects/categories/' + model.id + '/edit'"></item-list-edit-button>
             </td>
             <td>
                 <item-list-status-button :model="model"></item-list-status-button>
