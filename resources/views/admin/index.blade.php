@@ -3,8 +3,7 @@
 @section('title', __('Projects'))
 
 @section('content')
-    <item-list url-base="/api/projects" fields="id,image_id,category_id,date,status,title" table="projects" title="projects" include="image" :exportable="true" :searchable="['title']"
-        :sorting="['-date']">
+    <item-list url-base="/api/projects" fields="id,image_id,category_id,date,status,title" table="projects" title="projects" include="image" :exportable="true" :searchable="['title']" :sorting="['-date']">
         <template slot="add-button">
             <span v-if="$can('create projects')">
                 @include('core::admin._button-create', ['url' => route('admin::create-project')])
