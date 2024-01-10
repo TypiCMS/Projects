@@ -14,13 +14,11 @@
                     <div class="items-navigator">
                         <a class="items-navigator-back" href="{{ route($lang . '::projects-category', $model->category->slug) }}">← {{ $model->category->title }}</a>
                         <div class="items-navigator-previous-next">
-                            <a class="items-navigator-previous @if (!($prev = Projects::prev($model, $model->category_id))) disabled @endif"
-                                href="@if ($prev) {{ route($lang . '::project', [$prev->category->slug, $prev->slug]) }} @endif">
+                            <a class="items-navigator-previous @if (!($prev = Projects::prev($model, $model->category_id))) disabled @endif" href="@if ($prev) {{ route($lang . '::project', [$prev->category->slug, $prev->slug]) }} @endif">
                                 ←
                                 @lang('Previous')
                             </a>
-                            <a class="items-navigator-next @if (!($next = Projects::next($model, $model->category_id))) disabled @endif"
-                                href="@if ($next) {{ route($lang . '::project', [$next->category->slug, $next->slug]) }} @endif">
+                            <a class="items-navigator-next @if (!($next = Projects::next($model, $model->category_id))) disabled @endif" href="@if ($next) {{ route($lang . '::project', [$next->category->slug, $next->slug]) }} @endif">
                                 @lang('Next')
                                 →
                             </a>
