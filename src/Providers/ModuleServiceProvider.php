@@ -46,9 +46,7 @@ class ModuleServiceProvider extends ServiceProvider
             return $tag->morphedByMany(Project::class, 'taggable');
         });
 
-        /*
-         * Add the page in the view.
-         */
+        // Add the page in the view.
         View::composer('projects::public.*', function ($view) {
             $view->page = TypiCMS::getPageLinkedToModule('projects');
         });
