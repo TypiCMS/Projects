@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Tag;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Projects\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Projects\Facades\ProjectCategories;
 use TypiCMS\Modules\Projects\Facades\Projects;
@@ -34,10 +33,6 @@ class ModuleServiceProvider extends ServiceProvider
 
         AliasLoader::getInstance()->alias('Projects', Projects::class);
         AliasLoader::getInstance()->alias('ProjectCategories', ProjectCategories::class);
-
-        // Observers
-        Project::observe(new SlugObserver());
-        ProjectCategory::observe(new SlugObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
