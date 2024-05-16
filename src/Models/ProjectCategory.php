@@ -84,4 +84,9 @@ class ProjectCategory extends Base implements Sortable
     {
         return $this->belongsTo(File::class, 'image_id');
     }
+
+    public function ogImage(): BelongsTo
+    {
+        return $this->belongsTo(File::class, 'og_image_id');
+    }
 }

@@ -1,5 +1,8 @@
 @extends('pages::public.master')
 
+@section('title', $category->title . ' – ' . __('Projects') . ' – ' . $websiteTitle)
+@section('ogTitle', $category->title)
+@section('ogImage', $category->present()->ogImage())
 @section('bodyClass', 'body-projects body-projects-index body-page body-page-' . $page->id)
 
 @section('page')

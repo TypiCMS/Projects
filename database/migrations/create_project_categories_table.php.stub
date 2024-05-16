@@ -14,6 +14,7 @@ return new class() extends Migration {
         Schema::create('project_categories', function (Blueprint $table) {
             $table->id();
             $table->foreignId('image_id')->nullable()->constrained('files')->nullOnDelete();
+            $table->foreignId('og_image_id')->nullable()->constrained('files')->nullOnDelete();
             $table->integer('position')->unsigned()->default(0);
             $table->json('status')->default(new Expression('(JSON_OBJECT())'));
             $table->json('title')->default(new Expression('(JSON_OBJECT())'));
