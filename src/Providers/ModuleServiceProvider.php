@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\Projects\Providers;
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
-use TypiCMS\Modules\Core\Facades\TypiCMS;
 use TypiCMS\Modules\Core\Models\Tag;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Projects\Composers\SidebarViewComposer;
@@ -48,7 +47,7 @@ class ModuleServiceProvider extends ServiceProvider
 
         // Add the page in the view.
         View::composer('projects::public.*', function ($view) {
-            $view->page = TypiCMS::getPageLinkedToModule('projects');
+            $view->page = getPageLinkedToModule('projects');
         });
     }
 
