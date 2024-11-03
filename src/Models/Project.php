@@ -5,7 +5,6 @@ namespace TypiCMS\Modules\Projects\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
@@ -43,15 +42,14 @@ class Project extends Base
         'body',
     ];
 
-    public function uri($locale = null): string
+    public function url($locale = null): string
     {
-        $locale = $locale ?: config('app.locale');
-        $route = $locale . '::' . Str::singular($this->getTable());
-        if (Route::has($route)) {
-            return route($route, [$this->category->translate('slug', $locale), $this->translate('slug', $locale)]);
-        }
+        $locale = $locale ?: app()->getLocale();
+        $route = $locale . '::project';
+        $slug = $this->translate('slug', $locale);
+        $categorySlug = $this->category->translate('slug', $locale);
 
-        return url('/');
+        return Route::has($route) && $slug && $categorySlug ? url(route($route, [$categorySlug, $slug])) : url('/');
     }
 
     protected function thumb(): Attribute
