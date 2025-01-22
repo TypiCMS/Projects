@@ -37,7 +37,7 @@
             {!! BootForm::date(__('Date'), 'date')->value(old('date') ?: $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
         </div>
     </div>
-    {!! BootForm::text(__('Website'), 'website')->placeholder('http://') !!}
+    {!! BootForm::text(__('Website'), 'website')->type('url')->placeholder('https://') !!}
 
     {!! TranslatableBootForm::textarea(__('Summary'), 'summary')->rows(4) !!}
     {!! TranslatableBootForm::textarea(__('Body'), 'body')->addClass('ckeditor-full') !!}
