@@ -41,7 +41,8 @@ class PublicController extends BasePublicController
 
     public function show($categorySlug = null, $slug = null): View
     {
-        $category = ProjectCategories::with('image')
+        $category = ProjectCategories::query()
+            ->with('image')
             ->whereSlugIs($categorySlug)
             ->firstOrFail();
         $model = Project::query()
