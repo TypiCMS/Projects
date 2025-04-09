@@ -12,7 +12,8 @@ class PublicController extends BasePublicController
 {
     public function index(): View
     {
-        $categories = ProjectCategory::published()
+        $categories = ProjectCategory::query()
+            ->published()
             ->order()
             ->with('image')
             ->get();
@@ -23,11 +24,13 @@ class PublicController extends BasePublicController
 
     public function indexOfCategory($categorySlug = null): View
     {
-        $category = ProjectCategory::published()
+        $category = ProjectCategory::query()
+            ->published()
             ->with('image')
             ->whereSlugIs($categorySlug)
             ->firstOrFail();
-        $models = Project::published()
+        $models = Project::query()
+            ->published()
             ->order()
             ->where('category_id', $category->id)
             ->get();
@@ -41,7 +44,8 @@ class PublicController extends BasePublicController
         $category = ProjectCategories::with('image')
             ->whereSlugIs($categorySlug)
             ->firstOrFail();
-        $model = Project::published()
+        $model = Project::query()
+            ->published()
             ->with([
                 'image',
                 'images',
