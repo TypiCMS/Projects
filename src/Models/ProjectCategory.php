@@ -40,7 +40,8 @@ class ProjectCategory extends Base implements Sortable
 
     public function allForSelect(): array
     {
-        $categories = $this->order()
+        $categories = self::query()
+            ->order()
             ->get()
             ->pluck('title', 'id')
             ->all();
