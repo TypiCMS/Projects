@@ -5,6 +5,7 @@ namespace TypiCMS\Modules\Projects\Models;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
@@ -15,6 +16,12 @@ use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\CategoryPresenter;
 
+/**
+ * @property-read int $id
+ * @property-read string $thumb
+ * @property-read Carbon $created_at
+ * @property-read Carbon $updated_at
+ */
 class ProjectCategory extends Base implements Sortable
 {
     use HasTranslations;
