@@ -3,6 +3,7 @@
 namespace TypiCMS\Modules\Projects\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
@@ -13,14 +14,28 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Core\Models\File;
+use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\CategoryPresenter;
 
 /**
- * @property-read int $id
- * @property-read string $thumb
- * @property-read Carbon $created_at
- * @property-read Carbon $updated_at
+ * @property int $id
+ * @property int|null $og_image_id
+ * @property int|null $image_id
+ * @property int $position
+ * @property array<array-key, mixed> $status
+ * @property array<array-key, mixed> $title
+ * @property array<array-key, mixed> $slug
+ * @property Carbon|null $created_at
+ * @property Carbon|null $updated_at
+ * @property-read Collection<int, History> $history
+ * @property-read int|null $history_count
+ * @property-read File|null $image
+ * @property-read File|null $ogImage
+ * @property-read Collection<int, Project> $projects
+ * @property-read int|null $projects_count
+ * @property-read mixed $thumb
+ * @property-read mixed $translations
  */
 class ProjectCategory extends Base implements Sortable
 {
@@ -88,11 +103,13 @@ class ProjectCategory extends Base implements Sortable
         return $this->hasMany(Project::class, 'category_id')->order();
     }
 
+    /** @return BelongsTo<File, $this> */
     public function image(): BelongsTo
     {
         return $this->belongsTo(File::class, 'image_id');
     }
 
+    /** @return BelongsTo<File, $this> */
     public function ogImage(): BelongsTo
     {
         return $this->belongsTo(File::class, 'og_image_id');
