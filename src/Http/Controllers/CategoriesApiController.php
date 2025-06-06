@@ -22,7 +22,7 @@ class CategoriesApiController extends BaseApiController
                 AllowedFilter::custom('title', new FilterOr()),
             ])
             ->allowedIncludes(['image'])
-            ->paginate($request->input('per_page'));
+            ->paginate($request->integer('per_page'));
 
         return $data;
     }
