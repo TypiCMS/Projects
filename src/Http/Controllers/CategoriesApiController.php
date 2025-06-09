@@ -15,8 +15,8 @@ class CategoriesApiController extends BaseApiController
 {
     public function index(Request $request): LengthAwarePaginator
     {
-        $data = QueryBuilder::for(ProjectCategory::class)
-            ->selectFields()
+        $query = ProjectCategory::query()->selectFields();
+        $data = QueryBuilder::for($query)
             ->allowedSorts(['status_translated', 'position', 'title_translated'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
