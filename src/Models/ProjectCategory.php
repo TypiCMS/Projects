@@ -23,9 +23,9 @@ use TypiCMS\Modules\Projects\Presenters\CategoryPresenter;
  * @property int|null $og_image_id
  * @property int|null $image_id
  * @property int $position
- * @property array<array-key, mixed> $status
- * @property array<array-key, mixed> $title
- * @property array<array-key, mixed> $slug
+ * @property string $status
+ * @property string $title
+ * @property string $slug
  * @property Carbon|null $created_at
  * @property Carbon|null $updated_at
  * @property-read Collection<int, History> $history
