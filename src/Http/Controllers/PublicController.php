@@ -4,7 +4,6 @@ namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
-use TypiCMS\Modules\Projects\Facades\ProjectCategories;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
@@ -41,7 +40,7 @@ class PublicController extends BasePublicController
 
     public function show($categorySlug = null, $slug = null): View
     {
-        $category = ProjectCategories::query()
+        $category = ProjectCategory::query()
             ->with('image')
             ->whereSlugIs($categorySlug)
             ->firstOrFail();
@@ -54,7 +53,7 @@ class PublicController extends BasePublicController
             ])
             ->whereSlugIs($slug)
             ->firstOrFail();
-        if ($category->id != $model->category_id) {
+        if ($category->id !== $model->category_id) {
             abort(404);
         }
 

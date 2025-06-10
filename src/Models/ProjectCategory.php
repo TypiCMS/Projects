@@ -56,7 +56,7 @@ class ProjectCategory extends Base implements Sortable
         'status',
     ];
 
-    public $sortable = [
+    public array $sortable = [
         'order_column_name' => 'position',
     ];
 
@@ -71,6 +71,9 @@ class ProjectCategory extends Base implements Sortable
         return ['' => ''] + $categories;
     }
 
+    /**
+     * @return Attribute<string, null>
+     */
     protected function thumb(): Attribute
     {
         return Attribute::make(

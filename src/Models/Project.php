@@ -100,6 +100,9 @@ class Project extends Base
         return Route::has($route) && $slug && $categorySlug ? url(route($route, [$categorySlug, $slug])) : url('/');
     }
 
+    /**
+     * @return Attribute<string, null>
+     */
     protected function thumb(): Attribute
     {
         return Attribute::make(
