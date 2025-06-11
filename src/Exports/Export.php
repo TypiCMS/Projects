@@ -2,6 +2,8 @@
 
 namespace TypiCMS\Modules\Projects\Exports;
 
+use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
@@ -14,9 +16,13 @@ use Spatie\QueryBuilder\QueryBuilder;
 use TypiCMS\Modules\Core\Filters\FilterOr;
 use TypiCMS\Modules\Projects\Models\Project;
 
+/**
+ * @implements WithMapping<mixed>
+ */
 class Export implements FromCollection, ShouldAutoSize, WithColumnFormatting, WithHeadings, WithMapping
 {
-    public function collection()
+    /** @return Collection<int, Model> */
+    public function collection(): Collection
     {
         return QueryBuilder::for(Project::class)
             ->allowedSorts(['status_translated', 'date', 'title_translated'])
@@ -26,20 +32,22 @@ class Export implements FromCollection, ShouldAutoSize, WithColumnFormatting, Wi
             ->get();
     }
 
-    public function map($model): array
+    /** @return array<int, mixed> */
+    public function map(mixed $row): array
     {
         return [
-            Date::dateTimeToExcel($model->created_at),
-            Date::dateTimeToExcel($model->updated_at),
-            $model->status,
-            Date::dateTimeToExcel($model->date),
-            $model->website,
-            $model->title,
-            $model->summary,
-            $model->body,
+            Date::dateTimeToExcel($row->created_at),
+            Date::dateTimeToExcel($row->updated_at),
+            $row->status,
+            Date::dateTimeToExcel($row->date),
+            $row->website,
+            $row->title,
+            $row->summary,
+            $row->body,
         ];
     }
 
+    /** @return string[] */
     public function headings(): array
     {
         return [
@@ -54,6 +62,7 @@ class Export implements FromCollection, ShouldAutoSize, WithColumnFormatting, Wi
         ];
     }
 
+    /** @return array<string, string> */
     public function columnFormats(): array
     {
         return [

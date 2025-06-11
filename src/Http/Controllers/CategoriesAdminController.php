@@ -32,7 +32,7 @@ class CategoriesAdminController extends BaseAdminController
 
     public function store(CategoryFormRequest $request): RedirectResponse
     {
-        $category = ProjectCategory::create($request->validated());
+        $category = ProjectCategory::query()->create($request->validated());
 
         return $this->redirect($request, $category)
             ->withMessage(__('Item successfully created.'));

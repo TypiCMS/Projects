@@ -45,7 +45,7 @@ class AdminController extends BaseAdminController
 
     public function store(FormRequest $request): RedirectResponse
     {
-        $project = Project::create($request->validated());
+        $project = Project::query()->create($request->validated());
 
         return $this->redirect($request, $project)
             ->withMessage(__('Item successfully created.'));

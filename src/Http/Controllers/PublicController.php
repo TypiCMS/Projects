@@ -21,7 +21,7 @@ class PublicController extends BasePublicController
             ->with(compact('categories'));
     }
 
-    public function indexOfCategory($categorySlug = null): View
+    public function indexOfCategory(?string $categorySlug = null): View
     {
         $category = ProjectCategory::query()
             ->published()
@@ -38,7 +38,7 @@ class PublicController extends BasePublicController
             ->with(compact('models', 'category'));
     }
 
-    public function show($categorySlug = null, $slug = null): View
+    public function show(?string $categorySlug = null, ?string $slug = null): View
     {
         $category = ProjectCategory::query()
             ->with('image')
