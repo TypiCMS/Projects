@@ -50,16 +50,19 @@ class ProjectCategory extends Base implements Sortable
 
     protected $appends = ['thumb'];
 
+    /** @var array<string> */
     public array $translatable = [
         'title',
         'slug',
         'status',
     ];
 
+    /** @var array<string> */
     public array $sortable = [
         'order_column_name' => 'position',
     ];
 
+    /** @return array<string, string> */
     public function allForSelect(): array
     {
         $categories = self::query()
@@ -71,9 +74,7 @@ class ProjectCategory extends Base implements Sortable
         return ['' => ''] + $categories;
     }
 
-    /**
-     * @return Attribute<string, null>
-     */
+    /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
         return Attribute::make(
@@ -101,6 +102,7 @@ class ProjectCategory extends Base implements Sortable
         return route('admin::dashboard');
     }
 
+    /** @return HasMany<Project, $this> */
     public function projects(): HasMany
     {
         return $this->hasMany(Project::class, 'category_id')->order();

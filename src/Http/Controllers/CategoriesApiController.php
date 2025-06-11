@@ -2,6 +2,7 @@
 
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -27,7 +28,7 @@ class CategoriesApiController extends BaseApiController
         return $data;
     }
 
-    protected function updatePartial(ProjectCategory $category, Request $request)
+    protected function updatePartial(ProjectCategory $category, Request $request): void
     {
         foreach ($request->only('status', 'position') as $key => $content) {
             if ($category->isTranslatableAttribute($key)) {
@@ -42,11 +43,13 @@ class CategoriesApiController extends BaseApiController
         $category->save();
     }
 
-    public function destroy(ProjectCategory $category)
+    public function destroy(ProjectCategory $category): JsonResponse
     {
         if ($category->projects->count() > 0) {
-            return response(['message' => 'This category cannot be deleted as it contains projects.'], 403);
+            return response()->json(['message' => 'This category cannot be deleted as it contains projects.'], 403);
         }
         $category->delete();
+
+        return response()->json(status: 204);
     }
 }

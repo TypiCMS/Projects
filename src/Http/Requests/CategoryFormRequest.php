@@ -6,7 +6,8 @@ use TypiCMS\Modules\Core\Http\Requests\AbstractFormRequest;
 
 class CategoryFormRequest extends AbstractFormRequest
 {
-    public function rules()
+    /** @return array<string, string> */
+    public function rules(): array
     {
         return [
             'image_id' => 'nullable|integer',
