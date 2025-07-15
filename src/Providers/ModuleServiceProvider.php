@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Models\Tag;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Projects\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Projects\Facades\ProjectCategories;
 use TypiCMS\Modules\Projects\Facades\Projects;
@@ -36,6 +37,7 @@ class ModuleServiceProvider extends ServiceProvider
 
         // Observers
         Project::observe(new SlugObserver());
+        Project::observe(new TipTapHTMLObserver());
         ProjectCategory::observe(new SlugObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
