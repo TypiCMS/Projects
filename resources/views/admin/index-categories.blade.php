@@ -5,14 +5,11 @@
 @section('content')
     <item-list url-base="/api/projects/categories" fields="id,image_id,position,status,title" table="project_categories" title="categories" include="image" :searchable="['title']" :sorting="['position']">
         <template #back-button>
-            @include('core::admin._button-back', [
-                'url' => route('admin::index-projects'),
-                'title' => __('Projects'),
-            ])
+            <x-core::back-button :url="route('admin::index-projects')" :title="__('Projects')" />
         </template>
 
-        <template #add-button v-if="$can('create project_categories')">
-            @include('core::admin._button-create', ['module' => 'project_categories'])
+        <template #top-buttons v-if="$can('create project_categories')">
+            <x-core::create-button :url="route('admin::create-project_category')" :label="__('Create category')" />
         </template>
 
         <template #columns="{ sortArray }">

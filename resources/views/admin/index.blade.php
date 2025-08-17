@@ -4,13 +4,13 @@
 
 @section('content')
     <item-list url-base="/api/projects" fields="id,image_id,category_id,date,status,title" table="projects" title="projects" include="image" :exportable="true" :searchable="['title']" :sorting="['-date']">
-        <template #add-button>
-            <span v-if="$can('create projects')">
-                @include('core::admin._button-create', ['url' => route('admin::create-project')])
-            </span>
-            <a href="{{ route('admin::index-project_categories') }}" class="btn btn-sm btn-secondary" v-if="$can('read project_categories')">
+        <template #top-buttons>
+            <a href="{{ route('admin::index-project_categories') }}" class="btn btn-sm btn-secondary ms-auto" v-if="$can('read project_categories')">
                 @lang('Categories')
             </a>
+            <span v-if="$can('create projects')">
+                <x-core::create-button :url="route('admin::create-project')" :label="__('Create project')" />
+            </span>
         </template>
 
         <template #columns="{ sortArray }">
