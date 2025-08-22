@@ -74,6 +74,15 @@ class ProjectCategory extends Base implements Sortable
         return ['' => ''] + $categories;
     }
 
+    public function url(?string $locale = null): string
+    {
+        $locale = $locale ?: app()->getLocale();
+        $route = $locale . '::projects-category';
+        $slug = $this->translate('slug', $locale);
+
+        return Route::has($route) && $slug ? url(route($route, [$slug])) : url('/');
+    }
+
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
