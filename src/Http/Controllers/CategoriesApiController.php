@@ -18,15 +18,14 @@ class CategoriesApiController extends BaseApiController
     public function index(Request $request): LengthAwarePaginator
     {
         $query = ProjectCategory::query()->selectFields();
-        $data = QueryBuilder::for($query)
+
+        return QueryBuilder::for($query)
             ->allowedSorts(['status_translated', 'position', 'title_translated'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
             ])
             ->allowedIncludes(['image'])
             ->paginate($request->integer('per_page'));
-
-        return $data;
     }
 
     protected function updatePartial(ProjectCategory $category, Request $request): void

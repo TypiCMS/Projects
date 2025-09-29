@@ -32,7 +32,7 @@ class AdminController extends BaseAdminController
         $model = new Project();
 
         return view('projects::admin.create')
-            ->with(compact('model'));
+            ->with(['model' => $model]);
     }
 
     public function edit(Project $project): View

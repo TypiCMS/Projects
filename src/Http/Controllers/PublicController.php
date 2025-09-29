@@ -18,7 +18,7 @@ class PublicController extends BasePublicController
             ->get();
 
         return view('projects::public.index')
-            ->with(compact('categories'));
+            ->with(['categories' => $categories]);
     }
 
     public function indexOfCategory(?string $categorySlug = null): View
@@ -35,7 +35,7 @@ class PublicController extends BasePublicController
             ->get();
 
         return view('projects::public.index-of-category')
-            ->with(compact('models', 'category'));
+            ->with(['models' => $models, 'category' => $category]);
     }
 
     public function show(?string $categorySlug = null, ?string $slug = null): View
@@ -53,11 +53,9 @@ class PublicController extends BasePublicController
             ])
             ->whereSlugIs($slug)
             ->firstOrFail();
-        if ($category->id !== $model->category_id) {
-            abort(404);
-        }
+        abort_if($category->id !== $model->category_id, 404);
 
         return view('projects::public.show')
-            ->with(compact('model'));
+            ->with(['model' => $model]);
     }
 }

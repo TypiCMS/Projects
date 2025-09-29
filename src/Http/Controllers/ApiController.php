@@ -19,16 +19,15 @@ class ApiController extends BaseApiController
     {
         $query = Project::query()
             ->selectFields()
-            ->selectSub(ProjectCategory::select(column('title'))->whereColumn('category_id', 'project_categories.id'), 'category_name');
-        $data = QueryBuilder::for($query)
+            ->selectSub(ProjectCategory::query()->select(column('title'))->whereColumn('category_id', 'project_categories.id'), 'category_name');
+
+        return QueryBuilder::for($query)
             ->allowedSorts(['status_translated', 'date', 'title_translated', 'category_name'])
             ->allowedFilters([
                 AllowedFilter::custom('title', new FilterOr()),
             ])
             ->allowedIncludes(['image'])
             ->paginate($request->integer('per_page'));
-
-        return $data;
     }
 
     protected function updatePartial(Project $project, Request $request): void

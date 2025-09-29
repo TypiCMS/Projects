@@ -76,7 +76,7 @@ class ProjectCategory extends Base implements Sortable
 
     public function url(?string $locale = null): string
     {
-        $locale = $locale ?: app()->getLocale();
+        $locale ??= app()->getLocale();
         $route = $locale . '::projects-category';
         $slug = $this->translate('slug', $locale);
 

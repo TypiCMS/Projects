@@ -1,5 +1,6 @@
 <?php
 
+use TypiCMS\Modules\Core\Models\Page;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
 use TypiCMS\Modules\Projects\Http\Controllers\AdminController;
@@ -11,11 +12,11 @@ use TypiCMS\Modules\Projects\Http\Controllers\PublicController;
 /*
  * Front office routes
  */
-if ($page = getPageLinkedToModule('projects')) {
+if (($page = getPageLinkedToModule('projects')) instanceof Page) {
     $middleware = $page->private ? ['public', 'auth'] : ['public'];
     foreach (locales() as $lang) {
         if ($page->isPublished($lang) && $path = $page->path($lang)) {
-            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router) {
+            Route::middleware($middleware)->prefix($path)->name($lang . '::')->group(function (Router $router): void {
                 $router->get('/', [PublicController::class, 'index'])->name('index-projects');
                 $router->get('{category}', [PublicController::class, 'indexOfCategory'])->name('projects-category');
                 $router->get('{category}/{slug}', [PublicController::class, 'show'])->name('project');
@@ -27,7 +28,7 @@ if ($page = getPageLinkedToModule('projects')) {
 /*
  * Admin routes
  */
-Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router) {
+Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Router $router): void {
     $router->get('projects', [AdminController::class, 'index'])->name('index-projects')->middleware('can:read projects');
     $router->get('projects/export', [AdminController::class, 'export'])->name('export-projects')->middleware('can:read projects');
     $router->get('projects/create', [AdminController::class, 'create'])->name('create-project')->middleware('can:create projects');
@@ -46,7 +47,7 @@ Route::middleware('admin')->prefix('admin')->name('admin::')->group(function (Ro
 /*
  * API routes
  */
-Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router) {
+Route::middleware(['api', 'auth:api'])->prefix('api')->group(function (Router $router): void {
     $router->get('projects', [ApiController::class, 'index'])->middleware('can:read projects');
     $router->patch('projects/{project}', [ApiController::class, 'updatePartial'])->middleware('can:update projects');
     $router->delete('projects/{project}', [ApiController::class, 'destroy'])->middleware('can:delete projects');

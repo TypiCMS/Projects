@@ -96,7 +96,7 @@ class Project extends Base
 
     public function url(?string $locale = null): string
     {
-        $locale = $locale ?: app()->getLocale();
+        $locale ??= app()->getLocale();
         $route = $locale . '::project';
         $slug = $this->translate('slug', $locale);
         $categorySlug = $this->category->translate('slug', $locale);

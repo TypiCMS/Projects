@@ -21,7 +21,7 @@ class CategoriesAdminController extends BaseAdminController
         $model = new ProjectCategory();
 
         return view('projects::admin.create-category')
-            ->with(compact('model'));
+            ->with(['model' => $model]);
     }
 
     public function edit(ProjectCategory $category): View
