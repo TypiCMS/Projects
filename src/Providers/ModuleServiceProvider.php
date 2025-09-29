@@ -43,7 +43,7 @@ class ModuleServiceProvider extends ServiceProvider
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 
         // A project have tags.
-        Tag::resolveRelationUsing('projects', fn($tag) => $tag->morphedByMany(Project::class, 'taggable'));
+        Tag::resolveRelationUsing('projects', fn ($tag) => $tag->morphedByMany(Project::class, 'taggable'));
 
         // Add the page in the view.
         View::composer('projects::public.*', function ($view): void {

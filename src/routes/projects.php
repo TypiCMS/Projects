@@ -1,8 +1,8 @@
 <?php
 
-use TypiCMS\Modules\Core\Models\Page;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Route;
+use TypiCMS\Modules\Core\Models\Page;
 use TypiCMS\Modules\Projects\Http\Controllers\AdminController;
 use TypiCMS\Modules\Projects\Http\Controllers\ApiController;
 use TypiCMS\Modules\Projects\Http\Controllers\CategoriesAdminController;
