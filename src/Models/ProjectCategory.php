@@ -11,12 +11,12 @@ use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
-use Spatie\Translatable\HasTranslations;
 use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Projects\Presenters\CategoryPresenter;
+use TypiCMS\Translatable\HasTranslations;
 
 /**
  * @property int $id
