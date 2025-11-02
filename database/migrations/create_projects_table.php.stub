@@ -11,7 +11,7 @@ return new class() extends Migration {
      */
     public function up(): void
     {
-        Schema::create('projects', function (Blueprint $table) {
+        Schema::create('projects', function (Blueprint $table): void {
             $table->id();
             $table->foreignId('category_id')->constrained('project_categories')->onDelete('cascade');
             $table->foreignId('image_id')->nullable()->constrained('files')->nullOnDelete();
