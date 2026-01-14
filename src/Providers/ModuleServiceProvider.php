@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Projects\Providers;
 
 use Illuminate\Foundation\AliasLoader;
@@ -26,10 +28,16 @@ class ModuleServiceProvider extends ServiceProvider
         $this->loadViewsFrom(__DIR__ . '/../../resources/views/', 'projects');
 
         $this->publishes([
-            __DIR__ . '/../../database/migrations/create_project_categories_table.php.stub' => getMigrationFileName('create_project_categories_table'),
-            __DIR__ . '/../../database/migrations/create_projects_table.php.stub' => getMigrationFileName('create_projects_table'),
+            __DIR__ . '/../../database/migrations/create_project_categories_table.php.stub' => getMigrationFileName(
+                'create_project_categories_table',
+            ),
+            __DIR__ . '/../../database/migrations/create_projects_table.php.stub' => getMigrationFileName(
+                'create_projects_table',
+            ),
         ], 'typicms-migrations');
-        $this->publishes([__DIR__ . '/../../resources/views' => resource_path('views/vendor/projects')], 'typicms-views');
+        $this->publishes([
+            __DIR__ . '/../../resources/views' => resource_path('views/vendor/projects'),
+        ], 'typicms-views');
         $this->publishes([__DIR__ . '/../../resources/scss' => resource_path('scss')], 'typicms-resources');
 
         AliasLoader::getInstance()->alias('Projects', Projects::class);

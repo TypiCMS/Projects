@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Projects\Models;
 
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -107,9 +109,7 @@ class Project extends Base
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
-        return Attribute::make(
-            get: fn () => $this->present()->image(null, 54),
-        );
+        return Attribute::make(get: fn () => $this->present()->image(null, 54));
     }
 
     /** @return BelongsTo<ProjectCategory, $this> */

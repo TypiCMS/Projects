@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\View\View;
@@ -7,7 +9,7 @@ use TypiCMS\Modules\Core\Http\Controllers\BasePublicController;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
-class PublicController extends BasePublicController
+final class PublicController extends BasePublicController
 {
     public function index(): View
     {
@@ -17,8 +19,7 @@ class PublicController extends BasePublicController
             ->with('image')
             ->get();
 
-        return view('projects::public.index')
-            ->with(['categories' => $categories]);
+        return view('projects::public.index', ['categories' => $categories]);
     }
 
     public function indexOfCategory(?string $categorySlug = null): View
@@ -34,8 +35,7 @@ class PublicController extends BasePublicController
             ->where('category_id', $category->id)
             ->get();
 
-        return view('projects::public.index-of-category')
-            ->with(['models' => $models, 'category' => $category]);
+        return view('projects::public.index-of-category', ['models' => $models, 'category' => $category]);
     }
 
     public function show(?string $categorySlug = null, ?string $slug = null): View
@@ -55,7 +55,6 @@ class PublicController extends BasePublicController
             ->firstOrFail();
         abort_if($category->id !== $model->category_id, 404);
 
-        return view('projects::public.show')
-            ->with(['model' => $model]);
+        return view('projects::public.show', ['model' => $model]);
     }
 }

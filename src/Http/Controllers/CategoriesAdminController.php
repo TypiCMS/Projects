@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
@@ -9,7 +11,7 @@ use TypiCMS\Modules\Projects\Http\Requests\CategoryFormRequest;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
-class CategoriesAdminController extends BaseAdminController
+final class CategoriesAdminController extends BaseAdminController
 {
     public function index(): View
     {
@@ -20,22 +22,19 @@ class CategoriesAdminController extends BaseAdminController
     {
         $model = new ProjectCategory();
 
-        return view('projects::admin.create-category')
-            ->with(['model' => $model]);
+        return view('projects::admin.create-category', ['model' => $model]);
     }
 
     public function edit(ProjectCategory $category): View
     {
-        return view('projects::admin.edit-category')
-            ->with(['model' => $category]);
+        return view('projects::admin.edit-category', ['model' => $category]);
     }
 
     public function store(CategoryFormRequest $request): RedirectResponse
     {
         $category = ProjectCategory::query()->create($request->validated());
 
-        return $this->redirect($request, $category)
-            ->withMessage(__('Item successfully created.'));
+        return $this->redirect($request, $category)->withMessage(__('Item successfully created.'));
     }
 
     public function update(ProjectCategory $category, CategoryFormRequest $request): RedirectResponse
@@ -43,7 +42,6 @@ class CategoriesAdminController extends BaseAdminController
         $category->update($request->validated());
         (new Project())->flushCache();
 
-        return $this->redirect($request, $category)
-            ->withMessage(__('Item successfully updated.'));
+        return $this->redirect($request, $category)->withMessage(__('Item successfully updated.'));
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -13,7 +15,7 @@ use TypiCMS\Modules\Projects\Exports\Export;
 use TypiCMS\Modules\Projects\Http\Requests\FormRequest;
 use TypiCMS\Modules\Projects\Models\Project;
 
-class AdminController extends BaseAdminController
+final class AdminController extends BaseAdminController
 {
     public function index(): View
     {
@@ -31,32 +33,26 @@ class AdminController extends BaseAdminController
     {
         $model = new Project();
 
-        return view('projects::admin.create')
-            ->with(['model' => $model]);
+        return view('projects::admin.create', ['model' => $model]);
     }
 
     public function edit(Project $project): View
     {
-        return view('projects::admin.edit')
-            ->with([
-                'model' => $project,
-            ]);
+        return view('projects::admin.edit', ['model' => $project]);
     }
 
     public function store(FormRequest $request): RedirectResponse
     {
         $project = Project::query()->create($request->validated());
 
-        return $this->redirect($request, $project)
-            ->withMessage(__('Item successfully created.'));
+        return $this->redirect($request, $project)->withMessage(__('Item successfully created.'));
     }
 
     public function update(Project $project, FormRequest $request): RedirectResponse
     {
         $project->update($request->validated());
 
-        return $this->redirect($request, $project)
-            ->withMessage(__('Item successfully updated.'));
+        return $this->redirect($request, $project)->withMessage(__('Item successfully updated.'));
     }
 
     public function files(Project $project): JsonResponse

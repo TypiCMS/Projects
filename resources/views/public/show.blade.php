@@ -30,20 +30,20 @@
             </div>
         </header>
         <div class="project-body">
-            @if (!empty($model->summary))
+            @if ($model->summary)
                 <p class="project-summary">{!! nl2br($model->summary) !!}</p>
             @endif
 
-            @if (!empty($model->image))
+            @if ($model->image)
                 <figure class="project-picture">
                     <img class="project-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
-                    @if (!empty($model->image->description))
+                    @if ($model->image->description)
                         <figcaption class="project-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif
                 </figure>
             @endif
 
-            @if (!empty($model->body))
+            @if ($model->body)
                 <div class="rich-content">{!! $model->present()->body !!}</div>
             @endif
 

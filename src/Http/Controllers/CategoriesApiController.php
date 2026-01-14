@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace TypiCMS\Modules\Projects\Http\Controllers;
 
 use Illuminate\Http\JsonResponse;
@@ -12,7 +14,7 @@ use TypiCMS\Modules\Core\Http\Controllers\BaseApiController;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
-class CategoriesApiController extends BaseApiController
+final class CategoriesApiController extends BaseApiController
 {
     /** @return LengthAwarePaginator<int, mixed> */
     public function index(Request $request): LengthAwarePaginator
@@ -39,6 +41,7 @@ class CategoriesApiController extends BaseApiController
                 $category->{$key} = $content;
             }
         }
+
         (new Project())->flushCache();
         $category->save();
     }
@@ -48,6 +51,7 @@ class CategoriesApiController extends BaseApiController
         if ($category->projects->count() > 0) {
             return response()->json(['message' => 'This category cannot be deleted as it contains projects.'], 403);
         }
+
         $category->delete();
 
         return response()->json(status: 204);
