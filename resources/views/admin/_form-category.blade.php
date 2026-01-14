@@ -7,13 +7,20 @@
 <div class="content">
     <x-core::form-errors />
 
-    <file-manager></file-manager>
-    <file-field type="image" field="image_id" :init-file="{{ $model->image ?? 'null' }}"></file-field>
-    <file-field type="image" field="og_image_id" :init-file="{{ $model->ogImage ?? 'null' }}" label="Open Graph image"></file-field>
-
-    <x-core::title-and-slug-fields />
-    <div class="mb-3">
-        {!! TranslatableBootForm::hidden('status')->value(0) !!}
-        {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+    <div class="row">
+        <div class="col-lg-8">
+            <x-core::title-and-slug-fields />
+            <div class="mb-3">
+                {!! TranslatableBootForm::hidden('status')->value(0) !!}
+                {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="right-column">
+                <file-manager></file-manager>
+                <file-field type="image" field="image_id" :init-file="{{ $model->image ?? 'null' }}"></file-field>
+                <file-field type="image" field="og_image_id" :init-file="{{ $model->ogImage ?? 'null' }}" label="Open Graph image"></file-field>
+            </div>
+        </div>
     </div>
 </div>
