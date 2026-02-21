@@ -4,21 +4,28 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
 use Laracasts\Presenter\PresentableTrait;
-use TypiCMS\Modules\Core\Models\Base;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Models\Tag;
 use TypiCMS\Modules\Core\Models\Term;
+use TypiCMS\Modules\Core\Traits\HasAdminUrls;
+use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
 use TypiCMS\Modules\Core\Traits\HasFiles;
+use TypiCMS\Modules\Core\Traits\HasSelectableFields;
+use TypiCMS\Modules\Core\Traits\HasSlugScope;
 use TypiCMS\Modules\Core\Traits\HasTags;
 use TypiCMS\Modules\Core\Traits\HasTerms;
 use TypiCMS\Modules\Core\Traits\Historable;
+use TypiCMS\Modules\Core\Traits\Navigable;
+use TypiCMS\Modules\Core\Traits\Publishable;
 use TypiCMS\Modules\Projects\Presenters\ModulePresenter;
 use TypiCMS\Translatable\HasTranslations;
 
@@ -59,14 +66,21 @@ use TypiCMS\Translatable\HasTranslations;
  * @property-read Collection<int, File> $videos
  * @property-read int|null $videos_count
  */
-class Project extends Base
+class Project extends Model
 {
+    use Cachable;
+    use HasAdminUrls;
+    use HasConfigurableOrder;
     use HasFiles;
+    use HasSelectableFields;
+    use HasSlugScope;
     use HasTags;
     use HasTerms;
     use HasTranslations;
     use Historable;
+    use Navigable;
     use PresentableTrait;
+    use Publishable;
 
     protected string $presenter = ModulePresenter::class;
 
