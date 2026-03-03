@@ -15,7 +15,7 @@
                 {!! TranslatableBootForm::checkbox(__('Published'), 'status') !!}
             </div>
 
-            {!! BootForm::select(__('Category'), 'category_id', ProjectCategories::allForSelect())->required() !!}
+            {!! BootForm::select(__('Category'), 'category_id', (new TypiCMS\Modules\Projects\Models\ProjectCategory())->allForSelect())->required() !!}
 
             {!! BootForm::text(__('Tags'), 'tags')->value(old('tags') ?: $model->tags->pluck('tag')->implode(',')) !!}
 
