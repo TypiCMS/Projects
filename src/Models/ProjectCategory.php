@@ -77,7 +77,7 @@ class ProjectCategory extends Model implements Sortable
     /** @return array<string, string> */
     public function allForSelect(): array
     {
-        $categories = self::query()
+        $categories = static::query()
             ->order()
             ->get()
             ->pluck('title', 'id')
