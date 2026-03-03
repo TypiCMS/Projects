@@ -4,15 +4,12 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Projects\Providers;
 
-use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Models\Tag;
 use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Projects\Composers\SidebarViewComposer;
-use TypiCMS\Modules\Projects\Facades\ProjectCategories;
-use TypiCMS\Modules\Projects\Facades\Projects;
 use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
@@ -40,9 +37,6 @@ class ModuleServiceProvider extends ServiceProvider
         ], 'typicms-views');
         $this->publishes([__DIR__ . '/../../resources/scss' => resource_path('scss')], 'typicms-resources');
 
-        AliasLoader::getInstance()->alias('Projects', Projects::class);
-        AliasLoader::getInstance()->alias('ProjectCategories', ProjectCategories::class);
-
         // Observers
         Project::observe(new SlugObserver());
         Project::observe(new TipTapHTMLObserver());
@@ -57,11 +51,5 @@ class ModuleServiceProvider extends ServiceProvider
         View::composer('projects::public.*', function ($view): void {
             $view->page = getPageLinkedToModule('projects');
         });
-    }
-
-    public function register(): void
-    {
-        $this->app->bind('Projects', Project::class);
-        $this->app->bind('ProjectCategories', ProjectCategory::class);
     }
 }
