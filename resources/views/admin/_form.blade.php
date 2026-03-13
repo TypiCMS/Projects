@@ -25,7 +25,7 @@
 
             <div class="row gx-3">
                 <div class="col-sm-6">
-                    {!! BootForm::date(__('Date'), 'date')->value(old('date') ?: $model->present()->dateOrNow('date'))->addClass('datepicker') !!}
+                    {!! BootForm::date(__('Date'), 'date')->value(old('date') ?: $model->dateOrNow('date'))->addClass('datepicker') !!}
                 </div>
             </div>
             {!! BootForm::text(__('Website'), 'website')->type('url')->placeholder('https://') !!}

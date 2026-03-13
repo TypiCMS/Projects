@@ -2,7 +2,7 @@
 
 @section('title', $category->title . ' – ' . __('Projects') . ' – ' . $websiteTitle)
 @section('ogTitle', $category->title)
-@section('ogImage', $category->present()->ogImage())
+@section('ogImage', $category->ogImageUrl())
 @section('bodyClass', 'body-projects body-projects-index body-page body-page-' . $page->id)
 
 @section('page')

@@ -3,7 +3,7 @@
 @section('title', $model->title . ' – ' . __('Projects') . ' – ' . $websiteTitle)
 @section('ogTitle', $model->title)
 @section('description', $model->summary)
-@section('ogImage', $model->present()->ogImage())
+@section('ogImage', $model->ogImageUrl())
 @section('bodyClass', 'body-projects body-project-' . $model->id . ' body-page body-page-' . $page->id)
 
 @section('content')
@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <h1 class="project-title">{{ $model->title }}</h1>
-                <div class="project-date">{{ $model->present()->dateLocalized }}</div>
+                <div class="project-date">{{ $model->dateLocalized() }}</div>
             </div>
         </header>
         <div class="project-body">
@@ -36,7 +36,7 @@
 
             @if ($model->image)
                 <figure class="project-picture">
-                    <img class="project-picture-image" src="{{ $model->present()->image(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
+                    <img class="project-picture-image" src="{{ $model->imageUrl(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @if ($model->image->description)
                         <figcaption class="project-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif
@@ -44,7 +44,7 @@
             @endif
 
             @if ($model->body)
-                <div class="rich-content">{!! $model->present()->body !!}</div>
+                <div class="rich-content">{!! $model->formattedBody() !!}</div>
             @endif
 
             @include('files::public._document-list')

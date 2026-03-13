@@ -12,17 +12,16 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
-use Laracasts\Presenter\PresentableTrait;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
+use TypiCMS\Modules\Core\Traits\HasPresenterMethods;
 use TypiCMS\Modules\Core\Traits\HasSelectableFields;
 use TypiCMS\Modules\Core\Traits\HasSlugScope;
 use TypiCMS\Modules\Core\Traits\Historable;
 use TypiCMS\Modules\Core\Traits\Publishable;
-use TypiCMS\Modules\Projects\Presenters\CategoryPresenter;
 use TypiCMS\Translatable\HasTranslations;
 
 /**
@@ -48,15 +47,13 @@ class ProjectCategory extends Model implements Sortable
 {
     use Cachable;
     use HasConfigurableOrder;
+    use HasPresenterMethods;
     use HasSelectableFields;
     use HasSlugScope;
     use HasTranslations;
     use Historable;
-    use PresentableTrait;
     use Publishable;
     use SortableTrait;
-
-    protected string $presenter = CategoryPresenter::class;
 
     protected $guarded = [];
 
@@ -98,7 +95,7 @@ class ProjectCategory extends Model implements Sortable
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
-        return Attribute::make(get: fn () => $this->present()->image(null, 54));
+        return Attribute::make(get: fn () => $this->imageUrl(null, 54));
     }
 
     public function editUrl(): string
