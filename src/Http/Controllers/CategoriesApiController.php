@@ -22,11 +22,9 @@ final class CategoriesApiController extends BaseApiController
         $query = ProjectCategory::query()->selectFields();
 
         return QueryBuilder::for($query)
-            ->allowedSorts(['status_translated', 'position', 'title_translated'])
-            ->allowedFilters([
-                AllowedFilter::custom('title', new FilterOr()),
-            ])
-            ->allowedIncludes(['image'])
+            ->allowedSorts('status_translated', 'position', 'title_translated')
+            ->allowedFilters(AllowedFilter::custom('title', new FilterOr()))
+            ->allowedIncludes('image')
             ->paginate($request->integer('per_page'));
     }
 
