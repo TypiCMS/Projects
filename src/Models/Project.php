@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Uri;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Models\Tag;
@@ -107,14 +108,29 @@ class Project extends Model
         'body',
     ];
 
-    public function url(?string $locale = null): string
+    public function url(?string $locale = null): ?string
     {
         $locale ??= app()->getLocale();
-        $route = $locale . '::project';
+        $route = "{$locale}::project";
         $slug = $this->translate('slug', $locale);
         $categorySlug = $this->category->translate('slug', $locale);
 
-        return Route::has($route) && $slug && $categorySlug ? url(route($route, [$categorySlug, $slug])) : url('/');
+        if (Route::has($route) && $slug && $categorySlug) {
+            return route($route, [$categorySlug, $slug]);
+        }
+
+        return null;
+    }
+
+    public function previewUrl(?string $locale = null): ?string
+    {
+        $url = $this->url($locale);
+
+        if (!$url) {
+            return null;
+        }
+
+        return (string) Uri::of($url)->withQuery(['preview' => 'true']);
     }
 
     /** @return Attribute<string, null> */

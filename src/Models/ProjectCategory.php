@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Uri;
 use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use TypiCMS\Modules\Core\Models\File;
@@ -83,13 +84,28 @@ class ProjectCategory extends Model implements Sortable
         return ['' => ''] + $categories;
     }
 
-    public function url(?string $locale = null): string
+    public function url(?string $locale = null): ?string
     {
         $locale ??= app()->getLocale();
-        $route = $locale . '::projects-category';
+        $route = "{$locale}::projects-category";
         $slug = $this->translate('slug', $locale);
 
-        return Route::has($route) && $slug ? url(route($route, [$slug])) : url('/');
+        if (Route::has($route) && $slug) {
+            return route($route, $slug);
+        }
+
+        return null;
+    }
+
+    public function previewUrl(?string $locale = null): ?string
+    {
+        $url = $this->url($locale);
+
+        if (!$url) {
+            return null;
+        }
+
+        return (string) Uri::of($url)->withQuery(['preview' => 'true']);
     }
 
     /** @return Attribute<string, null> */
