@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Projects\Models;
 
-use GeneaLabs\LaravelModelCaching\Traits\Cachable;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -68,7 +67,6 @@ use TypiCMS\Translatable\HasTranslations;
  */
 class Project extends Model
 {
-    use Cachable;
     use HasAdminUrls;
     use HasConfigurableOrder;
     use HasFiles;

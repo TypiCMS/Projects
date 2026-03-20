@@ -8,7 +8,6 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 use TypiCMS\Modules\Core\Http\Controllers\BaseAdminController;
 use TypiCMS\Modules\Projects\Http\Requests\CategoryFormRequest;
-use TypiCMS\Modules\Projects\Models\Project;
 use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 final class CategoriesAdminController extends BaseAdminController
@@ -40,7 +39,6 @@ final class CategoriesAdminController extends BaseAdminController
     public function update(ProjectCategory $category, CategoryFormRequest $request): RedirectResponse
     {
         $category->update($request->validated());
-        (new Project())->flushCache();
 
         return $this->redirect($request, $category)->withMessage(__('Item successfully updated.'));
     }
