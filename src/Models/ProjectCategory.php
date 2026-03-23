@@ -111,7 +111,7 @@ class ProjectCategory extends Model implements Sortable
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
-        return Attribute::make(get: fn () => imageOrDefault($this->image, null, 54));
+        return Attribute::make(get: fn (): string => imageOrDefault($this->image, null, 54));
     }
 
     public function editUrl(): string

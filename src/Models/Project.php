@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Override;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -85,6 +86,7 @@ class Project extends Model
     use Publishable;
 
     /** @return array<string, string> */
+    #[Override]
     protected function casts(): array
     {
         return [
@@ -138,7 +140,7 @@ class Project extends Model
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
-        return Attribute::make(get: fn () => imageOrDefault($this->image, null, 54));
+        return Attribute::make(get: fn (): string => imageOrDefault($this->image, null, 54));
     }
 
     /** @return BelongsTo<ProjectCategory, $this> */
