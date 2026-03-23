@@ -17,7 +17,9 @@ use Spatie\EloquentSortable\SortableTrait;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
-use TypiCMS\Modules\Core\Traits\HasPresenterMethods;
+use TypiCMS\Modules\Core\Traits\HasContentPresenter;
+use TypiCMS\Modules\Core\Traits\HasImagePresenter;
+use TypiCMS\Modules\Core\Traits\HasOgImagePresenter;
 use TypiCMS\Modules\Core\Traits\HasSelectableFields;
 use TypiCMS\Modules\Core\Traits\HasSlugScope;
 use TypiCMS\Modules\Core\Traits\Historable;
@@ -46,7 +48,9 @@ use TypiCMS\Translatable\HasTranslations;
 class ProjectCategory extends Model implements Sortable
 {
     use HasConfigurableOrder;
-    use HasPresenterMethods;
+    use HasContentPresenter;
+    use HasImagePresenter;
+    use HasOgImagePresenter;
     use HasSelectableFields;
     use HasSlugScope;
     use HasTranslations;
