@@ -22,7 +22,7 @@ final class PublicController extends BasePublicController
         return view('projects::public.index', ['categories' => $categories]);
     }
 
-    public function indexOfCategory(?string $categorySlug = null): View
+    public function indexOfCategory(string $categorySlug): View
     {
         $category = ProjectCategory::query()
             ->published()
@@ -38,7 +38,7 @@ final class PublicController extends BasePublicController
         return view('projects::public.index-of-category', ['models' => $models, 'category' => $category]);
     }
 
-    public function show(?string $categorySlug = null, ?string $slug = null): View
+    public function show(string $categorySlug, string $slug): View
     {
         $category = ProjectCategory::query()
             ->with('image')
