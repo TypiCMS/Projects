@@ -18,8 +18,7 @@ use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
 use TypiCMS\Modules\Core\Traits\HasContentPresenter;
-use TypiCMS\Modules\Core\Traits\HasImagePresenter;
-use TypiCMS\Modules\Core\Traits\HasOgImagePresenter;
+use TypiCMS\Modules\Core\Traits\HasOgImage;
 use TypiCMS\Modules\Core\Traits\HasSelectableFields;
 use TypiCMS\Modules\Core\Traits\HasSlugScope;
 use TypiCMS\Modules\Core\Traits\Historable;
@@ -49,8 +48,7 @@ class ProjectCategory extends Model implements Sortable
 {
     use HasConfigurableOrder;
     use HasContentPresenter;
-    use HasImagePresenter;
-    use HasOgImagePresenter;
+    use HasOgImage;
     use HasSelectableFields;
     use HasSlugScope;
     use HasTranslations;
@@ -113,7 +111,7 @@ class ProjectCategory extends Model implements Sortable
     /** @return Attribute<string, null> */
     protected function thumb(): Attribute
     {
-        return Attribute::make(get: fn () => $this->imageUrl(null, 54));
+        return Attribute::make(get: fn () => imageOrDefault($this->image, null, 54));
     }
 
     public function editUrl(): string

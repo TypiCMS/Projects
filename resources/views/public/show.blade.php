@@ -26,7 +26,7 @@
                     </div>
                 </div>
                 <h1 class="project-title">{{ $model->title }}</h1>
-                <div class="project-date">{{ $model->dateLocalized() }}</div>
+                <div class="project-date"><x-core::date-localized :date="$model->date" /></div>
             </div>
         </header>
         <div class="project-body">
@@ -36,7 +36,7 @@
 
             @if ($model->image)
                 <figure class="project-picture">
-                    <img class="project-picture-image" src="{{ $model->imageUrl(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
+                    <img class="project-picture-image" src="{{ $model->image->render(2000, 1000) }}" width="{{ $model->image->width }}" height="{{ $model->image->height }}" alt="" />
                     @if ($model->image->description)
                         <figcaption class="project-picture-legend">{{ $model->image->description }}</figcaption>
                     @endif

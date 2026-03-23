@@ -3,7 +3,7 @@
         <li class="project-list-results-item">
             <a class="project-list-results-item-link" href="{{ $project->url() }}">
                 <span class="project-list-results-item-title">{{ $project->title }}</span>
-                <span class="project-list-results-item-date">{{ $project->dateLocalized() }}</span>
+                <span class="project-list-results-item-date"><x-core::date-localized :date="$project->date" /></span>
             </a>
         </li>
     @endforeach
