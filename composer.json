@@ -1,6 +1,6 @@
 {
     "name": "typicms/projects",
-    "description": "",
+    "description": "A module to manage and display multilingual project portfolios with categories and tags in TypiCMS applications.",
     "license": "MIT",
     "authors": [
         {
