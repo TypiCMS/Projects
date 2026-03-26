@@ -10,7 +10,7 @@ return [
         'date' => 'desc',
     ],
     'sidebar' => [
-        'icon' => '<i class="icon-grid-2x2"></i>',
+        'icon' => '<i class="icon-shapes"></i>',
         'weight' => 60,
     ],
     'permissions' => [
