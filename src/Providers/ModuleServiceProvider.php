@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Projects\Providers;
 
+use Override;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Models\Tag;
@@ -12,11 +13,15 @@ use TypiCMS\Modules\Projects\Models\Project;
 
 class ModuleServiceProvider extends ServiceProvider
 {
-    public function boot(): void
+    #[Override]
+    public function register(): void
     {
         $this->mergeConfigFrom(__DIR__.'/../config/projects.php', 'typicms.modules.projects');
         $this->mergeConfigFrom(__DIR__.'/../config/project_categories.php', 'typicms.modules.project_categories');
+    }
 
+    public function boot(): void
+    {
         $this->loadRoutesFrom(__DIR__.'/../routes/projects.php');
 
         $this->loadViewsFrom(__DIR__.'/../../resources/views/', 'projects');
