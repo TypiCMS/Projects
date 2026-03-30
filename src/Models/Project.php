@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -15,6 +17,8 @@ use Override;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
 use TypiCMS\Modules\Core\Models\Tag;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
+use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Core\Models\Term;
 use TypiCMS\Modules\Core\Traits\HasAdminUrls;
 use TypiCMS\Modules\Core\Traits\HasBodyPresenter;
@@ -68,6 +72,8 @@ use TypiCMS\Translatable\HasTranslations;
  * @property-read Collection<int, File> $videos
  * @property-read int|null $videos_count
  */
+#[ObservedBy([SlugObserver::class, TipTapHTMLObserver::class])]
+#[Unguarded]
 class Project extends Model
 {
     use HasAdminUrls;
@@ -93,8 +99,6 @@ class Project extends Model
             'date' => 'datetime:Y-m-d',
         ];
     }
-
-    protected $guarded = [];
 
     protected $appends = ['thumb'];
 

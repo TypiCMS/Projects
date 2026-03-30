@@ -7,11 +7,8 @@ namespace TypiCMS\Modules\Projects\Providers;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 use TypiCMS\Modules\Core\Models\Tag;
-use TypiCMS\Modules\Core\Observers\SlugObserver;
-use TypiCMS\Modules\Core\Observers\TipTapHTMLObserver;
 use TypiCMS\Modules\Projects\Composers\SidebarViewComposer;
 use TypiCMS\Modules\Projects\Models\Project;
-use TypiCMS\Modules\Projects\Models\ProjectCategory;
 
 class ModuleServiceProvider extends ServiceProvider
 {
@@ -36,11 +33,6 @@ class ModuleServiceProvider extends ServiceProvider
             __DIR__ . '/../../resources/views' => resource_path('views/vendor/projects'),
         ], 'typicms-views');
         $this->publishes([__DIR__ . '/../../resources/scss' => resource_path('scss')], 'typicms-resources');
-
-        // Observers
-        Project::observe(new SlugObserver());
-        Project::observe(new TipTapHTMLObserver());
-        ProjectCategory::observe(new SlugObserver());
 
         View::composer('core::admin._sidebar', SidebarViewComposer::class);
 

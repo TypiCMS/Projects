@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace TypiCMS\Modules\Projects\Models;
 
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Attributes\Unguarded;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
@@ -16,6 +18,7 @@ use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
 use TypiCMS\Modules\Core\Models\File;
 use TypiCMS\Modules\Core\Models\History;
+use TypiCMS\Modules\Core\Observers\SlugObserver;
 use TypiCMS\Modules\Core\Traits\HasConfigurableOrder;
 use TypiCMS\Modules\Core\Traits\HasContentPresenter;
 use TypiCMS\Modules\Core\Traits\HasOgImage;
@@ -44,6 +47,8 @@ use TypiCMS\Translatable\HasTranslations;
  * @property-read mixed $thumb
  * @property-read mixed $translations
  */
+#[ObservedBy(SlugObserver::class)]
+#[Unguarded]
 class ProjectCategory extends Model implements Sortable
 {
     use HasConfigurableOrder;
@@ -55,8 +60,6 @@ class ProjectCategory extends Model implements Sortable
     use Historable;
     use Publishable;
     use SortableTrait;
-
-    protected $guarded = [];
 
     protected $appends = ['thumb'];
 
