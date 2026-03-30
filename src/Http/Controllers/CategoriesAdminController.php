@@ -19,7 +19,7 @@ final class CategoriesAdminController extends BaseAdminController
 
     public function create(): View
     {
-        $model = new ProjectCategory();
+        $model = new ProjectCategory;
 
         return view('projects::admin.create-category', ['model' => $model]);
     }
